@@ -1,0 +1,51 @@
+# Visual Studio Code editor files
+.vscode/
+.vs/
+
+# Visual Studio files
+/CodeBuddies/*.suo
+/CodeBuddies/*.user
+/CodeBuddies/*.userprefs
+/CodeBuddies/*.pidb
+/CodeBuddies/*.vspscc
+/CodeBuddies/*.vssscc
+/CodeBuddies/*/[Bb]in/
+/CodeBuddies/*/[Oo]bj/
+/CodeBuddies/*.log
+/CodeBuddies/*.cache
+/CodeBuddies/*.vsix
+/CodeBuddies/*.sqlite
+/CodeBuddies/*.sqlite3
+/CodeBuddies/*.db
+/CodeBuddies/*.db3
+/CodeBuddies/*.pdb
+
+# Resharper files
+/CodeBuddies/*.resharper
+/CodeBuddies/*.ReSharper/
+
+# Rider files
+/CodeBuddies/.idea/
+
+# NuGet packages
+/CodeBuddies/packages/
+
+# Windows image file caches
+/CodeBuddies/Thumbs.db
+/CodeBuddies/ehthumbs.db
+
+# Windows Installer files
+/CodeBuddies/*.cab
+/CodeBuddies/*.msi
+/CodeBuddies/*.msm
+/CodeBuddies/*.msp
+
+# Windows shortcuts
+/CodeBuddies/*.lnk
+
+# Ignore build output
+/CodeBuddies/bin/
+/CodeBuddies/obj/
+
+# Ignore user-specific files
+/CodeBuddies/*.userprefs
