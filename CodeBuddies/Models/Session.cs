@@ -50,17 +50,17 @@ namespace CodeBuddies.Models
             DrawingBoard = drawingBoard;
         }
 
-        public void AddBuddy(int buddyId)
+        public void AddBuddy(long buddyId)
         {
             // Add buddy to the session
         }
 
-        public void RemoveBuddy(int buddyId)
+        public void RemoveBuddy(long buddyId)
         {
             // Remove buddy from the session
         }
 
-        public void LeaveSession(int buddyId)
+        public void LeaveSession(long buddyId)
         {
             // Leave the session
         }
