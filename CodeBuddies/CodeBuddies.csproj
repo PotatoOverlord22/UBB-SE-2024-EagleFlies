@@ -9,8 +9,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\dog_picture.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Services\" />
     <Folder Include="ViewModels\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\dog_picture.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
 </Project>
