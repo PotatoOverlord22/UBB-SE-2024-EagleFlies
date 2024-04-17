@@ -13,6 +13,22 @@
             <ColumnDefinition Width=".7*"/>
         </Grid.ColumnDefinitions>
 
+        <Grid Grid.Column="0" Background="DimGray">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="70"/>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height=".7*"/>
+                <RowDefinition Height=".3*"/>
+            </Grid.RowDefinitions>
+
+            <Label Grid.Row="0" Content="Code Buddies" Style="{StaticResource BrandLabelStyle}"></Label>
+
+            <TextBox Grid.Row="1" Style="{StaticResource SearchBar}" Tag="Search code buddies..." Padding="5 0 0 0" Margin="10 0 10 0"  Height="35" HorizontalAlignment="Stretch" VerticalAlignment="Center" HorizontalContentAlignment="Left"  VerticalContentAlignment="Center"></TextBox>
+
+            <userControls:BuddiesList Grid.Row="2" />
+
+        </Grid>
+
         <Grid Grid.Column="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="70"/>
