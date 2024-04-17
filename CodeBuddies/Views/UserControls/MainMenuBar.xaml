@@ -1,0 +1,22 @@
+﻿<UserControl x:Class="CodeBuddies.Views.UserControls.MainMenuBar"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:CodeBuddies.Views.UserControls"
+             mc:Ignorable="d" 
+             Height="70" d:DesignWidth="800">
+   
+    <Grid Background="BlueViolet">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="70"/>
+        </Grid.RowDefinitions>
+
+        <Button  Margin="20 0 0 0" Content="New Session" Width="100" Height="30" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        <Button  Margin="140 0 0 0" Content="Change Themes" Width="100" Height="30" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        <TextBox Style="{StaticResource SearchBar}" Tag="Search session by name..." Margin="0 0 20 0"  Width="200" Height="30" HorizontalAlignment="Right" VerticalAlignment="Center" HorizontalContentAlignment="Left"  VerticalContentAlignment="Center"></TextBox>
+        
+        
+        
+    </Grid>
+</UserControl>
