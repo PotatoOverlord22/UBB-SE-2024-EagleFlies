@@ -1,0 +1,83 @@
+﻿<UserControl x:Class="CodeBuddies.Views.UserControls.NotificationsPanel"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:CodeBuddies.Views.UserControls"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="400">
+    <Grid Background="#424242">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="Notifications" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <Image Height="40" Width="40" Source="pack://application:,,,/CodeBuddies;component/resources/notifications_picture.png" HorizontalAlignment="Left" Margin="10 0 0 0" VerticalAlignment="Center" />
+        </Grid>
+
+        <Grid Grid.Row="1">
+            <ScrollViewer Style="{StaticResource MyScrollViewer}" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition Height="40"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid Grid.Row="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width=".8*" />
+                            <ColumnDefinition Width=".2*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Button Height="30" Style="{StaticResource AcceptButtonStyle}" Grid.Column="0" Content="Succesfully sent invite Notification" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="10 0 0 0" />
+                        
+                    </Grid>
+
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width=".8*" />
+                            <ColumnDefinition Width=".2*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Button Height="30" Grid.Column="0" Content="Invite Notification - Accept or Decline" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="10 0 0 0" />
+
+                        <Grid Grid.Column="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width=".5*" />
+                                <ColumnDefinition Width=".5*" />
+                            </Grid.ColumnDefinitions>
+
+                            <Image Grid.Column="0" Height="30" Width="30" Source="pack://application:,,,/CodeBuddies;component/resources/accepted-picture.png" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                            <Image Grid.Column="1" Height="35" Width="35" Source="pack://application:,,,/CodeBuddies;component/resources/decline-picture.png" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Grid>
+                        
+                    </Grid>
+
+                    <Grid Grid.Row="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width=".8*" />
+                            <ColumnDefinition Width=".2*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Button Height="30" Style="{StaticResource RejectButtonStyle}" Grid.Column="0" Content="Rejected Past Notifications" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="10 0 0 0" />
+
+                    </Grid>
+
+                  
+
+
+
+                </Grid>
+            </ScrollViewer>
+        </Grid>
+    </Grid>
+</UserControl>
+
+    

@@ -6,7 +6,8 @@
              xmlns:local="clr-namespace:CodeBuddies.Views.UserControls"
              mc:Ignorable="d" 
              d:DesignHeight="200" d:DesignWidth="300">
-    <ScrollViewer VerticalScrollBarVisibility="Hidden" 
+    <ScrollViewer VerticalScrollBarVisibility="Auto"
+                  Style="{StaticResource MyScrollViewer}"
                HorizontalScrollBarVisibility="Disabled">
         <Grid>
             <Grid.RowDefinitions>
