@@ -6,96 +6,29 @@
              xmlns:local="clr-namespace:CodeBuddies.Views.UserControls"
              mc:Ignorable="d" 
              d:DesignHeight="200" d:DesignWidth="300">
-    <ScrollViewer VerticalScrollBarVisibility="Auto"
-                  Style="{StaticResource MyScrollViewer}"
-               HorizontalScrollBarVisibility="Disabled">
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="70"/>
-                <RowDefinition Height="70"/>
-                <RowDefinition Height="70"/>
-                <RowDefinition Height="70"/>
-            </Grid.RowDefinitions>
-
-            <Grid Grid.Row="0">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width=".2*"/>
-                    <ColumnDefinition Width=".7*"/>
-                    <ColumnDefinition Width=".1*"/>
-                </Grid.ColumnDefinitions>
-                <Border BorderBrush="Black" BorderThickness="2" CornerRadius="50" Margin="2" Background="White">
-                    <Ellipse Margin="5">
-                        <Ellipse.Fill>
-                            <ImageBrush ImageSource="pack://application:,,,/CodeBuddies;component/resources/pictures/dog_picture.png" 
+    <ListView ItemsSource="{Binding Buddies}">
+        <ListView.ItemTemplate>
+            <DataTemplate>
+                <Grid Height="80">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="80"/>
+                        <ColumnDefinition Width=".8*"/>
+                        <ColumnDefinition Width=".2*"/>
+                    </Grid.ColumnDefinitions>
+                    <Border BorderBrush="Black" BorderThickness="2" CornerRadius="50" Margin="2" Background="White">
+                        <Ellipse Margin="5">
+                            <Ellipse.Fill>
+                                <ImageBrush ImageSource="{Binding ProfilePhotoUrl}" 
                         Viewport="0,0,1,1" 
                         ViewportUnits="RelativeToBoundingBox" 
                         Stretch="Uniform"/>
-                        </Ellipse.Fill>
-                    </Ellipse>
-                </Border>
-                <Button Grid.Column="1" Content="Buddy 1" Height="50" Width="auto" Margin="10"/>
+                            </Ellipse.Fill>
+                        </Ellipse>
+                    </Border>
+                    <Button Grid.Column="1" Content="{Binding BuddyName}" Margin="10"/>
 
-            </Grid>
-
-            <Grid Grid.Row="1">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width=".2*"/>
-                    <ColumnDefinition Width=".7*"/>
-                    <ColumnDefinition Width=".1*"/>
-                </Grid.ColumnDefinitions>
-                <Border BorderBrush="Black" BorderThickness="2" CornerRadius="50" Margin="2" Background="White">
-                    <Ellipse Margin="5">
-                        <Ellipse.Fill>
-                            <ImageBrush ImageSource="pack://application:,,,/CodeBuddies;component/resources/pictures/dog_picture.png"
-                                                    Viewport="0,0,1,1" 
-                                                    ViewportUnits="RelativeToBoundingBox" 
-                                                    Stretch="Uniform"/> 
-                        </Ellipse.Fill>
-                    </Ellipse>
-                </Border>
-                <Button Grid.Column="1" Content="Buddy 2" Height="50" Width="auto" Margin="10"/>
-            </Grid>
-
-            <Grid Grid.Row="2">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width=".2*"/>
-                    <ColumnDefinition Width=".7*"/>
-                    <ColumnDefinition Width=".1*"/>
-                </Grid.ColumnDefinitions>
-                <Border BorderBrush="Black" BorderThickness="2" CornerRadius="50" Margin="2" Background="White">
-                    <Ellipse Margin="5">
-                        <Ellipse.Fill>
-                            <ImageBrush ImageSource="pack://application:,,,/CodeBuddies;component/resources/pictures/dog_picture.png"
-                                        Viewport="0,0,1,1" 
-                                        ViewportUnits="RelativeToBoundingBox" 
-                                        Stretch="Uniform"/>
-                        </Ellipse.Fill>
-                    </Ellipse>
-                </Border>
-                <Button Grid.Column="1" Content="Buddy 3" Height="50" Width="auto" Margin="10"/>
-            </Grid>
-
-
-            <Grid Grid.Row="3">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width=".2*"/>
-                    <ColumnDefinition Width=".7*"/>
-                    <ColumnDefinition Width=".1*"/>
-                </Grid.ColumnDefinitions>
-                <Border BorderBrush="Black" BorderThickness="2" CornerRadius="50" Margin="2" Background="White">
-                    <Ellipse Margin="5">
-                        <Ellipse.Fill>
-                            <ImageBrush ImageSource="pack://application:,,,/CodeBuddies;component/resources/pictures/dog_picture.png" 
-                                        Viewport="0,0,1,1" 
-                                        ViewportUnits="RelativeToBoundingBox" 
-                                        Stretch="Uniform"/>
-                        </Ellipse.Fill>
-                    </Ellipse>
-                </Border>
-                <Button Grid.Column="1" Content="Buddy 4" Height="50" Width="auto" Margin="10"/>
-            </Grid>
-
-
-        </Grid>
-    </ScrollViewer>
+                </Grid>
+            </DataTemplate>
+        </ListView.ItemTemplate>
+    </ListView>
 </UserControl>
