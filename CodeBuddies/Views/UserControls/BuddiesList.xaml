@@ -6,30 +6,37 @@
              xmlns:local="clr-namespace:CodeBuddies.Views.UserControls"
              mc:Ignorable="d" 
              d:DesignHeight="200" d:DesignWidth="300">
-    <ListView ItemsSource="{Binding Buddies}"  Template="{StaticResource CustomListViewTemplate}">
-        <ListView.ItemTemplate>
-            <DataTemplate>
-                <Grid Height="80">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="80"/>
-                        <ColumnDefinition Width=".8*"/>
-                        <ColumnDefinition Width=".2*"/>
-                    </Grid.ColumnDefinitions>
-                    <Border BorderBrush="Black" BorderThickness="2" CornerRadius="50" Margin="2" Background="White">
-                        <Ellipse Margin="5">
-                            <Ellipse.Fill>
-                                <ImageBrush ImageSource="{Binding ProfilePhotoUrl}" 
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <TextBox Grid.Row="0" Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource SearchBar}" Tag="Search code buddies..." Padding="5 0 0 0" Margin="10 0 10 0"  Height="35" HorizontalAlignment="Stretch" VerticalAlignment="Center" HorizontalContentAlignment="Left"  VerticalContentAlignment="Center"/>
+        <ListView Grid.Row="1" ItemsSource="{Binding Buddies}"  Template="{StaticResource CustomListViewTemplate}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Grid Height="80">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="80"/>
+                            <ColumnDefinition Width=".8*"/>
+                            <ColumnDefinition Width=".2*"/>
+                        </Grid.ColumnDefinitions>
+                        <Border BorderBrush="Black" BorderThickness="2" CornerRadius="50" Margin="2" Background="White">
+                            <Ellipse Margin="5">
+                                <Ellipse.Fill>
+                                    <ImageBrush ImageSource="{Binding ProfilePhotoUrl}" 
                         Viewport="0,0,1,1" 
                         ViewportUnits="RelativeToBoundingBox" 
                         Stretch="Uniform"/>
-                            </Ellipse.Fill>
-                        </Ellipse>
-                    </Border>
-                    <Button Style="{StaticResource defaultButtonStyle}" Grid.Column="1" Content="{Binding BuddyName}" Margin="10"/>
+                                </Ellipse.Fill>
+                            </Ellipse>
+                        </Border>
+                        <Button Style="{StaticResource defaultButtonStyle}" Grid.Column="1" Content="{Binding BuddyName}" Margin="10"/>
 
-                </Grid>
-            </DataTemplate>
-        </ListView.ItemTemplate>
-    </ListView>
-
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </Grid>
 </UserControl>
