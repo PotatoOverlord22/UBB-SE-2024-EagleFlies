@@ -25,14 +25,7 @@ namespace CodeBuddies.Views.UserControls
             InitializeComponent();
             DataContext = this;
             sessionsDataGrid.Items.Add(new ListItem());
-            sessionsDataGrid.Items.Add(new ListItem());
-            sessionsDataGrid.Items.Add(new ListItem());
-            sessionsDataGrid.Items.Add(new ListItem());
-            sessionsDataGrid.Items.Add(new ListItem());
-            sessionsDataGrid.Items.Add(new ListItem());
-            sessionsDataGrid.Items.Add(new ListItem());
-            sessionsDataGrid.Items.Add(new ListItem());
-            sessionsDataGrid.Items.Add(new ListItem());
+         
         }
     }
 }
