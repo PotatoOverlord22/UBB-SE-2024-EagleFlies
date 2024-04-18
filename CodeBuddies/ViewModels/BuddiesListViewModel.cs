@@ -60,14 +60,13 @@ namespace CodeBuddies.ViewModels
             else
             {
                 ObservableCollection<Buddy> filteredBuddies = new ObservableCollection<Buddy>();
-                foreach (var buddy in Buddies)
+                foreach (var buddy in repository.GetAll())
                 {
                     if (buddy.BuddyName.ToLower().Contains(SearchText.ToLower()))
                     {
                         filteredBuddies.Add(buddy);
                     }
                 }
-                Buddies.Clear();
                 Buddies = filteredBuddies;
             }
         }
