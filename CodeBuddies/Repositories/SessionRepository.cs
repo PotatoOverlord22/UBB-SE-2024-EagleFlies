@@ -10,6 +10,7 @@ namespace CodeBuddies.Repositories
     internal class SessionRepository
     {
         private string filePath;
+        private BuddyRepository buddyRepository;
 
         public string FilePath
         {
@@ -25,33 +26,62 @@ namespace CodeBuddies.Repositories
             set { sessions = value; }
         }
 
-        public SessionRepository(string filePath)
+        public SessionRepository(BuddyRepository buddyRepository, string filePath)
         {
             FilePath = filePath;
             Sessions = new List<Session>();
+            this.buddyRepository = buddyRepository;
             ReadFromFile();
         }
 
         public void ReadFromFile()
         {
-            XDocument doc = XDocument.Load(FilePath);
+            XDocument doc = XDocument.Load(filePath);
 
-            Sessions = doc.Descendants("Session").Select(session => new Session(
-                (long)session.Element("Id"),
-                (long)session.Element("OwnerId"),
-                (string)session.Element("Name"),
-                DateTime.Parse((string)session.Element("CreationDate")),
-                DateTime.Parse((string)session.Element("LastEditDate")),
-                session.Element("Buddies").Elements("BuddyRef").Select(b => new Buddy(b)).ToList(),
-                session.Element("Messages").Elements("Message").Select(m => new Message(m)).ToList(),
-                session.Element("CodeContributions").Elements("CodeContribution").Select(c => new CodeContribution(c)).ToList(),
-                session.Element("CodeReviewSections").Elements("CodeReviewSection").Select(c => new CodeReviewSection(c)).ToList(),
-                session.Element("FilePaths").Elements("FilePath").Select(f => f.Value).ToList(),
-                new TextEditor((string)session.Element("TextEditor").Element("TextColor"), session.Element("TextEditor").Elements("FilesPaths").Select(f => f.Value).ToList()),
-                new DrawingBoard((string)session.Element("DrawingBoard").Element("FilePath"))
-            )).ToList();
+            this.Sessions = doc.Descendants("Session").Select(session =>
+            {
+                long id = (long)session.Element("Id");
+                long ownerId = (long)session.Element("OwnerId");
+                string name = (string)session.Element("Name");
+                DateTime creationDate = DateTime.Parse((string)session.Element("CreationDate"));
+                DateTime lastEditDate = DateTime.Parse((string)session.Element("LastEditDate"));
+                var buddies = session.Element("Buddies").Elements("BuddyRef")
+                    .Select(br => this.buddyRepository.GetById((int)br))
+                    .Where(b => b != null)
+                    .ToList();
+
+                var messages = session.Element("Messages").Elements("Message")
+                    .Select(m => new Message(
+                        (long)m.Element("MessageId"),
+                        DateTime.Parse((string)m.Element("TimeStamp")),
+                        (string)m.Element("Content"),
+                        (long)m.Element("SenderId")
+                    )).ToList();
+
+                var codeContributions = session.Element("CodeContributions").Elements("CodeContribution")
+                    .Select(c => new CodeContribution(
+                        this.buddyRepository.GetById((int)c.Element("ContributorRef")), // Assuming Contributor is directly under CodeContribution
+                        DateTime.Parse((string)c.Element("ContributionDate")),
+                        (int)c.Element("ContributionValue")
+                    )).ToList();
+
+                var codeReviewSections = session.Element("CodeReviewSections").Elements("CodeReviewSection")
+                    .Select(crs => new CodeReviewSection(
+                        (long)crs.Element("Id"),
+                        (long)crs.Element("OwnerId"),
+                        crs.Element("Messages").Elements("Message").Select(m => new Message(
+                            (long)m.Element("MessageId"),
+                            DateTime.Parse((string)m.Element("TimeStamp")),
+                            (string)m.Element("Content"),
+                            (long)m.Element("SenderId")
+                        )).ToList(),
+                        (string)crs.Element("CodeSection"),
+                        (bool)crs.Element("IsClosed")
+                    )).ToList();
+
+                return new Session(id, ownerId, name, creationDate, lastEditDate, buddies, messages, codeContributions, codeReviewSections, null, null, null);
+            }).ToList();
         }
-
         public void SaveToFile()
         {
             var sessionsXml = new XElement("Sessions",

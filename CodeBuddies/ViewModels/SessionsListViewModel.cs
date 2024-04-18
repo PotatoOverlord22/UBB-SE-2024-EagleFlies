@@ -1,5 +1,6 @@
 ﻿using CodeBuddies.Models.Entities;
 using CodeBuddies.MVVM;
+using CodeBuddies.Repositories;
 using System.Collections.ObjectModel;
 
 
@@ -8,6 +9,8 @@ namespace CodeBuddies.ViewModels
     internal class SessionsListViewModel : ViewModelBase
     {
         private ObservableCollection<Session> sessions = new ObservableCollection<Session>();
+        private BuddyRepository buddyRepository;
+        private SessionRepository sessionRepository;
 
         public ObservableCollection<Session> Sessions
         {
@@ -17,8 +20,13 @@ namespace CodeBuddies.ViewModels
 
 
         public SessionsListViewModel()
-        {
-            PopulateWithHardCodedSessions();
+        {   
+            buddyRepository = new BuddyRepository("../../../Resources/Data/buddies.xml");
+            SessionRepository repository = new SessionRepository(buddyRepository, "../../../Resources/Data/sessions.xml");
+            foreach (Session session in repository.GetAll())
+            {
+                sessions.Add(session);
+            }
         }
 
         public void PopulateWithHardCodedSessions()
