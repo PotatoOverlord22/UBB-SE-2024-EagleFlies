@@ -1,7 +1,4 @@
 ﻿using CodeBuddies.Models.Entities;
-using CodeBuddies.Models.Exceptions;
-using System.Linq;
-using System.Xml;
 using System.Xml.Linq;
 
 namespace CodeBuddies.Repositories

@@ -16,7 +16,7 @@ namespace CodeBuddies.Models.Entities
             set { isAccepted = value; }
         }
 
-        public InviteNotification(long notificationId, DateTime timeStamp, string status, string description, bool isAccepted) : base(notificationId, timeStamp, status, description)
+        public InviteNotification(long notificationId, DateTime timeStamp, string type, string status, string description, bool isAccepted) : base(notificationId, timeStamp, type, status, description)
         {
             IsAccepted = isAccepted;
         }
