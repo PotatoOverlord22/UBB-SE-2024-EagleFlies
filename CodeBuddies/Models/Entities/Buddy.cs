@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CodeBuddies.Models
+namespace CodeBuddies.Models.Entities
 {
     internal class Buddy
     {
@@ -40,7 +40,13 @@ namespace CodeBuddies.Models
             set { status = value; }
         }
 
-        List<Notification> Notifications;
+        private List<Notification> notifications;
+
+        public List<Notification> Notifications
+        {
+            get { return notifications; }
+            set { notifications = value; }
+        }
 
 
         public Buddy(long buddyId, string buddyName, string profilePhotoUrl, string status, List<Notification> notifications)

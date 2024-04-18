@@ -1,0 +1,82 @@
+﻿<Buddies>
+	<Buddy>
+		<Id>1</Id>
+		<Name>Raul</Name>
+		<ImageUrl>pack://application:,,,/CodeBuddies;component/resources/pictures/dog_picture.png</ImageUrl>
+		<Status>active</Status>
+		<Notifications>
+			<Notification>
+				<Id>1</Id>
+				<Status>read</Status>
+				<Message>Hello from Alice!</Message>
+				<TimeStamp>2024-04-21T08:30:00</TimeStamp>
+			</Notification>
+			<Notification>
+				<Id>2</Id>
+				<Status>read</Status>
+				<Message>This is a notification from Alice.</Message>
+				<TimeStamp>2024-04-20T14:45:00</TimeStamp>
+			</Notification>
+		</Notifications>
+	</Buddy>
+	<Buddy>
+		<Id>2</Id>
+		<Name>Bob</Name>
+		<ImageUrl>pack://application:,,,/CodeBuddies;component/resources/pictures/dog_picture.png</ImageUrl>
+		<Status>inactive</Status>
+		<Notifications>
+			<Notification>
+				<Id>3</Id>
+				<Status>unread</Status>
+				<Message>Greetings from Bob!</Message>
+				<TimeStamp>2024-04-21T10:15:00</TimeStamp>
+			</Notification>
+			<Notification>
+				<Id>4</Id>
+				<Status>read</Status>
+				<Message>Bob here. Just saying hi.</Message>
+				<TimeStamp>2024-04-19T09:20:00</TimeStamp>
+			</Notification>
+		</Notifications>
+	</Buddy>
+	<Buddy>
+		<Id>3</Id>
+		<Name>Charlie</Name>
+		<ImageUrl>pack://application:,,,/CodeBuddies;component/resources/pictures/dog_picture.png</ImageUrl>
+		<Status>active</Status>
+		<Notifications>
+			<Notification>
+				<Id>5</Id>
+				<Status>unread</Status>
+				<Message>Hey, it's Charlie!</Message>
+				<TimeStamp>2024-04-21T11:45:00</TimeStamp>
+			</Notification>
+			<Notification>
+				<Id>6</Id>
+				<Status>unread</Status>
+				<Message>Charlie says hi.</Message>
+				<TimeStamp>2024-04-18T16:30:00</TimeStamp>
+			</Notification>
+		</Notifications>
+	</Buddy>
+	<Buddy>
+		<Id>4</Id>
+		<Name>Cosmin</Name>
+		<ImageUrl>pack://application:,,,/CodeBuddies;component/resources/pictures/dog_picture.png</ImageUrl>
+		<Status>mort</Status>
+		<Notifications>
+			<Notification>
+				<Id>6</Id>
+				<Status>unread</Status>
+				<Message>Hey, it's Charlie!</Message>
+				<TimeStamp>2024-04-21T11:45:00</TimeStamp>
+			</Notification>
+			<Notification>
+				<Id>7</Id>
+				<Status>unread</Status>
+				<Message>Charlie says hi.</Message>
+				<TimeStamp>2024-04-18T16:30:00</TimeStamp>
+			</Notification>
+		</Notifications>
+	</Buddy>
+</Buddies>

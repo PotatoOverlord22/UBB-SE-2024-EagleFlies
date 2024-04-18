@@ -6,14 +6,14 @@
              xmlns:local="clr-namespace:CodeBuddies.Views.UserControls"
              mc:Ignorable="d" 
              Height="70" d:DesignWidth="800">
-   
-    <Grid Background="BlueViolet">
+
+    <Grid Background="#BFBDBA">
         <Grid.RowDefinitions>
             <RowDefinition Height="70"/>
         </Grid.RowDefinitions>
 
-        <Button  Margin="20 0 0 0" Content="New Session" Width="100" Height="30" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-        <Button  Margin="140 0 0 0" Content="Change Themes" Width="100" Height="30" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        <Button Style="{StaticResource defaultButtonStyle}" Margin="20 0 0 0" Content="New Session" Width="100" Height="30" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        <Button Style="{StaticResource defaultButtonStyle}"  Margin="140 0 0 0" Content="Change Themes" Width="100" Height="30" HorizontalAlignment="Left" VerticalAlignment="Center"/>
         <TextBox Style="{StaticResource SearchBar}" Tag="Search session by name..." Margin="0 0 20 0" Padding="5 0 0 0"  Width="200" Height="30" HorizontalAlignment="Right" VerticalAlignment="Center" HorizontalContentAlignment="Left"  VerticalContentAlignment="Center"></TextBox>
         
         

@@ -16,16 +16,13 @@ using System.Windows.Shapes;
 namespace CodeBuddies.Views.UserControls
 {
     /// <summary>
-    /// Interaction logic for SessionsList.xaml
+    /// Interaction logic for CodeReview.xaml
     /// </summary>
-    public partial class SessionsList : UserControl
+    public partial class CodeReview : UserControl
     {
-        public SessionsList()
+        public CodeReview()
         {
             InitializeComponent();
-            DataContext = this;
-            sessionsDataGrid.Items.Add(new ListItem());
-         
         }
     }
 }

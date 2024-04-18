@@ -13,7 +13,7 @@
             <ColumnDefinition Width=".7*"/>
         </Grid.ColumnDefinitions>
 
-        <Grid Grid.Column="0" Background="DimGray">
+        <Grid Grid.Column="0" Background="#A6A29F">
             <Grid.RowDefinitions>
                 <RowDefinition Height="70"/>
                 <RowDefinition Height="40"/>
@@ -42,7 +42,6 @@
             <userControls:SessionsList Grid.Row="1"/>
 
         </Grid>
-
 
 
     </Grid>

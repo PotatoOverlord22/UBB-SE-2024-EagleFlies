@@ -11,6 +11,7 @@
                 <ResourceDictionary Source="Views/Styles/LabelStyles.xaml" />
                 <ResourceDictionary Source="Views/Styles/ScrollViewerStyles.xaml" />
                 <ResourceDictionary Source="Views/Styles/DataGridStyles.xaml" />
+                <ResourceDictionary Source="Views/Styles/ListViewStyles.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
              

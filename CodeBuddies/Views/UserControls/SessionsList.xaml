@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <!--Sessions data grid-->
-    <DataGrid Grid.Row="1" x:Name="sessionsDataGrid" Background="DimGray" BorderBrush="#404040">
+    <DataGrid Grid.Row="1" x:Name="sessionsDataGrid" Background="#A6A29F"  CanUserResizeColumns="False" CanUserResizeRows="False" BorderBrush="DimGray" HeadersVisibility="Column" >
         <DataGrid.Columns >
             <DataGridTextColumn Header="Session Name" CanUserResize="False" IsReadOnly="True" Width="*" />
             <DataGridTextColumn Header="Admin" CanUserResize="False" IsReadOnly="True" Width="*" />
@@ -16,8 +16,8 @@
             <DataGridTemplateColumn Header="Enter session" CanUserResize="False" IsReadOnly="True" Width="*">
                 <DataGridTemplateColumn.CellTemplate>
                     <DataTemplate>
-                        <Button Name="btn5" Width="30" Height="30">
-                            <Image Source="resources/enter_session.png"></Image>
+                        <Button Style="{StaticResource JoinLeaveSessionButtonStyle}" Name="btn5" Width="30" Height="30" Margin="8">
+                            <Image Source="pack://application:,,,/CodeBuddies;component/resources/pictures/join-session.png"/>
                         </Button>
                     </DataTemplate>
                 </DataGridTemplateColumn.CellTemplate>
@@ -25,8 +25,8 @@
             <DataGridTemplateColumn Header="Leave session" CanUserResize="False" IsReadOnly="True" Width="*">
                 <DataGridTemplateColumn.CellTemplate>
                     <DataTemplate>
-                        <Button Name="btn5" Width="30" Height="30">
-                            <Image Source="resources/enter_session.png"></Image>
+                        <Button Style="{StaticResource JoinLeaveSessionButtonStyle}" Name="btn6" Width="30" Height="30" Margin="8">
+                            <Image Source="pack://application:,,,/CodeBuddies;component/resources/pictures/exit-session.png"/>
                         </Button>
                     </DataTemplate>
                 </DataGridTemplateColumn.CellTemplate>

@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:CodeBuddies.Views.UserControls"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="400">
-    <Grid Background="#424242">
+    <Grid Background="#BFBDBA">
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
             <RowDefinition Height="*"/>
@@ -22,61 +22,42 @@
         </Grid>
 
         <Grid Grid.Row="1">
-            <ScrollViewer Style="{StaticResource MyScrollViewer}" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="40"/>
-                        <RowDefinition Height="40"/>
-                        <RowDefinition Height="40"/>
-                    </Grid.RowDefinitions>
-
-                    <Grid Grid.Row="0">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width=".8*" />
-                            <ColumnDefinition Width=".2*" />
-                        </Grid.ColumnDefinitions>
-
-                        <Button Height="30" Style="{StaticResource AcceptButtonStyle}" Grid.Column="0" Content="Succesfully sent invite Notification" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="10 0 0 0" />
-                        
-                    </Grid>
-
-                    <Grid Grid.Row="1">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width=".8*" />
-                            <ColumnDefinition Width=".2*" />
-                        </Grid.ColumnDefinitions>
-
-                        <Button Height="30" Grid.Column="0" Content="Invite Notification - Accept or Decline" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="10 0 0 0" />
-
-                        <Grid Grid.Column="1">
+            <ListView ItemsSource="{Binding Notifications}"  Template="{StaticResource CustomListViewTemplate}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Height="40">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width=".5*" />
-                                <ColumnDefinition Width=".5*" />
+                                <ColumnDefinition Width=".8*"/>
+                                <ColumnDefinition Width=".2*"/>
                             </Grid.ColumnDefinitions>
+                            <Button Grid.Column="0" Height="30" Style="{StaticResource NotificationButton}" Content="{Binding Description}" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="10 0 0 0" />
 
-                            <Image Grid.Column="0" Height="30" Width="30" Source="pack://application:,,,/CodeBuddies;component/resources/pictures/accepted-picture.png" HorizontalAlignment="Center" VerticalAlignment="Center" />
-                            <Image Grid.Column="1" Height="35" Width="35" Source="pack://application:,,,/CodeBuddies;component/resources/pictures/decline-picture.png" HorizontalAlignment="Center" VerticalAlignment="Center" />
+
+                            <Grid Grid.Column="1">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width=".5*" />
+                                    <ColumnDefinition Width=".5*" />
+                                </Grid.ColumnDefinitions>
+
+                                <Button Grid.Column="0" Style="{StaticResource JoinLeaveSessionButtonStyle}" Name="acceptInvitationBtn" Width="30" Height="30">
+                                    <Image Source="pack://application:,,,/CodeBuddies;component/resources/pictures/accepted-picture.png"/>
+                                </Button>
+
+                                <Button Grid.Column="1" Style="{StaticResource JoinLeaveSessionButtonStyle}" Name="declineInvitationBtn" Width="35" Height="35">
+                                    <Image Source="pack://application:,,,/CodeBuddies;component/resources/pictures/decline-picture.png"/>
+                                </Button>
+
+                             
+                            </Grid>
+
+
                         </Grid>
-                        
-                    </Grid>
-
-                    <Grid Grid.Row="2">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width=".8*" />
-                            <ColumnDefinition Width=".2*" />
-                        </Grid.ColumnDefinitions>
-
-                        <Button Height="30" Style="{StaticResource RejectButtonStyle}" Grid.Column="0" Content="Rejected Past Notifications" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="10 0 0 0" />
-
-                    </Grid>
-
-                  
-
-
-
-                </Grid>
-            </ScrollViewer>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
         </Grid>
+
+
     </Grid>
 </UserControl>
 
