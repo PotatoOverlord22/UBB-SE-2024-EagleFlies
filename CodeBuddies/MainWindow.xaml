@@ -39,6 +39,8 @@
 
             <userControls:MainMenuBar Grid.Row="0"/>
 
+            <userControls:SessionsList Grid.Row="1"/>
+
         </Grid>
 
 
