@@ -1,0 +1,49 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Services\**" />
+    <EmbeddedResource Remove="Services\**" />
+    <None Remove="Services\**" />
+    <Page Remove="Services\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Resources\Pictures\exit-session.png" />
+    <None Remove="Resources\Pictures\join-session.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Resources\Data\Constants\" />
+<<<<<<< HEAD
+    <Folder Include="Services\" />
+=======
+    <Folder Include="ViewModels\" />
+>>>>>>> da04c3895fa055e3cc8f88cda892758218b4ae92
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\Pictures\accepted-picture.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Pictures\decline-picture.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Pictures\dog_picture.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Pictures\exit-session.png" />
+    <Resource Include="Resources\Pictures\join-session.png" />
+    <Resource Include="Resources\Pictures\notifications_picture.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+
+</Project>

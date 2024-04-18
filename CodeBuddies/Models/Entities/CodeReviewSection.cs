@@ -10,7 +10,7 @@ namespace CodeBuddies.Models.Entities
     {
         private long id;
 
-        private long Id
+        public long Id
         {
             get { return id; }
             set { id = value; }
