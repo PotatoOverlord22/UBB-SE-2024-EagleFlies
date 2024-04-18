@@ -8,12 +8,36 @@ namespace CodeBuddies.Models.Entities
 {
     internal abstract class Notification
     {
-        protected long NotificationId { get; set; }
-        protected DateTime TimeStamp { get; set; }
+        protected long notificationId;
 
-        protected string Status { get; set; }
+        public long NotificationId
+        {
+            get { return notificationId; }
+            set { notificationId = value; }
+        }
 
-        protected string Description { get; set; }
+        protected DateTime timeStamp;
+        public DateTime TimeStamp
+        {
+            get { return timeStamp; }
+            set { timeStamp = value; }
+        }
+
+        protected string status;
+
+        public string Status
+        {
+            get { return status; }
+            set { status = value; }
+        }
+
+        protected string description;
+
+        public string Description
+        {
+            get { return description; }
+            set { description = value; }
+        }
 
         public Notification(long notificationId, DateTime timeStamp, string status, string description)
         {

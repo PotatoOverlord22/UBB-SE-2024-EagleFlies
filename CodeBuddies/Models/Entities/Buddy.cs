@@ -40,7 +40,13 @@ namespace CodeBuddies.Models.Entities
             set { status = value; }
         }
 
-        List<Notification> Notifications;
+        private List<Notification> notifications;
+
+        public List<Notification> Notifications
+        {
+            get { return notifications; }
+            set { notifications = value; }
+        }
 
 
         public Buddy(long buddyId, string buddyName, string profilePhotoUrl, string status, List<Notification> notifications)

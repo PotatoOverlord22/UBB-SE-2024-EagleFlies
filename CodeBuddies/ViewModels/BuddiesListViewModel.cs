@@ -1,6 +1,8 @@
 ﻿using CodeBuddies.Models.Entities;
 using CodeBuddies.MVVM;
+using CodeBuddies.Repositories;
 using System.Collections.ObjectModel;
+using System.IO;
 
 namespace CodeBuddies.ViewModels
 {
@@ -17,14 +19,11 @@ namespace CodeBuddies.ViewModels
 
         public BuddiesListViewModel()
         {
-            PopulateWithHardCodedBuddies();
-        }
-
-        public void PopulateWithHardCodedBuddies()
-        {
-            buddies.Add(new Buddy(1, "yo1", "pack://application:,,,/CodeBuddies;component/resources/pictures/dog_picture.png", "active", new List<Notification>()));
-            buddies.Add(new Buddy(2, "yo2", "pack://application:,,,/CodeBuddies;component/resources/pictures/dog_picture.png", "inactive", new List<Notification>()));
-            buddies.Add(new Buddy(3, "yo3", "pack://application:,,,/CodeBuddies;component/resources/pictures/dog_picture.png", "inactive", new List<Notification>()));
+            BuddyRepository repository = new BuddyRepository("../../../Resources/Data/buddies.xml");
+            foreach (Buddy buddy in repository.GetAll())
+            {
+                buddies.Add(buddy);
+            }
         }
     }
 }
