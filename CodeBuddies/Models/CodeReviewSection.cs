@@ -8,18 +8,47 @@ namespace CodeBuddies.Models
 {
     internal class CodeReviewSection
     {
+        private long id;
 
-        long CodeReviewSectionId { get; set; }
-        long OwnerId { get; set; }
-        List<Message> Messages { get; set; }
+        public long Id
+        {
+            get { return id; }
+            set { id = value; }
+        }
 
-        string CodeSection { get; set; }
+        private long ownerId;
 
-        bool IsClosed { get; set; }
+        public long OwnerId
+        {
+            get { return ownerId; }
+            set { ownerId = value; }
+        }
+        private List<Message> messages;
+
+        public List<Message> Messages
+        {
+            get { return messages; }
+            set { messages = value; }
+        }
+        private string codeSection;
+
+        public string CodeSection
+        {
+            get { return codeSection; }
+            set { codeSection = value; }
+        }
+
+        private bool isClosed;
+
+        public bool IsClosed
+        {
+            get { return isClosed; }
+            set { isClosed = value; }
+        }
 
         public CodeReviewSection(long codeReviewSectionId, long ownerId, List<Message> message, string codeSection, bool isClosed)
         {
-            CodeReviewSectionId = codeReviewSectionId;
+            Id = codeReviewSectionId;
             OwnerId = ownerId;
             Messages = message;
             CodeSection = codeSection;

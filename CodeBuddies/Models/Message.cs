@@ -8,7 +8,13 @@ namespace CodeBuddies.Models
 {
     internal class Message
     {
-        long MessageId { get; set; }
+        private long messageId;
+
+        public long MessageId
+        {
+            get { return messageId; }
+            set { messageId = value; }
+        }
 
         private DateTime timeStamp;
 
