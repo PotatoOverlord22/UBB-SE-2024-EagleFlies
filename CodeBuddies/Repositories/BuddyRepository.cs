@@ -97,6 +97,16 @@ namespace CodeBuddies.Repositories
             return Buddies;
         }
 
+        public Buddy GetById(int id)
+        {
+            foreach (var buddy in Buddies) 
+            {
+                if (buddy.Id == id)
+                    return buddy;
+            }
+            return null;
+        }
+
         // TODO remove this
         public void PopulateWithHardCodedBuddies()
         {
