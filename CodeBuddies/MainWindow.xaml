@@ -41,8 +41,9 @@
 
             <userControls:SessionsList Grid.Row="1"/>
 
-        </Grid>
+            <userControls:CodeReview Grid.Row="2"/>
 
+        </Grid>
 
 
     </Grid>
