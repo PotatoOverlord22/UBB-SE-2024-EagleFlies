@@ -98,7 +98,7 @@
 
     <Style x:Key="JoinLeaveSessionButtonStyle" TargetType="Button">
         <Setter Property="FontSize" Value="10"/>
-        <Setter Property="Visibility" Value="Hidden"/>
+        <Setter Property="Visibility" Value="Visible"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
@@ -113,14 +113,7 @@
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>
-            </Setter>
-
-        <Style.Triggers>
-            <DataTrigger Binding="{Binding Type}" Value="invite">
-                <Setter Property="Visibility" Value="Visible"/>
-            </DataTrigger>
-
-        </Style.Triggers>
+        </Setter>
     </Style>
 
 </ResourceDictionary>
