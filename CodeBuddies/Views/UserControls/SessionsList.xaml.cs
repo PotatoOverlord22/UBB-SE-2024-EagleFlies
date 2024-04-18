@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CodeBuddies.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,8 +24,7 @@ namespace CodeBuddies.Views.UserControls
         public SessionsList()
         {
             InitializeComponent();
-            DataContext = this;
-            sessionsDataGrid.Items.Add(new ListItem());
+            DataContext = new SessionsListViewModel();
          
         }
     }

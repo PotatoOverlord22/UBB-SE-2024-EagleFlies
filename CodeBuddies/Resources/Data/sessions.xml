@@ -1,0 +1,49 @@
+﻿<Sessions>
+	<Session>
+		<Id>1</Id>
+		<OwnerId>1001</OwnerId>
+		<Name>Coding Basics</Name>
+		<CreationDate>2024-04-01T09:00:00</CreationDate>
+		<LastEditDate>2024-04-10T15:00:00</LastEditDate>
+		<Buddies>
+			<BuddyRef>1</BuddyRef>
+			<BuddyRef>2</BuddyRef>
+		</Buddies>
+		<Messages>
+			<Message>
+				<MessageId>101</MessageId>
+				<SenderId>1</SenderId>
+				<TimeStamp>2024-04-02T10:15:00</TimeStamp>
+				<Content>Welcome to the session!</Content>
+			</Message>
+		</Messages>
+		<CodeContributions>
+			<CodeContribution>
+				<ContributorRef>2</ContributorRef>
+				<ContributionDate>2024-04-03T11:00:00</ContributionDate>
+				<ContributionValue>50</ContributionValue>
+			</CodeContribution>
+		</CodeContributions>
+		<CodeReviewSections>
+			<CodeReviewSection>
+				<Id>501</Id>
+				<OwnerId>1</OwnerId>
+				<IsClosed>false</IsClosed>
+				<CodeSection>Initial Review</CodeSection>
+			</CodeReviewSection>
+		</CodeReviewSections>
+		<FilePaths>
+			<FilePath>session1_notes.txt</FilePath>
+		</FilePaths>
+		<TextEditor>
+			<TextColor>Black</TextColor>
+			<FilesPaths>
+				<FilePath>session1_draft.docx</FilePath>
+			</FilesPaths>
+		</TextEditor>
+		<DrawingBoard>
+			<FilePath>session1_sketch.png</FilePath>
+		</DrawingBoard>
+	</Session>
+	<!-- Add 9 more Session elements with appropriate IDs and data -->
+</Sessions>
