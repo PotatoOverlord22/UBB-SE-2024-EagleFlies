@@ -6,8 +6,8 @@
              xmlns:local="clr-namespace:CodeBuddies.Views.UserControls"
              mc:Ignorable="d" 
              Height="70" d:DesignWidth="800">
-   
-    <Grid Background="BlueViolet">
+
+    <Grid Background="#BFBDBA">
         <Grid.RowDefinitions>
             <RowDefinition Height="70"/>
         </Grid.RowDefinitions>

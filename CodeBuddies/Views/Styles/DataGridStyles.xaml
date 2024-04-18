@@ -3,9 +3,16 @@
     <Style TargetType="{x:Type DataGridColumnHeader}">
         <Setter Property="Background" Value="DimGray"/>
         <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="Padding" Value="10"/>
     </Style>
     <Style TargetType="{x:Type DataGridCell}">
-           <Setter Property="Background" Value="#404040"/>
+        <Setter Property="Background" Value="#736F6C"/>
+           <Setter Property="BorderThickness" Value="0"/>
+           <Setter Property="BorderBrush" Value="Transparent"/>
+      
+
     </Style>
+
+   
 </ResourceDictionary>
 
