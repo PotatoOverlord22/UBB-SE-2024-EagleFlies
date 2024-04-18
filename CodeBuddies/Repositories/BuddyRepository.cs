@@ -41,25 +41,18 @@ namespace CodeBuddies.Repositories
 
                 List<Notification> notifications = new List<Notification>();
 
-                foreach (var notification in buddy.Descendants("InformationNotification"))
+                foreach (var notification in buddy.Descendants("Notification"))
                 {
                     long notificationId = (long)notification.Element("Id");
                     DateTime timeStamp = (DateTime)notification.Element("TimeStamp");
+                    string type = (string)notification.Element("Type");
                     string notificationStatus = (string)notification.Element("Status");
                     string message = (string)notification.Element("Message");
 
-                    notifications.Add(new InfoNotification(notificationId, timeStamp, notificationStatus, message));
-                }
-
-                foreach (var notification in buddy.Descendants("InviteNotification"))
-                {
-                    long notificationId = (long)notification.Element("Id");
-                    DateTime timeStamp = (DateTime)notification.Element("TimeStamp");
-                    string notificationStatus = (string)notification.Element("Status");
-                    string message = (string)notification.Element("Message");
-                    bool isAccepted = (bool)notification.Element("Accepted");
-
-                    notifications.Add(new InviteNotification(notificationId, timeStamp, notificationStatus, message, isAccepted));
+                    if (type == "information")
+                        notifications.Add(new InfoNotification(notificationId, timeStamp, type, notificationStatus, message));
+                    if (type == "invite")
+                        notification.Add(new InviteNotification(notificationId, timeStamp, type, notificationStatus, message, false));
                 }
 
                 return new Buddy(id, name, imageUrl, status, notifications);
@@ -82,9 +75,9 @@ namespace CodeBuddies.Repositories
                     new XElement("Status", buddy.Status),
                     new XElement("Notifications",
                         buddy.Notifications.Select(notification =>
-                            new XElement("InformationNotification",
+                            new XElement("Notification",
                                 new XElement("Id", notification.NotificationId),
-                                new XElement("Type", "information"), // Assuming type is fixed for InformationNotification
+                                new XElement("Type", notification.Type),
                                 new XElement("Status", notification.Status),
                                 new XElement("Message", notification.Description),
                                 new XElement("TimeStamp", notification.TimeStamp.ToString("yyyy-MM-ddTHH:mm:ss"))
