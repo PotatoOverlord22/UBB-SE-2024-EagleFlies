@@ -15,16 +15,16 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="Resources\accepted-picture.png">
+    <Resource Include="Resources\Pictures\accepted-picture.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Resources\decline-picture.png">
+    <Resource Include="Resources\Pictures\decline-picture.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Resources\dog_picture.png">
+    <Resource Include="Resources\Pictures\dog_picture.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Resources\notifications_picture.png">
+    <Resource Include="Resources\Pictures\notifications_picture.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>
