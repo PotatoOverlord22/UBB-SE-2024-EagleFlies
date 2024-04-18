@@ -22,7 +22,11 @@
 
   <ItemGroup>
     <Folder Include="Resources\Data\Constants\" />
+<<<<<<< HEAD
+    <Folder Include="Services\" />
+=======
     <Folder Include="ViewModels\" />
+>>>>>>> da04c3895fa055e3cc8f88cda892758218b4ae92
   </ItemGroup>
 
   <ItemGroup>

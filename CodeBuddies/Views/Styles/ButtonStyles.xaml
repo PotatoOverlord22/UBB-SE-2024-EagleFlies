@@ -63,8 +63,42 @@
         </Setter>
     </Style>
 
+    <Style x:Key="NotificationButton" TargetType="Button">
+        <Setter Property="FontSize" Value="10"/>
+        <Setter Property="Background" Value="Green"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Grid>
+                        <Border CornerRadius="20"
+                         Background="{TemplateBinding Background}"
+                         Width="{TemplateBinding Width}"
+                         Height="{TemplateBinding Height}"
+                         BorderThickness="0">
+                            <ContentPresenter HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"/>
+                        </Border>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding Type}" Value="successInformation">
+                <Setter Property="Background" Value="Green"/>
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Type}" Value="rejectInformation">
+                <Setter Property="Background" Value="red"/>
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Type}" Value="invite">
+                <Setter Property="Background" Value="LightBlue"/>
+            </DataTrigger>
+
+        </Style.Triggers>
+    </Style>
+
     <Style x:Key="JoinLeaveSessionButtonStyle" TargetType="Button">
         <Setter Property="FontSize" Value="10"/>
+        <Setter Property="Visibility" Value="Hidden"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
@@ -79,7 +113,14 @@
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>
-        </Setter>
+            </Setter>
+
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding Type}" Value="invite">
+                <Setter Property="Visibility" Value="Visible"/>
+            </DataTrigger>
+
+        </Style.Triggers>
     </Style>
 
 </ResourceDictionary>

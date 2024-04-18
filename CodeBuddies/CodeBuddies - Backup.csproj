@@ -9,20 +9,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Services\**" />
-    <EmbeddedResource Remove="Services\**" />
-    <None Remove="Services\**" />
-    <Page Remove="Services\**" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Remove="Resources\Pictures\exit-session.png" />
     <None Remove="Resources\Pictures\join-session.png" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Resources\Data\Constants\" />
-    <Folder Include="ViewModels\" />
+    <Folder Include="Services\" />
   </ItemGroup>
 
   <ItemGroup>

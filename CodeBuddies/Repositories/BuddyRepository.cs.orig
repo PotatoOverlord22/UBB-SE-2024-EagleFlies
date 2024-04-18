@@ -1,6 +1,11 @@
 ﻿using CodeBuddies.Models.Entities;
-
+<<<<<<< HEAD
+using CodeBuddies.Models.Exceptions;
+using System.Linq;
+using System.Xml;
+=======
 using System.Xml.Linq;
+>>>>>>> da04c3895fa055e3cc8f88cda892758218b4ae92
 
 namespace CodeBuddies.Repositories
 {
@@ -31,7 +36,12 @@ namespace CodeBuddies.Repositories
 
         public void ReadFromFile()
         {
-            XDocument doc = XDocument.Load(FilePath);
+            XmlDocument xmlDoc = new XmlDocument();
+            xmlDoc.Load(FilePath);
+            buddies.Clear();
+
+<<<<<<< HEAD
+=======
             List<Buddy> buddies = doc.Descendants("Buddy").Select(buddy =>
             {
                 long id = (long)buddy.Element("Id");
@@ -59,11 +69,15 @@ namespace CodeBuddies.Repositories
             }).ToList();
 
             Buddies = buddies;
+>>>>>>> da04c3895fa055e3cc8f88cda892758218b4ae92
 
         }
 
         public void SaveToFile()
         {
+<<<<<<< HEAD
+            // Save the buddies to the xml file given by FilePath
+=======
             XElement buddiesXml = new XElement("Buddies");
 
             foreach (var buddy in Buddies)
@@ -90,12 +104,15 @@ namespace CodeBuddies.Repositories
             }
 
             buddiesXml.Save(filePath);
+>>>>>>> da04c3895fa055e3cc8f88cda892758218b4ae92
         }
 
         public List<Buddy> GetAll()
         {
             return Buddies;
         }
+<<<<<<< HEAD
+=======
 
         public Buddy GetById(int id)
         {
@@ -114,5 +131,6 @@ namespace CodeBuddies.Repositories
             buddies.Add(new Buddy(2, "yo2", "pack://application:,,,/CodeBuddies;component/resources/pictures/dog_picture.png", "inactive", new List<Notification>()));
             buddies.Add(new Buddy(3, "yo3", "pack://application:,,,/CodeBuddies;component/resources/pictures/dog_picture.png", "inactive", new List<Notification>()));
         }
+>>>>>>> da04c3895fa055e3cc8f88cda892758218b4ae92
     }
 }

@@ -15,12 +15,20 @@ namespace CodeBuddies.Models.Entities
             get { return notificationId; }
             set { notificationId = value; }
         }
-
         protected DateTime timeStamp;
+
         public DateTime TimeStamp
         {
             get { return timeStamp; }
             set { timeStamp = value; }
+        }
+
+        protected string type;
+
+        public string Type
+        {
+            get { return type; }
+            set { type = value; }
         }
 
         protected string status;
@@ -39,10 +47,12 @@ namespace CodeBuddies.Models.Entities
             set { description = value; }
         }
 
-        public Notification(long notificationId, DateTime timeStamp, string status, string description)
+
+        public Notification(long notificationId, DateTime timeStamp, string type, string status, string description)
         {
             NotificationId = notificationId;
             TimeStamp = timeStamp;
+            Type = type;
             Status = status;
             Description = description;
         }
