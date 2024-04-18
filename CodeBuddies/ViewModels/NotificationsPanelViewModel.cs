@@ -1,4 +1,4 @@
-﻿using CodeBuddies.Models;
+﻿using CodeBuddies.Models.Entities;
 using CodeBuddies.MVVM;
 using System.Collections.ObjectModel;
 
