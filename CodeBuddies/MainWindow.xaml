@@ -27,6 +27,8 @@
 
             <userControls:BuddiesList Grid.Row="2" />
 
+            <userControls:NotificationsPanel Grid.Row="3" />
+
         </Grid>
 
         <Grid Grid.Column="1">
