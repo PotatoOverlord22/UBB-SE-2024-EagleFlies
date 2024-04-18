@@ -9,6 +9,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\Pictures\exit_session.png" />
+    <None Remove="Resources\Pictures\join_session.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Resources\Data\" />
     <Folder Include="Services\" />
     <Folder Include="ViewModels\" />
@@ -24,6 +29,8 @@
     <Resource Include="Resources\Pictures\dog_picture.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Resources\Pictures\exit_session.png" />
+    <Resource Include="Resources\Pictures\join_session.png" />
     <Resource Include="Resources\Pictures\notifications_picture.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
