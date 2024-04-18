@@ -1,4 +1,7 @@
-﻿using CodeBuddies.Models;
+﻿using CodeBuddies.Models.Entities;
+using CodeBuddies.Models.Exceptions;
+using System.Linq;
+using System.Xml;
 
 namespace CodeBuddies.Repositories
 {
@@ -24,12 +27,16 @@ namespace CodeBuddies.Repositories
         {
             FilePath = filePath;
             Buddies = new List<Buddy>();
-            PopulateBuddiesFromFile();
+            ReadFromFile();
         }
 
-        public void PopulateBuddiesFromFile()
+        public void ReadFromFile()
         {
-            // Read from an xml file given by FilePath all the buddies and populate the list
+            XmlDocument xmlDoc = new XmlDocument();
+            xmlDoc.Load(FilePath);
+            buddies.Clear();
+
+
         }
 
         public void SaveToFile()

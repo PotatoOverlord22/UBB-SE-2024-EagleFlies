@@ -4,23 +4,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CodeBuddies.Models
+namespace CodeBuddies.Models.Entities
 {
     internal abstract class Notification
     {
         protected long NotificationId { get; set; }
         protected DateTime TimeStamp { get; set; }
-        protected string Type { get; set; }
 
         protected string Status { get; set; }
 
         protected string Description { get; set; }
 
-        public Notification(long notificationId, DateTime timeStamp, string type, string status, string description)
+        public Notification(long notificationId, DateTime timeStamp, string status, string description)
         {
             NotificationId = notificationId;
             TimeStamp = timeStamp;
-            Type = type;
             Status = status;
             Description = description;
         }
