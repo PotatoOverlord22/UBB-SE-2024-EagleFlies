@@ -4,17 +4,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CodeBuddies.Models
+namespace CodeBuddies.Models.Entities
 {
     internal class InfoNotification : Notification
     {
-        public InfoNotification(long notificationId, DateTime timeStamp, string type, string status, string description) : base(notificationId, timeStamp, type, status, description) {}
-      
+        public InfoNotification(long notificationId, DateTime timeStamp, string status, string description) : base(notificationId, timeStamp, status, description) { }
+
         protected override void MarkNotification()
         {
             // mark as read
         }
     }
-    
-    
+
+
 }

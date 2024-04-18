@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CodeBuddies.Models
+namespace CodeBuddies.Models.Entities
 {
     internal class DrawingBoard
     {
@@ -23,17 +23,17 @@ namespace CodeBuddies.Models
         public void Draw(int x, int y)
         {
             // Draw the point at x, y
-        } 
+        }
 
         public void Save()
         {
             // Save the drawing to the file
         }
 
-        public void Render() 
-        { 
+        public void Render()
+        {
             // Render the drawing
-            
+
         }
 
         public void Erase(int x, int y)

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CodeBuddies.Models
+namespace CodeBuddies.Models.Entities
 {
     internal class InviteNotification : Notification
     {
@@ -16,11 +16,11 @@ namespace CodeBuddies.Models
             set { isAccepted = value; }
         }
 
-        public InviteNotification(long notificationId, DateTime timeStamp, string type, string status, string description, bool isAccepted) : base(notificationId, timeStamp, type, status, description)
-        { 
+        public InviteNotification(long notificationId, DateTime timeStamp, string status, string description, bool isAccepted) : base(notificationId, timeStamp, status, description)
+        {
             IsAccepted = isAccepted;
         }
-      
+
         protected override void MarkNotification()
         {
             // mark as declined/accepted

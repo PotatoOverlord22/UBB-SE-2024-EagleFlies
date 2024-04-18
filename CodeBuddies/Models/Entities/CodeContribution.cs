@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CodeBuddies.Models
+namespace CodeBuddies.Models.Entities
 {
     internal class CodeContribution
     {
