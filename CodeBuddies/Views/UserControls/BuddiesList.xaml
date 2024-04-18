@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:CodeBuddies.Views.UserControls"
              mc:Ignorable="d" 
              d:DesignHeight="200" d:DesignWidth="300">
-    <ListView ItemsSource="{Binding Buddies}">
+    <ListView ItemsSource="{Binding Buddies}"  Template="{StaticResource CustomListViewTemplate}">
         <ListView.ItemTemplate>
             <DataTemplate>
                 <Grid Height="80">
@@ -25,10 +25,11 @@
                             </Ellipse.Fill>
                         </Ellipse>
                     </Border>
-                    <Button Grid.Column="1" Content="{Binding BuddyName}" Margin="10"/>
+                    <Button Style="{StaticResource defaultButtonStyle}" Grid.Column="1" Content="{Binding BuddyName}" Margin="10"/>
 
                 </Grid>
             </DataTemplate>
         </ListView.ItemTemplate>
     </ListView>
+
 </UserControl>
