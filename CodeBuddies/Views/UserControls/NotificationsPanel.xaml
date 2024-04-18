@@ -18,7 +18,7 @@
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
             <TextBlock Text="Notifications" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-            <Image Height="40" Width="40" Source="pack://application:,,,/CodeBuddies;component/resources/notifications_picture.png" HorizontalAlignment="Left" Margin="10 0 0 0" VerticalAlignment="Center" />
+            <Image Height="40" Width="40" Source="pack://application:,,,/CodeBuddies;component/resources/pictures/notifications_picture.png" HorizontalAlignment="Left" Margin="10 0 0 0" VerticalAlignment="Center" />
         </Grid>
 
         <Grid Grid.Row="1">
@@ -54,8 +54,8 @@
                                 <ColumnDefinition Width=".5*" />
                             </Grid.ColumnDefinitions>
 
-                            <Image Grid.Column="0" Height="30" Width="30" Source="pack://application:,,,/CodeBuddies;component/resources/accepted-picture.png" HorizontalAlignment="Center" VerticalAlignment="Center" />
-                            <Image Grid.Column="1" Height="35" Width="35" Source="pack://application:,,,/CodeBuddies;component/resources/decline-picture.png" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                            <Image Grid.Column="0" Height="30" Width="30" Source="pack://application:,,,/CodeBuddies;component/resources/pictures/accepted-picture.png" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                            <Image Grid.Column="1" Height="35" Width="35" Source="pack://application:,,,/CodeBuddies;component/resources/pictures/decline-picture.png" HorizontalAlignment="Center" VerticalAlignment="Center" />
                         </Grid>
                         
                     </Grid>

@@ -26,7 +26,7 @@
                 <Border BorderBrush="Black" BorderThickness="2" CornerRadius="50" Margin="2" Background="White">
                     <Ellipse Margin="5">
                         <Ellipse.Fill>
-                            <ImageBrush ImageSource="pack://application:,,,/CodeBuddies;component/resources/dog_picture.png" 
+                            <ImageBrush ImageSource="pack://application:,,,/CodeBuddies;component/resources/pictures/dog_picture.png" 
                         Viewport="0,0,1,1" 
                         ViewportUnits="RelativeToBoundingBox" 
                         Stretch="Uniform"/>
@@ -46,7 +46,7 @@
                 <Border BorderBrush="Black" BorderThickness="2" CornerRadius="50" Margin="2" Background="White">
                     <Ellipse Margin="5">
                         <Ellipse.Fill>
-                            <ImageBrush ImageSource="pack://application:,,,/CodeBuddies;component/resources/dog_picture.png"
+                            <ImageBrush ImageSource="pack://application:,,,/CodeBuddies;component/resources/pictures/dog_picture.png"
                                                     Viewport="0,0,1,1" 
                                                     ViewportUnits="RelativeToBoundingBox" 
                                                     Stretch="Uniform"/> 
@@ -65,7 +65,7 @@
                 <Border BorderBrush="Black" BorderThickness="2" CornerRadius="50" Margin="2" Background="White">
                     <Ellipse Margin="5">
                         <Ellipse.Fill>
-                            <ImageBrush ImageSource="pack://application:,,,/CodeBuddies;component/resources/dog_picture.png"
+                            <ImageBrush ImageSource="pack://application:,,,/CodeBuddies;component/resources/pictures/dog_picture.png"
                                         Viewport="0,0,1,1" 
                                         ViewportUnits="RelativeToBoundingBox" 
                                         Stretch="Uniform"/>
@@ -85,7 +85,7 @@
                 <Border BorderBrush="Black" BorderThickness="2" CornerRadius="50" Margin="2" Background="White">
                     <Ellipse Margin="5">
                         <Ellipse.Fill>
-                            <ImageBrush ImageSource="pack://application:,,,/CodeBuddies;component/resources/dog_picture.png" 
+                            <ImageBrush ImageSource="pack://application:,,,/CodeBuddies;component/resources/pictures/dog_picture.png" 
                                         Viewport="0,0,1,1" 
                                         ViewportUnits="RelativeToBoundingBox" 
                                         Stretch="Uniform"/>

@@ -8,8 +8,13 @@ namespace CodeBuddies.Models
 {
     internal class DrawingBoard
     {
+        private string filePath;
 
-        string FilePath { get; set; }
+        public string FilePath
+        {
+            get { return filePath; }
+            set { filePath = value; }
+        }
         public DrawingBoard(string filePath)
         {
             FilePath = filePath;

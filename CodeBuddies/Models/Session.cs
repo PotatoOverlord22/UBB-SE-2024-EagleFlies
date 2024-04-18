@@ -8,44 +8,114 @@ namespace CodeBuddies.Models
 {
     internal class Session
     {
+        private long id;
 
-        long SessionId { get; set; }
-
-        long OwnerId { get; set; }
-
-        string Name { get; set; }
-
-        DateTime CreationDate { get; set; }
-
-        DateTime LastEditedDate { get; set; }
-
-        List<Buddy> Buddies { get; set;}
-
-        List<Message> Messages { get; set; }
-
-        List<CodeContribution> CodeContributions { get; set;}
-
-        List<CodeReviewSection> CodeReviewSections { get; set;}
-
-        List<string> FilesPaths { get; set; }
-
-
-        TextEditor TextEditor { get; set; }
-
-        DrawingBoard DrawingBoard { get; set; }
-
-        public Session(long sessionId, long ownerId, string name, DateTime creationDate, DateTime lastEditedDate, List<Buddy> buddies, List<Message> messages, List<CodeContribution> codeContributions, List<CodeReviewSection> codeReviewSections, List<string> filesPaths, TextEditor textEditor, DrawingBoard drawingBoard)
+        public long Id
         {
-            SessionId = sessionId;
+            get { return id; }
+            set { id = value; }
+        }
+
+        private long ownerId;
+
+        public long OwnerId
+        {
+            get { return ownerId; }
+            set { ownerId = value; }
+        }
+
+        private string name;
+
+        public string Name
+        {
+            get { return name; }
+            set { name = value; }
+        }
+
+        private DateTime creationDate;
+
+        public DateTime CreationDate
+        {
+            get { return creationDate; }
+            set { creationDate = value; }
+        }
+
+        private DateTime lastEditDate;
+
+        public DateTime LastEditDate
+        {
+            get { return lastEditDate; }
+            set { lastEditDate = value; }
+        }
+
+        private List<Buddy> buddies;
+
+        public List<Buddy> Buddies
+        {
+            get { return buddies; }
+            set { buddies = value; }
+        }
+
+        private List<Message> messages;
+
+        public List<Message> Messages
+        {
+            get { return messages; }
+            set { messages = value; }
+        }
+
+        private List<CodeContribution> codeContributions;
+
+        public List<CodeContribution> CodeContributions
+        {
+            get { return codeContributions; }
+            set { codeContributions = value; }
+        }
+
+        private List<CodeReviewSection> codeReviewSections;
+
+        public List<CodeReviewSection> CodeReviewSections
+        {
+            get { return codeReviewSections; }
+            set { codeReviewSections = value; }
+        }
+
+        private List<string> filePaths;
+
+        public List<string> FilePaths
+        {
+            get { return filePaths; }
+            set { filePaths = value; }
+        }
+
+        private TextEditor textEditor;
+
+        public TextEditor TextEditor
+        {
+            get { return textEditor; }
+            set { textEditor = value; }
+        }
+
+        private DrawingBoard drawingBoard;
+
+        public DrawingBoard DrawingBoard
+        {
+            get { return drawingBoard; }
+            set { drawingBoard = value; }
+        }
+
+        public Session(long sessionId, long ownerId, string name, DateTime creationDate, DateTime lastEditedDate, List<Buddy> buddies, List<Message> messages, List<CodeContribution> codeContributions, List<CodeReviewSection> codeReviewSections, List<string> filePaths, TextEditor textEditor, DrawingBoard drawingBoard)
+        {
+            Id = sessionId;
             OwnerId = ownerId;
             Name = name;
             CreationDate = creationDate;
-            LastEditedDate = lastEditedDate;
+            LastEditDate = lastEditedDate;
             Buddies = buddies;
             Messages = messages;
             CodeContributions = codeContributions;
             CodeReviewSections = codeReviewSections;
-            FilesPaths = filesPaths;
+            FilePaths = filePaths;
             TextEditor = textEditor;
             DrawingBoard = drawingBoard;
         }
@@ -67,7 +137,7 @@ namespace CodeBuddies.Models
 
         public void UploadFile(string filePath)
         {
-            FilesPaths.Add(filePath);
+            FilePaths.Add(filePath);
         }
 
         public void addCodeContribution(int buddyId, DateTime date, int contributionValue)

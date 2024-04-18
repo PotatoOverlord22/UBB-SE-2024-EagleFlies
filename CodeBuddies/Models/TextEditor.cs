@@ -8,14 +8,26 @@ namespace CodeBuddies.Models
 {
     internal class TextEditor
     {
-        string TextColor { get; set; }
-        List<string> FilesPaths { get; set; }
+        private string textColor;
+
+        public string TextColor
+        {
+            get { return textColor; }
+            set { textColor = value; }
+        }
+        private List<string> filePaths;
+
+        public List<string> FilePaths
+        {
+            get { return filePaths; }
+            set { filePaths = value; }
+        }
 
 
         public TextEditor(string textColor, List<string> filesPaths)
         {
             TextColor = textColor;
-            FilesPaths = filesPaths;
+            FilePaths = filesPaths;
         }
 
         public void Insert(int row, int column, string text)

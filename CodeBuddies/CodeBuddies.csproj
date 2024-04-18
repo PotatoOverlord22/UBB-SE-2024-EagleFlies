@@ -9,28 +9,22 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Resources\accepted-picture.png" />
-    <None Remove="Resources\decline-picture.png" />
-    <None Remove="Resources\dog_picture.png" />
-    <None Remove="Resources\notifications_picture.png" />
-  </ItemGroup>
-
-  <ItemGroup>
+    <Folder Include="Resources\Data\" />
     <Folder Include="Services\" />
     <Folder Include="ViewModels\" />
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="Resources\accepted-picture.png">
+    <Resource Include="Resources\Pictures\accepted-picture.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Resources\decline-picture.png">
+    <Resource Include="Resources\Pictures\decline-picture.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Resources\dog_picture.png">
+    <Resource Include="Resources\Pictures\dog_picture.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Resources\notifications_picture.png">
+    <Resource Include="Resources\Pictures\notifications_picture.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>

@@ -8,18 +8,44 @@ namespace CodeBuddies.Models
 {
     internal class Buddy
     {
+        private long id;
 
-        long BuddyId { get; set; }
-        string BuddyName { get; set; }
-        string ProfilePhotoUrl { get; set; }
-        string Status { get; set; }
+        public long Id
+        {
+            get { return id; }
+            set { id = value; }
+        }
+
+        private string buddyName;
+
+        public string BuddyName
+        {
+            get { return buddyName; }
+            set { buddyName = value; }
+        }
+
+        private string profilePhotoUrl;
+
+        public string ProfilePhotoUrl
+        {
+            get { return profilePhotoUrl; }
+            set { profilePhotoUrl = value; }
+        }
+
+        private string status;
+
+        public string Status
+        {
+            get { return status; }
+            set { status = value; }
+        }
 
         List<Notification> Notifications;
 
 
         public Buddy(long buddyId, string buddyName, string profilePhotoUrl, string status, List<Notification> notifications)
         {
-            BuddyId = buddyId;
+            Id = buddyId;
             BuddyName = buddyName;
             ProfilePhotoUrl = profilePhotoUrl;
             Status = status;

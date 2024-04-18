@@ -8,8 +8,14 @@ namespace CodeBuddies.Models
 {
     internal class InviteNotification : Notification
     {
+        private bool isAccepted;
 
-        bool IsAccepted { get; set; }
+        public bool IsAccepted
+        {
+            get { return isAccepted; }
+            set { isAccepted = value; }
+        }
+
         public InviteNotification(long notificationId, DateTime timeStamp, string type, string status, string description, bool isAccepted) : base(notificationId, timeStamp, type, status, description)
         { 
             IsAccepted = isAccepted;

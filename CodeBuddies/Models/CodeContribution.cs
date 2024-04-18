@@ -8,17 +8,34 @@ namespace CodeBuddies.Models
 {
     internal class CodeContribution
     {
+        private Buddy contributor;
 
-        Buddy Buddy { get; set; }
-
-        DateTime Date { get; set; }
-
-        int ContributionValue { get; set; }
-
-        public CodeContribution(Buddy buddy, DateTime date, int contributionValue)
+        public Buddy Contributor
         {
-            Buddy = buddy;
-            Date = date;
+            get { return contributor; }
+            set { contributor = value; }
+        }
+
+        private DateTime contributionDate;
+
+        public DateTime ContributionDate
+        {
+            get { return contributionDate; }
+            set { contributionDate = value; }
+        }
+
+        private int contributionValue;
+
+        public int ContributionValue
+        {
+            get { return contributionValue; }
+            set { contributionValue = value; }
+        }
+
+        public CodeContribution(Buddy contributor, DateTime date, int contributionValue)
+        {
+            Contributor = contributor;
+            ContributionDate = date;
             ContributionValue = contributionValue;
         }
     }
