@@ -9,13 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Resources\accepted-picture.png" />
-    <None Remove="Resources\decline-picture.png" />
-    <None Remove="Resources\dog_picture.png" />
-    <None Remove="Resources\notifications_picture.png" />
-  </ItemGroup>
-
-  <ItemGroup>
+    <Folder Include="Resources\Data\" />
     <Folder Include="Services\" />
     <Folder Include="ViewModels\" />
   </ItemGroup>
