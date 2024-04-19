@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using CodeBuddies;
 
 namespace CodeBuddies.Views.UserControls
 {
@@ -23,6 +24,15 @@ namespace CodeBuddies.Views.UserControls
         public MainMenuBar()
         {
             InitializeComponent();
+        }
+
+        
+        private void DrawingBoardButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (App.Current.MainWindow is MainWindow mainWindow)
+            {
+                mainWindow.ToggleDrawingBoard();
+            }
         }
     }
 }

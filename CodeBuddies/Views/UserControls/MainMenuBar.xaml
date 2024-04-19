@@ -14,9 +14,8 @@
 
         <Button Style="{StaticResource defaultButtonStyle}" Margin="20 0 0 0" Content="New Session" Width="100" Height="30" HorizontalAlignment="Left" VerticalAlignment="Center"/>
         <Button Style="{StaticResource defaultButtonStyle}"  Margin="140 0 0 0" Content="Change Themes" Width="100" Height="30" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        <Button Style="{StaticResource defaultButtonStyle}"  Margin="260 0 0 0" Content="Drawing Board" Click="DrawingBoardButton_Click" Width="100" Height="30" HorizontalAlignment="Left" VerticalAlignment="Center"/>
         <TextBox Style="{StaticResource SearchBar}" Tag="Search session by name..." Margin="0 0 20 0" Padding="5 0 0 0"  Width="200" Height="30" HorizontalAlignment="Right" VerticalAlignment="Center" HorizontalContentAlignment="Left"  VerticalContentAlignment="Center"></TextBox>
-        
-        
-        
+
     </Grid>
 </UserControl>

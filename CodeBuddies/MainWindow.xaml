@@ -38,8 +38,9 @@
 
             <userControls:SessionsList Grid.Row="1"/>
 
+            <userControls:DrawingBoard Grid.Row ="1" x:Name="DrawingBoardControl" Visibility="Collapsed"/>
+
         </Grid>
-
-
+        
     </Grid>
 </Window>
