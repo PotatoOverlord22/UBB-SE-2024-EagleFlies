@@ -24,5 +24,11 @@ namespace CodeBuddies.Views.UserControls
         {
             InitializeComponent();
         }
+
+        private void NewSessionButtonClicked(object sender, RoutedEventArgs e)
+        {
+            CreateNewSessionPopUp createNewSessionPopUp = new CreateNewSessionPopUp();
+            createNewSessionPopUp.ShowDialog();
+        }
     }
 }
