@@ -39,17 +39,19 @@
                                     <ColumnDefinition Width=".5*" />
                                 </Grid.ColumnDefinitions>
 
-                                <Button Grid.Column="0" Style="{StaticResource JoinLeaveSessionButtonStyle}" Name="acceptInvitationBtn" Width="30" Height="30">
+                                <Button Grid.Column="0" Style="{StaticResource JoinLeaveSessionButtonStyle}" Name="acceptInvitationBtn" Width="30" Height="30" 
+                                        Command="{Binding DataContext.AcceptCommand, RelativeSource={RelativeSource AncestorType={x:Type ListView}}}"
+                                        CommandParameter="{Binding DataContext, RelativeSource={RelativeSource AncestorType={x:Type ListViewItem}}}">
                                     <Image Source="pack://application:,,,/CodeBuddies;component/resources/pictures/accepted-picture.png"/>
                                 </Button>
 
                                 <Button Grid.Column="1" Style="{StaticResource JoinLeaveSessionButtonStyle}" Name="declineInvitationBtn" Width="35" Height="35">
                                     <Image Source="pack://application:,,,/CodeBuddies;component/resources/pictures/decline-picture.png"/>
                                 </Button>
-
-                             
                             </Grid>
-
+                                <Button Grid.Column="1" Style="{StaticResource MarkReadButton}" Name="markReadBtn" Width="30" Height="30">
+                                    <Image Source="pack://application:,,,/CodeBuddies;component/resources/pictures/accepted-picture.png"/>
+                                </Button>
 
                         </Grid>
                     </DataTemplate>
