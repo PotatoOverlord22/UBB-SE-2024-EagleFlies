@@ -1,137 +1,157 @@
 ﻿using CodeBuddies.Models.Entities;
+using CodeBuddies.MVVM;
+using System.Data;
+using System.Data.SqlClient;
+using CodeBuddies.Resources.Data;
 using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Xml.Linq;
 
 namespace CodeBuddies.Repositories
 {
-    internal class SessionRepository
+    internal class SessionRepository : DBRepositoryBase
     {
-        private string filePath;
-        private BuddyRepository buddyRepository;
+        public SessionRepository() : base() { }
 
-        public string FilePath
+
+        private List<Message> GetMessagesForSpecificSession(long sessionId)
         {
-            get { return filePath; }
-            set { filePath = value; }
-        }
+            List<Message> sessionMessages = new List<Message>();
 
-        private List<Session> sessions;
+            SqlDataAdapter dataAdapter = new SqlDataAdapter();
 
-        public List<Session> Sessions
-        {
-            get { return sessions; }
-            set { sessions = value; }
-        }
+            DataSet messagesDataSet = new DataSet();
+            string selectAllMessagesForSpecificSession = "SELECT * FROM Messages m inner join MessagesSessions ms on m.id = ms.message_id where ms.session_id = @id ";
+            SqlCommand selectAllMessagesForSpecificSessionCommand = new SqlCommand(selectAllMessagesForSpecificSession, sqlConnection);
+            selectAllMessagesForSpecificSessionCommand.Parameters.AddWithValue("@id", sessionId);
+            dataAdapter.SelectCommand = selectAllMessagesForSpecificSessionCommand;
+            dataAdapter.Fill(messagesDataSet, "Messages");
 
-        public SessionRepository(BuddyRepository buddyRepository, string filePath)
-        {
-            FilePath = filePath;
-            Sessions = new List<Session>();
-            this.buddyRepository = buddyRepository;
-            ReadFromFile();
-        }
-
-        public void ReadFromFile()
-        {
-            XDocument doc = XDocument.Load(filePath);
-
-            this.Sessions = doc.Descendants("Session").Select(session =>
+            foreach (DataRow messageRow in messagesDataSet.Tables["Messages"].Rows)
             {
-                long id = (long)session.Element("Id");
-                long ownerId = (long)session.Element("OwnerId");
-                string name = (string)session.Element("Name");
-                DateTime creationDate = DateTime.Parse((string)session.Element("CreationDate"));
-                DateTime lastEditDate = DateTime.Parse((string)session.Element("LastEditDate"));
-                var buddies = session.Element("Buddies").Elements("BuddyRef")
-                    .Select(br => this.buddyRepository.GetById((int)br))
-                    .Where(b => b != null)
-                    .ToList();
+                Message currentMessage = new Message((long)messageRow["id"], Convert.ToDateTime(messageRow["message_timestamp"]), messageRow["content"].ToString(), (long)messageRow["sender_id"]);
+                sessionMessages.Add(currentMessage);
+            }
 
-                var messages = session.Element("Messages").Elements("Message")
-                    .Select(m => new Message(
-                        (long)m.Element("MessageId"),
-                        DateTime.Parse((string)m.Element("TimeStamp")),
-                        (string)m.Element("Content"),
-                        (long)m.Element("SenderId")
-                    )).ToList();
-
-                var codeContributions = session.Element("CodeContributions").Elements("CodeContribution")
-                    .Select(c => new CodeContribution(
-                        this.buddyRepository.GetById((int)c.Element("ContributorRef")), // Assuming Contributor is directly under CodeContribution
-                        DateTime.Parse((string)c.Element("ContributionDate")),
-                        (int)c.Element("ContributionValue")
-                    )).ToList();
-
-                var codeReviewSections = session.Element("CodeReviewSections").Elements("CodeReviewSection")
-                    .Select(crs => new CodeReviewSection(
-                        (long)crs.Element("Id"),
-                        (long)crs.Element("OwnerId"),
-                        crs.Element("Messages").Elements("Message").Select(m => new Message(
-                            (long)m.Element("MessageId"),
-                            DateTime.Parse((string)m.Element("TimeStamp")),
-                            (string)m.Element("Content"),
-                            (long)m.Element("SenderId")
-                        )).ToList(),
-                        (string)crs.Element("CodeSection"),
-                        (bool)crs.Element("IsClosed")
-                    )).ToList();
-
-                return new Session(id, ownerId, name, creationDate, lastEditDate, buddies, messages, codeContributions, codeReviewSections, null, null, null);
-            }).ToList();
+            return sessionMessages;
         }
-        public void SaveToFile()
+
+        private List<CodeContribution> GetCodeContributionsForSpecificSession(long sessionId)
         {
-            var sessionsXml = new XElement("Sessions",
-                Sessions.Select(session => new XElement("Session",
-                    new XElement("Id", session.Id),
-                    new XElement("OwnerId", session.OwnerId),
-                    new XElement("Name", session.Name),
-                    new XElement("CreationDate", session.CreationDate.ToString("s")),
-                    new XElement("LastEditDate", session.LastEditDate.ToString("s")),
-                    new XElement("Buddies", session.Buddies.Select(b => new XElement("BuddyRef", b.Id))),
-                    new XElement("Messages", session.Messages.Select(m =>
-                        new XElement("Message",
-                            new XElement("MessageId", m.MessageId),
-                            new XElement("SenderId", m.SenderId),
-                            new XElement("TimeStamp", m.TimeStamp.ToString("s")),
-                            new XElement("Content", m.Content)
-                        )
-                    )),
-                    new XElement("CodeContributions", session.CodeContributions.Select(c =>
-                        new XElement("CodeContribution",
-                            new XElement("Contributor", c.Contributor.Id),
-                            new XElement("ContributionDate", c.ContributionDate.ToString("s")),
-                            new XElement("ContributionValue", c.ContributionValue)
-                        )
-                    )),
-                    new XElement("CodeReviewSections", session.CodeReviewSections.Select(c =>
-                        new XElement("CodeReviewSection",
-                            new XElement("Id", c.Id),
-                            new XElement("OwnerId", c.OwnerId),
-                            new XElement("IsClosed", c.IsClosed),
-                            new XElement("CodeSection", c.CodeSection)
-                        )
-                    )),
-                    new XElement("FilePaths", session.FilePaths.Select(f => new XElement("FilePath", f))),
-                    new XElement("TextEditor",
-                        new XElement("TextColor", session.TextEditor.TextColor),
-                        new XElement("FilesPaths", session.TextEditor.FilePaths.Select(f => new XElement("FilePath", f)))
-                    ),
-                    new XElement("DrawingBoard",
-                        new XElement("FilePath", session.DrawingBoard.FilePath)
-                    )
-                ))
-            );
+            List<CodeContribution> codeContributions = new List<CodeContribution>();
 
-            sessionsXml.Save(FilePath);
+            SqlDataAdapter dataAdapter = new SqlDataAdapter();
+            DataSet codeContributionsDataSet = new DataSet();
+            string selectAllCodeContributionsForSpecificSession = "SELECT * FROM CodeContributions where session_id = @id";
+            SqlCommand selectAllCodeContributionsForSpecificSessionCommand = new SqlCommand(selectAllCodeContributionsForSpecificSession, sqlConnection);
+            selectAllCodeContributionsForSpecificSessionCommand.Parameters.AddWithValue("@id", sessionId);
+            dataAdapter.SelectCommand = selectAllCodeContributionsForSpecificSessionCommand;
+            dataAdapter.Fill(codeContributionsDataSet, "CodeContributions");
+
+            foreach (DataRow codeContributionRow in codeContributionsDataSet.Tables["CodeContributions"].Rows)
+            {
+                CodeContribution currentCodeContribution = new CodeContribution((long)codeContributionRow["buddy_id"], Convert.ToDateTime(codeContributionRow["contribution_date"]), (int)codeContributionRow["contribution_value"]);
+                codeContributions.Add(currentCodeContribution);
+            }
+
+            return codeContributions;
         }
 
-        public List<Session> GetAll()
+        private List<Message> GetMessagesForSpecificCodeReview(long codeReviewId)
         {
-            return Sessions;
+            List<Message> codeReviewMessages = new List<Message>();
+
+            SqlDataAdapter dataAdapter = new SqlDataAdapter();
+            DataSet messagesDataSet = new DataSet();
+            string selectAllMessagesForSpecificCodeReview = "SELECT * FROM Messages m inner join MessagesCodeReviews mcr on m.id = mcr.message_id where mcr.code_review_id = @id ";
+            SqlCommand selectAllMessagesForSpecificCodeReviewCommand = new SqlCommand(selectAllMessagesForSpecificCodeReview, sqlConnection);
+            selectAllMessagesForSpecificCodeReviewCommand.Parameters.AddWithValue("@id", codeReviewId);
+            dataAdapter.SelectCommand = selectAllMessagesForSpecificCodeReviewCommand;
+            dataAdapter.Fill(messagesDataSet, "Messages");
+
+            foreach (DataRow messageRow in messagesDataSet.Tables["Messages"].Rows)
+            {
+                Message currentMessage = new Message((long)messageRow["id"], Convert.ToDateTime(messageRow["message_timestamp"]), messageRow["content"].ToString(), (long)messageRow["sender_id"]);
+                codeReviewMessages.Add(currentMessage);
+            }
+
+            return codeReviewMessages;
         }
+
+
+
+        private List<CodeReviewSection> GetCodeReviewSectionsForSpecificSession(long sessionId)
+        {
+            List<CodeReviewSection> codeReviewSections = new List<CodeReviewSection>();
+
+            SqlDataAdapter dataAdapter = new SqlDataAdapter();
+            DataSet codeReviewSectionsDataSet = new DataSet();
+            string selectAllCodeReviewSectionsForSpecificSession = "SELECT * FROM CodeReviews cr inner join CodeReviewsSessions crs on cr.id = crs.code_review_id where crs.session_id = @id ";
+            SqlCommand selectAllCodeReviewSectionsForSpecificSessionCommand = new SqlCommand(selectAllCodeReviewSectionsForSpecificSession, sqlConnection);
+            selectAllCodeReviewSectionsForSpecificSessionCommand.Parameters.AddWithValue("@id", sessionId);
+            dataAdapter.SelectCommand = selectAllCodeReviewSectionsForSpecificSessionCommand;
+            dataAdapter.Fill(codeReviewSectionsDataSet, "CodeReviews");
+
+            foreach (DataRow codeReviewSectionRow in codeReviewSectionsDataSet.Tables["CodeReviews"].Rows)
+            {
+                bool isClosed = false;
+                if (codeReviewSectionRow["code_review_status"].ToString() != "closed")
+                    isClosed = true;
+
+
+                CodeReviewSection currentCodeReviewSection = new CodeReviewSection((long)codeReviewSectionRow["id"], (long)codeReviewSectionRow["owner_id"], GetMessagesForSpecificCodeReview((long)codeReviewSectionRow["id"]), codeReviewSectionRow["code_section"].ToString(), isClosed);
+                codeReviewSections.Add(currentCodeReviewSection);
+            }
+
+            return codeReviewSections;
+        }
+
+        private List<long> GetBuddiesForSpecificSession(long sessionId)
+        {
+            List<long> sessionBuddies = new List<long>();
+
+            SqlDataAdapter dataAdapter = new SqlDataAdapter();
+            DataSet buddiesDataSet = new DataSet();
+            string selectAllBuddiesForSpecificSession = "SELECT * FROM BuddiesSessions where session_id = @id";
+            SqlCommand selectAllBuddiesForSpecificSessionCommand = new SqlCommand(selectAllBuddiesForSpecificSession, sqlConnection);
+            selectAllBuddiesForSpecificSessionCommand.Parameters.AddWithValue("@id", sessionId);
+            dataAdapter.SelectCommand = selectAllBuddiesForSpecificSessionCommand;
+            dataAdapter.Fill(buddiesDataSet, "BuddiesSessions");
+
+            foreach (DataRow currentRow in buddiesDataSet.Tables["BuddiesSessions"].Rows)
+            {
+                sessionBuddies.Add((long)currentRow["buddy_id"]);
+            }
+
+            return sessionBuddies;
+        }
+
+        public List<Session> GetAllSessions()
+        {
+            List<Session> sessions = new List<Session>();
+
+            DataSet sessionDataSet = new DataSet();
+            string selectAllSessions = "SELECT * FROM Sessions";
+            SqlCommand selectAllSessionsCommand = new SqlCommand(selectAllSessions, sqlConnection);
+            dataAdapter.SelectCommand = selectAllSessionsCommand;
+            dataAdapter.Fill(sessionDataSet, "Sessions");
+
+            foreach(DataRow sessionRow in sessionDataSet.Tables["Sessions"].Rows)
+            {
+                if ((long)sessionRow["owner_id"] == Constants.CLIENT_BUDDY_ID)
+                {
+                    List<Message> sessionMessages = GetMessagesForSpecificSession((long)sessionRow["id"]);
+                    List<long> sessionBuddies = GetBuddiesForSpecificSession((long)sessionRow["id"]);
+                    List<CodeContribution> sessionCodeContributions = GetCodeContributionsForSpecificSession((long)sessionRow["id"]);
+                    List<CodeReviewSection> sessionCodeReviewSections = GetCodeReviewSectionsForSpecificSession((long)sessionRow["id"]);
+
+                    
+                    Session session = new Session((long)sessionRow["id"], (long)sessionRow["owner_id"], sessionRow["session_name"].ToString(), Convert.ToDateTime(sessionRow["creation_date"]), Convert.ToDateTime(sessionRow["last_edit_date"]), sessionBuddies, sessionMessages, sessionCodeContributions, sessionCodeReviewSections, new List<string>(), new TextEditor("black", new List<string>()), new DrawingBoard(""));
+                    sessions.Add(session);
+                }
+            }        
+
+            return sessions;
+        }
+        
+   
     }
 }

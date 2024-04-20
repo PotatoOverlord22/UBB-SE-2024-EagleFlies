@@ -1,5 +1,6 @@
 ﻿using CodeBuddies.Models.Entities;
 using CodeBuddies.MVVM;
+using CodeBuddies.Repositories;
 using System.Collections.ObjectModel;
 
 namespace CodeBuddies.ViewModels
@@ -7,6 +8,14 @@ namespace CodeBuddies.ViewModels
     internal class NotificationsPanelViewModel : ViewModelBase
     {
         private ObservableCollection<Notification> notifications = new ObservableCollection<Notification>();
+
+        private BuddyRepository repository;
+
+        public BuddyRepository Repository
+        {
+            get { return repository; }
+            set { repository = value; }
+        }
 
         public ObservableCollection<Notification> Notifications
         {
@@ -17,7 +26,13 @@ namespace CodeBuddies.ViewModels
 
         public NotificationsPanelViewModel()
         {
-            PopulateWithHardCodedNotifications();
+            repository = new BuddyRepository();
+            Buddy currentBuddy = repository.GetAllBuddies()[0];
+
+            Notifications = new ObservableCollection<Notification>(currentBuddy.Notifications);
+
+
+            //PopulateWithHardCodedNotifications();
         }
 
         public void PopulateWithHardCodedNotifications()
