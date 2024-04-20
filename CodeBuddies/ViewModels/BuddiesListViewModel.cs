@@ -17,7 +17,7 @@ namespace CodeBuddies.ViewModels
         }
 
 
-        private ObservableCollection<Buddy> buddies = new ObservableCollection<Buddy>();
+        private ObservableCollection<Buddy> buddies;
 
         public ObservableCollection<Buddy> Buddies
         {
@@ -40,11 +40,8 @@ namespace CodeBuddies.ViewModels
 
         public BuddiesListViewModel()
         {
-            repository = new BuddyRepository("../../../Resources/Data/buddies.xml");
-            foreach (Buddy buddy in repository.GetAll())
-            {
-                buddies.Add(buddy);
-            }
+            repository = new BuddyRepository();
+            Buddies = new ObservableCollection<Buddy>(repository.GetAllBuddies());
         }
 
         private void FilterBuddies()
@@ -52,7 +49,7 @@ namespace CodeBuddies.ViewModels
             if (string.IsNullOrWhiteSpace(SearchText))
             {
                 Buddies.Clear();
-                foreach (Buddy buddy in repository.GetAll())
+                foreach (Buddy buddy in repository.GetAllBuddies())
                 {
                     Buddies.Add(buddy);
                 }
@@ -60,7 +57,7 @@ namespace CodeBuddies.ViewModels
             else
             {
                 ObservableCollection<Buddy> filteredBuddies = new ObservableCollection<Buddy>();
-                foreach (var buddy in repository.GetAll())
+                foreach (var buddy in repository.GetAllBuddies())
                 {
                     if (buddy.BuddyName.ToLower().Contains(SearchText.ToLower()))
                     {

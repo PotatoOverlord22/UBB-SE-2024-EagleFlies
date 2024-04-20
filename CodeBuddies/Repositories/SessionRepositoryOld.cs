@@ -1,4 +1,4 @@
-﻿using CodeBuddies.Models.Entities;
+﻿/*using CodeBuddies.Models.Entities;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -7,10 +7,10 @@ using System.Xml.Linq;
 
 namespace CodeBuddies.Repositories
 {
-    internal class SessionRepository
+    internal class SessionRepositoryOld
     {
         private string filePath;
-        private BuddyRepository buddyRepository;
+        private BuddyRepositoryOld buddyRepository;
 
         public string FilePath
         {
@@ -26,7 +26,7 @@ namespace CodeBuddies.Repositories
             set { sessions = value; }
         }
 
-        public SessionRepository(BuddyRepository buddyRepository, string filePath)
+        public SessionRepositoryOld(BuddyRepositoryOld buddyRepository, string filePath)
         {
             FilePath = filePath;
             Sessions = new List<Session>();
@@ -135,3 +135,4 @@ namespace CodeBuddies.Repositories
         }
     }
 }
+*/
