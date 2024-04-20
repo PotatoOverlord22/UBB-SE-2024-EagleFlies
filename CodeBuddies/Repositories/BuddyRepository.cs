@@ -1,118 +1,69 @@
-﻿using CodeBuddies.Models.Entities;
-
-using System.Xml.Linq;
-
+﻿using CodeBuddies.MVVM;
+using CodeBuddies.Models.Entities;
+using System.Data.SqlClient;
+using System.Data;
 namespace CodeBuddies.Repositories
 {
-    internal class BuddyRepository
+    internal class BuddyRepository : DBRepositoryBase
     {
-        private string filePath;
 
-        public string FilePath
+        public BuddyRepository() : base() { }
+        
+
+        public List<Buddy> GetAllBuddies()
         {
-            get { return filePath; }
-            set { filePath = value; }
-        }
 
-        private List<Buddy> buddies;
+            List<Buddy> buddies = new List<Buddy>();
 
-        public List<Buddy> Buddies
-        {
-            get { return buddies; }
-            set { buddies = value; }
-        }
+            DataSet buddyDataSet = new DataSet();
+            string selectAllBuddies = "SELECT * FROM Buddies";
+            SqlCommand selectAllBuddiesCommand = new SqlCommand(selectAllBuddies, sqlConnection);
+            dataAdapter.SelectCommand = selectAllBuddiesCommand;
+            buddyDataSet.Clear();
+            dataAdapter.Fill(buddyDataSet, "Buddies");
 
-        public BuddyRepository(string filePath)
-        {
-            FilePath = filePath;
-            Buddies = new List<Buddy>();
-            ReadFromFile();
-        }
-
-        public void ReadFromFile()
-        {
-            XDocument doc = XDocument.Load(FilePath);
-            List<Buddy> buddies = doc.Descendants("Buddy").Select(buddy =>
+            foreach (DataRow buddyRow in buddyDataSet.Tables["Buddies"].Rows)
             {
-                long id = (long)buddy.Element("Id");
-                string name = (string)buddy.Element("Name");
-                string imageUrl = (string)buddy.Element("ImageUrl");
-                string status = (string)buddy.Element("Status");
+
+                SqlDataAdapter notificationsDataAdapter = new SqlDataAdapter();
+
+                DataSet notificationDataSet = new DataSet();
+                string notificationQuery = "SELECT * FROM Notifications where buddy_id = @id";
+                SqlCommand selectAllNotificationsForSpecificBuddyCommand = new SqlCommand(notificationQuery, sqlConnection);
+                notificationsDataAdapter.SelectCommand = selectAllNotificationsForSpecificBuddyCommand;
+                selectAllNotificationsForSpecificBuddyCommand.Parameters.AddWithValue("@id", buddyRow["id"]);
+                notificationDataSet.Clear();
+                notificationsDataAdapter.Fill(notificationDataSet, "Notifications");
 
                 List<Notification> notifications = new List<Notification>();
 
-                foreach (var notification in buddy.Descendants("Notification"))
+                foreach (DataRow notificationRow in notificationDataSet.Tables["Notifications"].Rows)
                 {
-                    long notificationId = (long)notification.Element("Id");
-                    DateTime timeStamp = (DateTime)notification.Element("TimeStamp");
-                    string type = (string)notification.Element("Type");
-                    string notificationStatus = (string)notification.Element("Status");
-                    string message = (string)notification.Element("Message");
 
-                    if (type == "information")
-                        notifications.Add(new InfoNotification(notificationId, timeStamp, type, notificationStatus, message));
-                    if (type == "invite")
-                        notification.Add(new InviteNotification(notificationId, timeStamp, type, notificationStatus, message, false));
+                    Notification currentNotification;
+
+                    if (notificationRow["notification_type"].ToString() == "invite")
+                    {
+                        currentNotification = new InviteNotification((long)notificationRow["id"], (DateTime)notificationRow["notification_timestamp"], notificationRow["notification_type"].ToString(), notificationRow["notification_status"].ToString(), notificationRow["notification_description"].ToString(), false);
+                    }    
+                    else
+                    {
+                        currentNotification = new InfoNotification((long)notificationRow["id"], (DateTime)notificationRow["notification_timestamp"], notificationRow["notification_type"].ToString(), notificationRow["notification_status"].ToString(), notificationRow["notification_description"].ToString());
+
+                    }
+
+                    notifications.Add(currentNotification);
+             
                 }
 
-                return new Buddy(id, name, imageUrl, status, notifications);
-            }).ToList();
-
-            Buddies = buddies;
-
-        }
-
-        public void SaveToFile()
-        {
-            XElement buddiesXml = new XElement("Buddies");
-
-            foreach (var buddy in Buddies)
-            {
-                XElement buddyXml = new XElement("Buddy",
-                    new XElement("Id", buddy.Id),
-                    new XElement("Name", buddy.BuddyName),
-                    new XElement("ImageUrl", buddy.ProfilePhotoUrl),
-                    new XElement("Status", buddy.Status),
-                    new XElement("Notifications",
-                        buddy.Notifications.Select(notification =>
-                            new XElement("Notification",
-                                new XElement("Id", notification.NotificationId),
-                                new XElement("Type", notification.Type),
-                                new XElement("Status", notification.Status),
-                                new XElement("Message", notification.Description),
-                                new XElement("TimeStamp", notification.TimeStamp.ToString("yyyy-MM-ddTHH:mm:ss"))
-                            )
-                        )
-                    )
-                );
-
-                buddiesXml.Add(buddyXml);
+                Buddy currentBudy = new Buddy((long)buddyRow["id"], buddyRow["buddy_name"].ToString(), buddyRow["profile_photo_url"].ToString(), buddyRow["buddy_status"].ToString(), notifications );
+                buddies.Add(currentBudy);
             }
 
-            buddiesXml.Save(filePath);
+            return buddies;
+
         }
 
-        public List<Buddy> GetAll()
-        {
-            return Buddies;
-        }
 
-        public Buddy GetById(int id)
-        {
-            foreach (var buddy in Buddies) 
-            {
-                if (buddy.Id == id)
-                    return buddy;
-            }
-            return null;
-        }
-
-        // TODO remove this
-        public void PopulateWithHardCodedBuddies()
-        {
-            buddies.Add(new Buddy(1, "yo1", "pack://application:,,,/CodeBuddies;component/resources/pictures/dog_picture.png", "active", new List<Notification>()));
-            buddies.Add(new Buddy(2, "yo2", "pack://application:,,,/CodeBuddies;component/resources/pictures/dog_picture.png", "inactive", new List<Notification>()));
-            buddies.Add(new Buddy(3, "yo3", "pack://application:,,,/CodeBuddies;component/resources/pictures/dog_picture.png", "inactive", new List<Notification>()));
-        }
     }
 }

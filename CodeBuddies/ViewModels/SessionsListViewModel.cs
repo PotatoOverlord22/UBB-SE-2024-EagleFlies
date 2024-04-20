@@ -9,8 +9,7 @@ namespace CodeBuddies.ViewModels
     internal class SessionsListViewModel : ViewModelBase
     {
         private ObservableCollection<Session> sessions = new ObservableCollection<Session>();
-        private BuddyRepository buddyRepository;
-        private SessionRepository sessionRepository;
+       // private SessionRepositoryOld sessionRepository;
 
         public ObservableCollection<Session> Sessions
         {
@@ -20,13 +19,15 @@ namespace CodeBuddies.ViewModels
 
 
         public SessionsListViewModel()
-        {   
-            buddyRepository = new BuddyRepository("../../../Resources/Data/buddies.xml");
-            SessionRepository repository = new SessionRepository(buddyRepository, "../../../Resources/Data/sessions.xml");
+        {
+            /*buddyRepository = new BuddyRepositoryOld("../../../Resources/Data/buddies.xml");
+            SessionRepositoryOld repository = new SessionRepositoryOld(buddyRepository, "../../../Resources/Data/sessions.xml");
             foreach (Session session in repository.GetAll())
             {
                 sessions.Add(session);
-            }
+            }*/
+
+            PopulateWithHardCodedSessions();
         }
 
         public void PopulateWithHardCodedSessions()
