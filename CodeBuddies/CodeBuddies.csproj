@@ -9,9 +9,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Resources\Data\Constants\**" />
     <Compile Remove="Services\**" />
+    <EmbeddedResource Remove="Resources\Data\Constants\**" />
     <EmbeddedResource Remove="Services\**" />
+    <None Remove="Resources\Data\Constants\**" />
     <None Remove="Services\**" />
+    <Page Remove="Resources\Data\Constants\**" />
     <Page Remove="Services\**" />
   </ItemGroup>
 
@@ -21,7 +25,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Resources\Data\Constants\" />
     <Folder Include="ViewModels\" />
   </ItemGroup>
 
