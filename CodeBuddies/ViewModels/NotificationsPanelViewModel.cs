@@ -10,6 +10,8 @@ namespace CodeBuddies.ViewModels
 
         // This creates a command that runs a function and sends the 
         public RelayCommand<Notification> AcceptCommand => new RelayCommand<Notification>(AcceptInvite);
+        public RelayCommand<Notification> DeclineCommand => new RelayCommand<Notification>(DeclineInvite);
+        public RelayCommand<Notification> MarkReadCommand => new RelayCommand<Notification>(MarkReadNotification);
 
         public ObservableCollection<Notification> Notifications
         {
@@ -39,6 +41,16 @@ namespace CodeBuddies.ViewModels
 
         }
         private void AcceptInvite(Notification notification)
+        {
+            Console.WriteLine(notification.NotificationId);
+
+        }
+        private void DeclineInvite(Notification notification)
+        {
+            Console.WriteLine(notification.NotificationId);
+
+        }
+        private void MarkReadNotification(Notification notification)
         {
             Console.WriteLine(notification.NotificationId);
 
