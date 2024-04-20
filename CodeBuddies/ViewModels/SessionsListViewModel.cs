@@ -8,8 +8,8 @@ namespace CodeBuddies.ViewModels
 {
     internal class SessionsListViewModel : ViewModelBase
     {
-        private ObservableCollection<Session> sessions = new ObservableCollection<Session>();
-       // private SessionRepositoryOld sessionRepository;
+        private ObservableCollection<Session> sessions;
+        private SessionRepository sessionRepository;
 
         public ObservableCollection<Session> Sessions
         {
@@ -20,48 +20,44 @@ namespace CodeBuddies.ViewModels
 
         public SessionsListViewModel()
         {
-            /*buddyRepository = new BuddyRepositoryOld("../../../Resources/Data/buddies.xml");
-            SessionRepositoryOld repository = new SessionRepositoryOld(buddyRepository, "../../../Resources/Data/sessions.xml");
-            foreach (Session session in repository.GetAll())
-            {
-                sessions.Add(session);
-            }*/
-
-            PopulateWithHardCodedSessions();
+            sessionRepository = new SessionRepository();
+            Sessions = new ObservableCollection<Session>(sessionRepository.GetAllSessions());
+  
         }
 
-        public void PopulateWithHardCodedSessions()
+        private string searchBySessionName;
+
+        public string SearchBySessionName
         {
-            for (int i = 1; i <= 10; i++)
+            get { return searchBySessionName; }
+            set
             {
-                long sessionId = i;
-                long ownerId = 100 + i; // Just sample data
-                string name = "Session " + i;
-                DateTime creationDate = DateTime.Now;
-                DateTime lastEditedDate = DateTime.Now;
-                List<Buddy> buddies = new List<Buddy>
-                {
-                    new Buddy(i, "Buddy " + i, "url", "Active", new List<Notification>())
-                };
-                List<Message> messages = new List<Message>
-                {
-                    new Message(i, DateTime.Now, "Hello from session " + i, i)
-                };
-                List<CodeContribution> codeContributions = new List<CodeContribution>
-                {
-                    new CodeContribution(new Buddy(i, "Buddy " + i, "url", "Active", new List<Notification>()), DateTime.Now, 10)
-                };
-                List<CodeReviewSection> codeReviewSections = new List<CodeReviewSection>
-                {
-                    new CodeReviewSection(i, ownerId, new List<Message>(), "Code section example", false)
-                };
-                List<string> filePaths = new List<string> { $"path_to_file_{i}.txt" };
-                TextEditor textEditor = new TextEditor("grey", filePaths); // Assuming a constructor exists
-                DrawingBoard drawingBoard = new DrawingBoard($"drawing_{i}.png");
-
-                sessions.Add(new Session(sessionId, ownerId, name, creationDate, lastEditedDate, buddies, messages, codeContributions, codeReviewSections, filePaths, textEditor, drawingBoard));
+                searchBySessionName = value;
+                FilterSessionsBySessionName();
             }
-
         }
+
+        void FilterSessionsBySessionName()
+        {
+            if (string.IsNullOrWhiteSpace(SearchBySessionName))
+            {
+                Sessions.Clear();
+                Sessions = new ObservableCollection<Session>(sessionRepository.GetAllSessions());
+            }
+            else
+            {
+                ObservableCollection<Session> filteredSessions = new ObservableCollection<Session>();
+                foreach (var session in sessionRepository.GetAllSessions())
+                {
+                    if (session.Name.ToLower().Contains(SearchBySessionName.ToLower()))
+                    {
+                        filteredSessions.Add(session);
+                    }
+                }
+                Sessions = filteredSessions;
+            }
+        }
+
+
     }
 }

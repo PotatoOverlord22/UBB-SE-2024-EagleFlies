@@ -28,6 +28,7 @@ namespace CodeBuddies.ViewModels
             // TODO inject this more cleanly
             repository = new NotificationRepository();
             Notifications = new ObservableCollection<Notification>(repository.GetAll());
+
         }
 
         public void PopulateWithHardCodedNotifications()

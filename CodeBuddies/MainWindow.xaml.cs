@@ -13,10 +13,6 @@ namespace CodeBuddies
         public MainWindow()
         {
             InitializeComponent();
-            BuddyRepository buddyRepository = new BuddyRepository();
-
-            List<Buddy> buddies = buddyRepository.GetAllBuddies();
-
         }
     }
 }
