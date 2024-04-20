@@ -111,7 +111,29 @@ namespace CodeBuddies.Repositories
 
         public void Save(Notification notification)
         {
+            // Define the SQL command to insert a new notification
+            string saveQuery = @"
+                INSERT INTO Notifications (id, notification_timestamp, notification_type, notification_status, notification_description, sender_id, receiver_id, session_id)
+                VALUES (@Id, @Timestamp, @Type, @Status, @Description, @SenderId, @ReceiverId, @SessionId)";
 
+            // Create a SqlCommand object with the save query and connection
+            using (SqlCommand saveCommand = new SqlCommand(saveQuery, sqlConnection))
+            {
+                // Add parameters to the SQL command
+                saveCommand.Parameters.AddWithValue("@Id", GetFreeNotificationId());
+                saveCommand.Parameters.AddWithValue("@Timestamp", notification.TimeStamp);
+                saveCommand.Parameters.AddWithValue("@Type", notification.Type);
+                saveCommand.Parameters.AddWithValue("@Status", notification.Status);
+                saveCommand.Parameters.AddWithValue("@Description", notification.Description);
+                saveCommand.Parameters.AddWithValue("@SenderId", notification.SenderId);
+                saveCommand.Parameters.AddWithValue("@ReceiverId", notification.ReceiverId);
+                saveCommand.Parameters.AddWithValue("@SessionId", notification.SessionId);
+
+                // Execute the SQL command
+                saveCommand.ExecuteNonQuery();
+
+
+            }
         }
     }
 }

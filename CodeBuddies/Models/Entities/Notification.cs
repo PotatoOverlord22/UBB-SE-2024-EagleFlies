@@ -75,6 +75,8 @@ namespace CodeBuddies.Models.Entities
             Type = type;
             Status = status;
             Description = description;
+            SenderId = senderId;
+            ReceiverId = receiverId;
             SessionId = sessionId;
         }
 

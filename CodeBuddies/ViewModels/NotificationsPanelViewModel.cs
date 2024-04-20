@@ -53,7 +53,7 @@ namespace CodeBuddies.ViewModels
         private void SendDeclinedInfoNotification(Notification notification)
         {
             // Reverse sender and receiver ids because this notification goes backwards
-            Notification declinedNotification = new InfoNotification(repository.GetFreeNotificationId(), DateTime.Now, "rejectInformation", "pending", Constants.CLIENT_NAME + " rejected your invitation", notification.ReceiverId, notification.SenderId,notification.SessionId);
+            Notification declinedNotification = new InfoNotification(repository.GetFreeNotificationId(), DateTime.Now, "rejectInformation", "pending", Constants.CLIENT_NAME + " rejected your invitation", notification.ReceiverId, notification.SenderId, notification.SessionId);
             repository.Save(declinedNotification);
         }
     }
