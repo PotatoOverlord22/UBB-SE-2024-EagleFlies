@@ -22,6 +22,7 @@
   <ItemGroup>
     <None Remove="Resources\Pictures\exit-session.png" />
     <None Remove="Resources\Pictures\join-session.png" />
+    <None Remove="Resources\Pictures\mark-read.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -44,6 +45,7 @@
     </Resource>
     <Resource Include="Resources\Pictures\exit-session.png" />
     <Resource Include="Resources\Pictures\join-session.png" />
+    <Resource Include="Resources\Pictures\mark-read.png" />
     <Resource Include="Resources\Pictures\notifications_picture.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>

@@ -8,7 +8,7 @@ namespace CodeBuddies.Models.Entities
 {
     internal class InfoNotification : Notification
     {
-        public InfoNotification(long notificationId, DateTime timeStamp, string type, string status, string description) : base(notificationId, timeStamp, type, status, description) { }
+        public InfoNotification(long notificationId, DateTime timeStamp, string type, string status, string description, long sessionId) : base(notificationId, timeStamp, type, status, description, sessionId) { }
 
         protected override void MarkNotification()
         {
