@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CodeBuddies"
-        xmlns:userControls="clr-namespace:CodeBuddies.Views.UserControls"
+        xmlns:userControls="clr-namespace:CodeBuddies.Views.UserControls" xmlns:custom="clr-namespace:ModalControl;assembly=ModalControl"
         mc:Ignorable="d"
         Title="MainWindow" Height="800" Width="1200">
     <Grid Background="Gray">
@@ -25,9 +25,9 @@
 
             <TextBox Grid.Row="1" Style="{StaticResource SearchBar}" Tag="Search code buddies..." Padding="5 0 0 0" Margin="10 0 10 0"  Height="35" HorizontalAlignment="Stretch" VerticalAlignment="Center" HorizontalContentAlignment="Left"  VerticalContentAlignment="Center"></TextBox>
 
-            <userControls:BuddiesList Grid.Row="2" />
+            <userControls:BuddiesList Grid.Row="2" Loaded="BuddiesList_Loaded" />
 
-            <userControls:NotificationsPanel Grid.Row="3" />
+            <userControls:NotificationsPanel Grid.Row="3" Margin="0,68,0,-68" />
 
         </Grid>
 
@@ -40,6 +40,9 @@
             <userControls:MainMenuBar Grid.Row="0"/>
 
             <userControls:SessionsList Grid.Row="1"/>
+
+            
+
 
         </Grid>
 

@@ -26,6 +26,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="SimpleModal.WPF" Version="1.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Resource Include="Resources\Pictures\accepted-picture.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
