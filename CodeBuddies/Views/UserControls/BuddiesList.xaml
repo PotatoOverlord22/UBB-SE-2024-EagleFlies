@@ -6,14 +6,15 @@
              xmlns:local="clr-namespace:CodeBuddies.Views.UserControls"
              mc:Ignorable="d" 
              d:DesignHeight="200" d:DesignWidth="300">
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="40"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-
         <TextBox Grid.Row="0" Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource SearchBar}" Tag="Search code buddies..." Padding="5 0 0 0" Margin="10 0 10 0"  Height="35" HorizontalAlignment="Stretch" VerticalAlignment="Center" HorizontalContentAlignment="Left"  VerticalContentAlignment="Center"/>
-        <ListView Grid.Row="1" ItemsSource="{Binding Buddies}"  Template="{StaticResource CustomListViewTemplate}">
+
+        <ListView Grid.Row="1" ItemsSource="{Binding Buddies}" SelectedItem="{Binding SelectedBuddy}" Template="{StaticResource CustomListViewTemplate}">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Grid Height="80">
@@ -26,14 +27,16 @@
                             <Ellipse Margin="5">
                                 <Ellipse.Fill>
                                     <ImageBrush ImageSource="{Binding ProfilePhotoUrl}" 
-                    Viewport="0,0,1,1" 
-                    ViewportUnits="RelativeToBoundingBox" 
-                    Stretch="Uniform"/>
+                        Viewport="0,0,1,1" 
+                        ViewportUnits="RelativeToBoundingBox" 
+                        Stretch="Uniform"/>
                                 </Ellipse.Fill>
                             </Ellipse>
                         </Border>
-                        <Button Style="{StaticResource defaultButtonStyle}" Grid.Column="1" Content="{Binding BuddyName}" Margin="10"/>
 
+                        <Button Name="BuddyCard" Style="{StaticResource defaultButtonStyle}" Grid.Column="1"
+                    Content="{Binding BuddyName}" Command="{Binding DataContext.OpenModalCommand, RelativeSource={RelativeSource AncestorType={x:Type ListView}}}"
+                     Margin="10"/>
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>
