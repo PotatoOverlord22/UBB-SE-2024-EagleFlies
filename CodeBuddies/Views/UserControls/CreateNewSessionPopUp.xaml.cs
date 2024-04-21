@@ -1,21 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using CodeBuddies.Repositories;
+using CodeBuddies.Resources.Data;
+using CodeBuddies.ViewModels;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using CodeBuddies.Models.Entities;
-using CodeBuddies.Repositories;
-using static CodeBuddies.Resources.Data.Constants;
-using static CodeBuddies.ViewModels.ValidationForNewSession;
+using static CodeBuddies.Models.Validators.ValidationForNewSession;
 
 namespace CodeBuddies.Views.UserControls
 {
@@ -24,9 +12,11 @@ namespace CodeBuddies.Views.UserControls
     /// </summary>
     public partial class CreateNewSessionPopUp : Window
     {
+        private CreateNewSessionPopUpViewModel viewModel;
         public CreateNewSessionPopUp()
         {
             InitializeComponent();
+            viewModel = new CreateNewSessionPopUpViewModel();
         }
 
         private void SessionNameTextBox_TextChanged(object sender, TextChangedEventArgs e)
@@ -87,18 +77,10 @@ namespace CodeBuddies.Views.UserControls
             //close the popup
 
             //generate a new session id randomly
-            Random random = new Random();
-            long sessionId = random.Next(1000, 9999);
-            SessionRepository sessionRepository = new SessionRepository();
 
             try
             {
-                ValidateSessionName(sessionName);
-                ValidateMaxNoOfBuddies(maxParticipants);
-                ValidateBuddyId(CLIENT_SESSION_ID);
-                ValidateSessionId(sessionId);
-
-                sessionRepository.AddNewSession(sessionId, sessionName, maxParticipants);
+                viewModel.AddNewSession(sessionName, maxParticipants);
 
                 if (sessionName != "" && maxParticipants != "")
                 {
