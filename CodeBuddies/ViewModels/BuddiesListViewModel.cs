@@ -53,11 +53,7 @@ namespace CodeBuddies.ViewModels
         {
             if (string.IsNullOrWhiteSpace(SearchText))
             {
-                Buddies.Clear();
-                foreach (Buddy buddy in repository.GetAllBuddies())
-                {
-                    Buddies.Add(buddy);
-                }
+                LoadBuddies();
             }
             else
             {
@@ -71,7 +67,6 @@ namespace CodeBuddies.ViewModels
                 }
                 Buddies = filteredBuddies;
             }
-            LoadBuddies();
 
         }
        
