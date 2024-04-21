@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using static CodeBuddies.Resources.Data.Constants;
 
-namespace CodeBuddies.ViewModels
+namespace CodeBuddies.Models.Validators
 {
     internal class ValidationForNewSession
     {

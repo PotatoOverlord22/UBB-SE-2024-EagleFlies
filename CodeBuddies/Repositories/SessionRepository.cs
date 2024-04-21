@@ -199,19 +199,61 @@ namespace CodeBuddies.Repositories
             return sessionName;
         }
 
-        public void AddNewSession(long sessionId, string sessionName, string maxParticipants)
+        public long GetFreeSessionId()
         {
+            long freeSessionId = 0;
+
+            // Execute a query to find a free session id
+            string query = "SELECT TOP 1 id FROM Sessions ORDER BY id DESC";
+            using (SqlCommand command = new SqlCommand(query, sqlConnection))
+            {
+                object result = command.ExecuteScalar();
+                if (result != null && long.TryParse(result.ToString(), out long lastSessionId))
+                {
+                    freeSessionId = lastSessionId + 1;
+                }
+                else
+                {
+                    // Handle if no sessions exist in the database
+                    freeSessionId = 1;
+                }
+            }
+
+            return freeSessionId;
+        }
+
+        public long AddNewSession(string sessionName, long ownerId, int maxParticipants)
+        {
+            long sessionId = 0;
+
+            // Get a free session id
+            long freeSessionId = GetFreeSessionId();
+
             string insertQuery = "INSERT INTO Sessions (id, owner_id, session_name, creation_date, last_edit_date) VALUES (@SessionId, @OwnerId, @SessionName, @CreationDate, @LastEditDate)";
+            string insertMemberQuery = "INSERT INTO BuddiesSessions (buddy_id, session_id) VALUES (@BuddyId, @SessionId)";
 
             try
             {
                 using (SqlCommand insertCommand = new SqlCommand(insertQuery, sqlConnection))
                 {
-                    insertCommand.Parameters.AddWithValue("@SessionId", sessionId);
+                    insertCommand.Parameters.AddWithValue("@SessionId", freeSessionId);
                     insertCommand.Parameters.AddWithValue("@SessionName", sessionName);
-                    insertCommand.Parameters.AddWithValue("@OwnerId", CLIENT_SESSION_ID);
+                    insertCommand.Parameters.AddWithValue("@OwnerId", ownerId);
                     insertCommand.Parameters.AddWithValue("@CreationDate", DateTime.Now);
                     insertCommand.Parameters.AddWithValue("@LastEditDate", DateTime.Now);
+
+                    int rowsAffected = insertCommand.ExecuteNonQuery();
+                    if (rowsAffected > 0)
+                    {
+                        sessionId = freeSessionId;
+                    }
+                }
+
+                using (SqlCommand insertCommand = new SqlCommand(insertMemberQuery, sqlConnection))
+                {
+
+                    insertCommand.Parameters.AddWithValue("@BuddyId", ownerId);
+                    insertCommand.Parameters.AddWithValue("@SessionId", freeSessionId);
 
                     insertCommand.ExecuteNonQuery();
                 }
@@ -220,6 +262,7 @@ namespace CodeBuddies.Repositories
             {
                 throw new EntityAlreadyExists(ex.Message);
             }
+            return sessionId;
         }
 
     }
