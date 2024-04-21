@@ -63,7 +63,7 @@ namespace CodeBuddies.ViewModels
         public ActiveInactiveBuddiesListViewModel()
         {
             // Initialize the BuddyRepository with the path to the buddies.xml file
-            BuddyRepository = new BuddyRepository("../../../Resources/Data/buddies.xml");
+            BuddyRepository = new BuddyRepository();
 
             ActiveBuddies = BuddyRepository.GetActiveBuddies();
             foreach (Buddy buddy in ActiveBuddies)
