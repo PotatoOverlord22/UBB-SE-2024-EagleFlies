@@ -9,7 +9,8 @@ namespace CodeBuddies.ViewModels
     internal class NotificationsPanelViewModel : ViewModelBase
     {
         private ObservableCollection<Notification> notifications;
-        private NotificationRepository repository;
+        private NotificationRepository notificationRepository;
+        private SessionRepository sessionRepository;
 
         // This creates a command that runs a function and sends the 
         public RelayCommand<Notification> AcceptCommand => new RelayCommand<Notification>(AcceptInvite);
@@ -25,36 +26,49 @@ namespace CodeBuddies.ViewModels
 
         public NotificationsPanelViewModel()
         {
-            // TODO inject this more cleanly
-            repository = new NotificationRepository();
-            Notifications = new ObservableCollection<Notification>(repository.GetAllByBuddyId(Constants.CLIENT_BUDDY_ID));
+            // TODO inject these more cleanly
+            notificationRepository = new NotificationRepository();
+            sessionRepository = new SessionRepository();
+
+            Notifications = new ObservableCollection<Notification>(notificationRepository.GetAllByBuddyId(Constants.CLIENT_BUDDY_ID));
 
         }
         private void AcceptInvite(Notification notification)
         {
-            Console.WriteLine(notification.NotificationId);
-
+            SendAcceptedInfoNotification(notification);
+            // save the new member
+            sessionRepository.AddBuddyMemberToSession(notification.ReceiverId, notification.SessionId);
+            // remove the invite notification from the db
+            notificationRepository.RemoveById(notification.NotificationId);
+            notifications.Remove(notification);
         }
         private void DeclineInvite(Notification notification)
         {
-            notifications.Remove(notification);
-            // remove the invite notification from the db
-            repository.RemoveById(notification.NotificationId);
             // send an information notification informing the inviter that the user declined
             SendDeclinedInfoNotification(notification);
+            // remove the invite notification from the db
+            notificationRepository.RemoveById(notification.NotificationId);
+            notifications.Remove(notification);
         }
         private void MarkReadNotification(Notification notification)
         {
             notifications.Remove(notification);
             // also remove from db
-            repository.RemoveById(notification.NotificationId);
+            notificationRepository.RemoveById(notification.NotificationId);
         }
 
         private void SendDeclinedInfoNotification(Notification notification)
         {
             // Reverse sender and receiver ids because this notification goes backwards
-            Notification declinedNotification = new InfoNotification(repository.GetFreeNotificationId(), DateTime.Now, "rejectInformation", "pending", Constants.CLIENT_NAME + " rejected your invitation", notification.ReceiverId, notification.SenderId, notification.SessionId);
-            repository.Save(declinedNotification);
+            Notification declinedNotification = new InfoNotification(notificationRepository.GetFreeNotificationId(), DateTime.Now, "rejectInformation", "pending", Constants.CLIENT_NAME + " rejected your invitation", notification.ReceiverId, notification.SenderId, notification.SessionId);
+            notificationRepository.Save(declinedNotification);
+        }
+
+        private void SendAcceptedInfoNotification(Notification notification)
+        {
+            // Reverse sender and receiver ids because this notification goes backwards
+            Notification acceptedNotification = new InfoNotification(notificationRepository.GetFreeNotificationId(), DateTime.Now, "successInformation", "pending", Constants.CLIENT_NAME + " accepted your invitation!", notification.ReceiverId, notification.SenderId, notification.SessionId);
+            notificationRepository.Save(acceptedNotification);
         }
     }
 }

@@ -151,6 +151,18 @@ namespace CodeBuddies.Repositories
             return sessions;
         }
 
+        public void AddBuddyMemberToSession(long buddyId, long sessionId)
+        {
+            string insertQuery = "INSERT INTO BuddiesSessions (buddy_id, session_id) VALUES (@BuddyId, @SessionId)";
+
+            using (SqlCommand insertCommand = new SqlCommand(insertQuery, sqlConnection))
+            {
+                insertCommand.Parameters.AddWithValue("@BuddyId", buddyId);
+                insertCommand.Parameters.AddWithValue("@SessionId", sessionId);
+
+                insertCommand.ExecuteNonQuery();
+            }
+        }
 
     }
 }
