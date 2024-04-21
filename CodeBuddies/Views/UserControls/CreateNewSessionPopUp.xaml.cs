@@ -1,18 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using CodeBuddies.ViewModels;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using CodeBuddies.Models.Entities;
 
 namespace CodeBuddies.Views.UserControls
 {
@@ -21,9 +9,11 @@ namespace CodeBuddies.Views.UserControls
     /// </summary>
     public partial class CreateNewSessionPopUp : Window
     {
+        private CreateNewSessionPopupViewModel popupViewModel;
         public CreateNewSessionPopUp()
         {
             InitializeComponent();
+            popupViewModel = new CreateNewSessionPopupViewModel();
         }
 
         private void SessionNameTextBox_TextChanged(object sender, TextChangedEventArgs e)
@@ -88,10 +78,7 @@ namespace CodeBuddies.Views.UserControls
 
             //SessionEndingCancelEventArgs args = new SessionEndingCancelEventArgs(false, SessionEndReasons.UserClosing);
 
-            //generate a new session id randomly
-            Random random = new Random();
-            long sessionId = random.Next(1000, 9999);
-
+            popupViewModel.AddNewSession(sessionName);
             SessionWindow sessionWindow = new SessionWindow();
             sessionWindow.ShowDialog();
         }

@@ -198,5 +198,65 @@ namespace CodeBuddies.Repositories
             return sessionName;
         }
 
+        public long GetFreeSessionId()
+        {
+            long freeSessionId = 0;
+            string query = "SELECT TOP 1 id FROM Sessions ORDER BY id DESC";
+            using (SqlCommand command = new SqlCommand(query, sqlConnection))
+            {
+                object result = command.ExecuteScalar();
+                if (result != null && long.TryParse(result.ToString(), out long lastSessionId))
+                {
+                    freeSessionId = lastSessionId + 1;
+                }
+                else
+                {
+                    // if no session exist
+                    freeSessionId = 1;
+                }
+            }
+
+            return freeSessionId;
+        }
+
+        public long AddNewSession(string sessionName, long ownerId)
+        {
+            // returns the session id
+            long sessionId = 0;
+
+            // Get a free session id
+            long freeSessionId = GetFreeSessionId();
+
+            // Execute a query to add a new session
+            string query = "INSERT INTO Sessions (id, session_name, owner_id, creation_date, last_edit_date) " +
+                           "VALUES (@SessionId, @SessionName, @OwnerId, @CreationDate, @LastEditDate)";
+            using (SqlCommand command = new SqlCommand(query, sqlConnection))
+            {
+                command.Parameters.AddWithValue("@SessionId", freeSessionId);
+                command.Parameters.AddWithValue("@SessionName", sessionName);
+                command.Parameters.AddWithValue("@OwnerId", ownerId);
+                command.Parameters.AddWithValue("@CreationDate", DateTime.Now);
+                command.Parameters.AddWithValue("@LastEditDate", DateTime.Now);
+
+                int rowsAffected = command.ExecuteNonQuery();
+                if (rowsAffected > 0)
+                {
+                    sessionId = freeSessionId;
+                }
+            }
+            string membershipQuery = "INSERT INTO BuddiesSessions (buddy_id, session_id) " +
+                           "VALUES (@BuddyId, @SessionId)";
+            using (SqlCommand command = new SqlCommand(membershipQuery, sqlConnection))
+            {
+                command.Parameters.AddWithValue("@BuddyId", ownerId);
+                command.Parameters.AddWithValue("@SessionId", freeSessionId);
+
+                command.ExecuteNonQuery();
+            }
+
+            return sessionId;
+
+        }
+
     }
 }
