@@ -14,7 +14,7 @@ namespace CodeBuddies.Repositories
         public SessionRepository() : base() { }
 
 
-        private List<Message> GetMessagesForSpecificSession(long sessionId)
+        public List<Message> GetMessagesForSpecificSession(long sessionId)
         {
             List<Message> sessionMessages = new List<Message>();
 
@@ -36,7 +36,7 @@ namespace CodeBuddies.Repositories
             return sessionMessages;
         }
 
-        private List<CodeContribution> GetCodeContributionsForSpecificSession(long sessionId)
+        public List<CodeContribution> GetCodeContributionsForSpecificSession(long sessionId)
         {
             List<CodeContribution> codeContributions = new List<CodeContribution>();
 
@@ -57,7 +57,7 @@ namespace CodeBuddies.Repositories
             return codeContributions;
         }
 
-        private List<Message> GetMessagesForSpecificCodeReview(long codeReviewId)
+        public List<Message> GetMessagesForSpecificCodeReview(long codeReviewId)
         {
             List<Message> codeReviewMessages = new List<Message>();
 
@@ -80,7 +80,7 @@ namespace CodeBuddies.Repositories
 
 
 
-        private List<CodeReviewSection> GetCodeReviewSectionsForSpecificSession(long sessionId)
+        public List<CodeReviewSection> GetCodeReviewSectionsForSpecificSession(long sessionId)
         {
             List<CodeReviewSection> codeReviewSections = new List<CodeReviewSection>();
 
@@ -106,7 +106,7 @@ namespace CodeBuddies.Repositories
             return codeReviewSections;
         }
 
-        private List<long> GetBuddiesForSpecificSession(long sessionId)
+        public List<long> GetBuddiesForSpecificSession(long sessionId)
         {
             List<long> sessionBuddies = new List<long>();
 
