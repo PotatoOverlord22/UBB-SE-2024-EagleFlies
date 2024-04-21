@@ -1,7 +1,6 @@
 ﻿using CodeBuddies.Models.Entities;
 using CodeBuddies.MVVM;
 using CodeBuddies.Repositories;
-using CodeBuddies.Stores;
 using CodeBuddies.Views;
 using System.Collections.ObjectModel;
 using System.Diagnostics;

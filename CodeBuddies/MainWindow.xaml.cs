@@ -14,10 +14,5 @@ namespace CodeBuddies
         {
             InitializeComponent();
         }
-
-        private void BuddiesList_Loaded(object sender, RoutedEventArgs e)
-        {
-
-        }
     }
 }

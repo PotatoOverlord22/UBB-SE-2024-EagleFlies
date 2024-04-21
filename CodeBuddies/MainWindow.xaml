@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CodeBuddies"
-        xmlns:userControls="clr-namespace:CodeBuddies.Views.UserControls" xmlns:custom="clr-namespace:ModalControl;assembly=ModalControl"
+        xmlns:userControls="clr-namespace:CodeBuddies.Views.UserControls"
         mc:Ignorable="d"
         Title="MainWindow" Height="800" Width="1200">
     <Grid Background="Gray">
@@ -25,7 +25,7 @@
 
 
 
-            <userControls:BuddiesList Grid.Row="1" Loaded="BuddiesList_Loaded" />
+            <userControls:BuddiesList Grid.Row="1" />
             <userControls:NotificationsPanel Grid.Row="2" />
 
         </Grid>
