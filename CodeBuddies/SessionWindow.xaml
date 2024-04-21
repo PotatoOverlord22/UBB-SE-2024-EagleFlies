@@ -38,7 +38,8 @@
             <userControls:RightPanelSessionWindow Grid.Row="1" Margin="550,0,0,0"/>
 
             <userControls:DrawingBoard x:Name="DrawingBoardControl" Grid.Row="1" Margin="0,0,0,0" Visibility="Hidden"/>
-
+            <userControls:TextEditor x:Name="TextEditorControl" Grid.Row="1" Margin="0,0,0,0" Visibility="Hidden"/>
+            <userControls:Files x:Name="FilesControl" Grid.Row="1" Margin="0,0,0,0" Visibility="Hidden"/>
         </Grid>
 
 

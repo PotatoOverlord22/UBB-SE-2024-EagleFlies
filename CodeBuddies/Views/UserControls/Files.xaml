@@ -1,0 +1,22 @@
+﻿<UserControl
+    x:Class="CodeBuddies.Views.UserControls.Files"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:CodeBuddies.Views.UserControls"
+    xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit">
+
+    <Grid Background="Beige">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <ListBox x:Name="lstFiles" SelectionChanged="lstFiles_SelectionChanged">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Button Content="{Binding Text}" Tag="{Binding Id}" Click="FileButton_Click"/>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+    </Grid>
+</UserControl>

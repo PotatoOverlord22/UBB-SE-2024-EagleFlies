@@ -28,6 +28,11 @@ namespace CodeBuddies.Views.UserControls
         private SessionRepository sessionRepository;
 
         public event EventHandler DrawingBoardButtonClicked;
+
+        public event EventHandler TextEditorButtonClicked;
+
+        public event EventHandler FilesButtonClicked;
+
         public SessionWindowBar()
         {
             InitializeComponent();
@@ -45,12 +50,12 @@ namespace CodeBuddies.Views.UserControls
 
         private void OpenExistingFileButton_Clicked(object sender, RoutedEventArgs e)
         {
-
+            FilesButtonClicked?.Invoke(this, EventArgs.Empty);
         }
 
         private void CreateNewFileButton_Clicked(object sender, RoutedEventArgs e)
         {
-
+            TextEditorButtonClicked?.Invoke(this, EventArgs.Empty);
         }
 
         private void OpenBoardButton_Clicked(object sender, RoutedEventArgs e)

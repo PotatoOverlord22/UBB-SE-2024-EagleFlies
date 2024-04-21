@@ -38,10 +38,10 @@
         <!-- Apply the Custom Style to Buttons -->
         <Button Click="OpenBoardButton_Clicked"
                 x:Name="OpenBoardButton"
-                Margin="281,0,0,0" 
+                Margin="281,20,0,0" 
                 Content="Open Board" 
                 Width="100" Height="30" 
-                HorizontalAlignment="Left" VerticalAlignment="Center" 
+                HorizontalAlignment="Left" VerticalAlignment="Top" 
                 Style="{StaticResource RoundedButtonStyle}" 
                 Background="#25BE04" 
                 FontFamily="Segoe UI" 

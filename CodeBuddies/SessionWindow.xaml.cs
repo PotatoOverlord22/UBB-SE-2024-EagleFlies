@@ -21,6 +21,18 @@ namespace CodeBuddies
                 ToggleDrawingBoard();
               
             };
+
+            SessionWindowBarControl.TextEditorButtonClicked += (sender, e) =>
+            {
+                ToggleTextEditor();
+
+            };
+
+            SessionWindowBarControl.FilesButtonClicked += (sender, e) =>
+            {
+                ToggleFiles();
+
+            };
         }
 
         internal SessionRepository getSessionRepository()
@@ -31,6 +43,16 @@ namespace CodeBuddies
         public void ToggleDrawingBoard()
         {
             DrawingBoardControl.Visibility = DrawingBoardControl.Visibility == Visibility.Visible ? Visibility.Hidden : Visibility.Visible;
+        }
+
+        public void ToggleTextEditor()
+        {
+            TextEditorControl.Visibility = TextEditorControl.Visibility == Visibility.Visible ? Visibility.Hidden : Visibility.Visible;
+        }
+
+        public void ToggleFiles()
+        {
+            FilesControl.Visibility = FilesControl.Visibility == Visibility.Visible ? Visibility.Hidden : Visibility.Visible;
         }
     }
 }

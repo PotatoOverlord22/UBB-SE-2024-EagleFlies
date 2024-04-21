@@ -1,0 +1,37 @@
+﻿<UserControl
+    x:Class="CodeBuddies.Views.UserControls.TextEditor"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:CodeBuddies.Views.UserControls"
+    xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit">
+
+    <Grid Background="Beige">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="5">
+            <xctk:ColorPicker SelectedColorChanged="ColorPicker" Width="50" Height="20" Margin="0,0,5,0" VerticalAlignment="Center"/>
+
+            <ComboBox Width="100" Margin="0,0,5,0" VerticalAlignment="Center" SelectionChanged="FontStyle">
+                <ComboBoxItem Content="Normal"/>
+                <ComboBoxItem Content="Bold"/>
+                <ComboBoxItem Content="Italic"/>
+            </ComboBox>
+
+            <ComboBox Width="50" Margin="0,0,5,0" VerticalAlignment="Center" SelectionChanged="FontSize">
+                <ComboBoxItem Content="10"/>
+                <ComboBoxItem Content="12"/>
+                <ComboBoxItem Content="14"/>
+                <ComboBoxItem Content="16"/>
+            </ComboBox>
+            <TextBox x:Name="txtSearch" Width="200" Margin="0,0,5,0" VerticalAlignment="Center" TextChanged="TxtSearch_TextChanged"/>
+            <Button Content="Search" Click="BtnSearch_Click"/>
+            <Button Content="Clear" Click="BtnClear_Click"/>
+            <Button Content="SEND" Click="Send"/>
+        </StackPanel>
+
+        <TextBox x:Name="txtEditor" Grid.Row="1" Margin="5" TextWrapping="Wrap" AcceptsReturn="True"/>
+    </Grid>
+</UserControl>
