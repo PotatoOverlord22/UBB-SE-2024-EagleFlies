@@ -4,11 +4,11 @@ using System.Windows.Controls;
 namespace CodeBuddies.Views.UserControls
 {
     /// <summary>
-    /// Interaction logic for SessionsList.xaml
+    /// Interaction logic for SessionsPanel.xaml
     /// </summary>
-    public partial class SessionsList : UserControl
+    public partial class SessionsPanel : UserControl
     {
-        public SessionsList()
+        public SessionsPanel()
         {
             InitializeComponent();
             DataContext = new SessionsListViewModel();

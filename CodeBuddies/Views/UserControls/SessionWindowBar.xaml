@@ -1,0 +1,113 @@
+﻿<UserControl x:Class="CodeBuddies.Views.UserControls.SessionWindowBar"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:CodeBuddies.Views.UserControls"
+             mc:Ignorable="d" 
+             d:DesignHeight="70" d:DesignWidth="800">
+    <UserControl.Resources>
+        <!-- Custom Button Style with Rounded Borders -->
+        <Style x:Key="RoundedButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="{Binding RelativeSource={RelativeSource Self}, Path=Background}" />
+            <Setter Property="Foreground" Value="{Binding RelativeSource={RelativeSource Self}, Path=Foreground}" />
+            <Setter Property="FontFamily" Value="{Binding RelativeSource={RelativeSource Self}, Path=FontFamily}" />
+            <Setter Property="FontSize" Value="{Binding RelativeSource={RelativeSource Self}, Path=FontSize}" />
+            <Setter Property="FontWeight" Value="{Binding RelativeSource={RelativeSource Self}, Path=FontWeight}" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="15">
+                            <!-- Adjust the CornerRadius value to change the roundness -->
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+
+    <Grid Background="#200B29">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="70"/>
+        </Grid.RowDefinitions>
+
+        <!-- Apply the Custom Style to Buttons -->
+        <Button Click="OpenBoardButton_Clicked" 
+                Margin="281,0,0,0" 
+                Content="Open Board" 
+                Width="100" Height="30" 
+                HorizontalAlignment="Left" VerticalAlignment="Center" 
+                Style="{StaticResource RoundedButtonStyle}" 
+                Background="#25BE04" 
+                FontFamily="Segoe UI" 
+                FontSize="15" 
+                FontWeight="SemiBold" 
+                Foreground="White"/>
+
+        <Button Click="ContributionChartButton_Clicked"  
+                Margin="386,0,0,0" 
+                Content="Contribution Chart" 
+                Width="137" Height="30" 
+                HorizontalAlignment="Left" VerticalAlignment="Center" 
+                Style="{StaticResource RoundedButtonStyle}" 
+                Background="#055AD3" 
+                FontFamily="Segoe UI" 
+                FontSize="15" 
+                FontWeight="SemiBold" 
+                Foreground="White"/>
+
+        <Button Click="OpenExistingFileButton_Clicked"  
+            Margin="10,0,0,0" 
+            Content="Open Existing File" 
+            Width="137" Height="30" 
+            HorizontalAlignment="Left" VerticalAlignment="Center" 
+            Style="{StaticResource RoundedButtonStyle}" 
+            Background="#F17F15" 
+            FontFamily="Segoe UI" 
+            FontSize="15" 
+            FontWeight="SemiBold" 
+            Foreground="White"/>
+
+        <Button Click="CreateNewFileButton_Clicked"  
+            Margin="152,0,0,0" 
+            Content="Create New File" 
+            Width="124" Height="30" 
+            HorizontalAlignment="Left" VerticalAlignment="Center" 
+            Style="{StaticResource RoundedButtonStyle}" 
+            Background="#7BF257" 
+            FontFamily="Segoe UI" 
+            FontSize="15" 
+            FontWeight="SemiBold" 
+            Foreground="White"/>
+
+        <Button Click="LeaveSessionButton_Clicked"  
+            Margin="673,0,0,0" 
+            Content="Leave Session" 
+            Width="117" Height="30" 
+            HorizontalAlignment="Left" VerticalAlignment="Center" 
+            Style="{StaticResource RoundedButtonStyle}" 
+            Background="#F43636" 
+            FontFamily="Segoe UI" 
+            FontSize="15" 
+            FontWeight="SemiBold" 
+            Foreground="White"/>
+
+        <Button Click="SeeCodeReviewSectionButton_Clicked"  
+            Margin="528,0,0,0" 
+            Content="CodeReviews" 
+            Width="105" Height="30" 
+            HorizontalAlignment="Left" VerticalAlignment="Center" 
+            Style="{StaticResource RoundedButtonStyle}" 
+            Background="#01B894" 
+            FontFamily="Segoe UI" 
+            FontSize="15" 
+            FontWeight="SemiBold" 
+            Foreground="White"/>
+
+
+    </Grid>
+</UserControl>

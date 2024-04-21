@@ -1,0 +1,21 @@
+﻿<Window x:Class="CodeBuddies.Views.BuddyModalWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Buddy Details" Height="100" Width="150"
+        WindowStyle="None" ResizeMode="NoResize"
+        Background="Transparent" AllowsTransparency="True"
+        WindowStartupLocation="CenterScreen">
+    <!-- Center the window on the screen -->
+
+    <Border  CornerRadius="20" Padding="20">
+        <Border.Background>
+            <SolidColorBrush Color="CornflowerBlue"/>
+        </Border.Background>
+
+
+        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+            <Button Content="Pin/Unpin" Margin="10" Width="100" Command="{Binding CloseCommand}"/>
+            <Button Content="Invite to session" Margin="5" Width="100" Command="{Binding CloseCommand}"/>
+        </StackPanel>
+    </Border>
+</Window>

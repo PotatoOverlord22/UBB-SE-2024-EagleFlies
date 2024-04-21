@@ -1,19 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using CodeBuddies;
-
 namespace CodeBuddies.Views.UserControls
 {
     /// <summary>
@@ -26,13 +12,18 @@ namespace CodeBuddies.Views.UserControls
             InitializeComponent();
         }
 
-        
+
         private void DrawingBoardButton_Click(object sender, RoutedEventArgs e)
         {
             if (App.Current.MainWindow is MainWindow mainWindow)
             {
                 mainWindow.ToggleDrawingBoard();
             }
+        }
+        private void NewSessionButtonClicked(object sender, RoutedEventArgs e)
+        {
+            CreateNewSessionPopUp createNewSessionPopUp = new CreateNewSessionPopUp();
+            createNewSessionPopUp.ShowDialog();
         }
     }
 }

@@ -48,9 +48,9 @@ namespace CodeBuddies.Models.Entities
             set { lastEditDate = value; }
         }
 
-        private List<Buddy> buddies;
+        private List<long> buddies;
 
-        public List<Buddy> Buddies
+        public List<long> Buddies
         {
             get { return buddies; }
             set { buddies = value; }
@@ -104,7 +104,7 @@ namespace CodeBuddies.Models.Entities
             set { drawingBoard = value; }
         }
 
-        public Session(long sessionId, long ownerId, string name, DateTime creationDate, DateTime lastEditedDate, List<Buddy> buddies, List<Message> messages, List<CodeContribution> codeContributions, List<CodeReviewSection> codeReviewSections, List<string> filePaths, TextEditor textEditor, DrawingBoard drawingBoard)
+        public Session(long sessionId, long ownerId, string name, DateTime creationDate, DateTime lastEditedDate, List<long> buddies, List<Message> messages, List<CodeContribution> codeContributions, List<CodeReviewSection> codeReviewSections, List<string> filePaths, TextEditor textEditor, DrawingBoard drawingBoard)
         {
             Id = sessionId;
             OwnerId = ownerId;

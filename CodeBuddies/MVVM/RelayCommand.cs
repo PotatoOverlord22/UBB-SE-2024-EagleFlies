@@ -1,12 +1,19 @@
-﻿using System.Windows.Input;
+﻿using System.Reflection.Metadata;
+using System.Windows.Input;
 
 namespace CodeBuddies.MVVM
 {
-    internal class RelayCommand : ICommand
+    internal class RelayCommand<T> : ICommand
     {
 
-        private Action<object> execute;
-        private Func<object, bool> canExecute;
+        private Action<T> execute;
+        private Func<T, bool> canExecute;
+
+        public RelayCommand(Action<T> execute, Func<T, bool> canExecute = null)
+        {
+            this.execute = execute ?? throw new ArgumentNullException(nameof(execute));
+            this.canExecute = canExecute;
+        }
 
         public event EventHandler? CanExecuteChanged
         {
@@ -14,21 +21,14 @@ namespace CodeBuddies.MVVM
             remove { CommandManager.RequerySuggested -= value; }
         }
 
-
-        public RelayCommand(Action<object> execute, Func<object, bool> canExecute = null)
-        {
-            this.execute = execute;
-            this.canExecute = canExecute;
-        }
-
         public bool CanExecute(object? parameter)
         {
-            return canExecute == null || canExecute(parameter);
+            return canExecute == null || canExecute((T)parameter);
         }
 
         public void Execute(object? parameter)
         {
-            execute(parameter);
+            execute((T)parameter);
         }
     }
 }
