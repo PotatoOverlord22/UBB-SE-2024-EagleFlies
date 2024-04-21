@@ -23,7 +23,7 @@ namespace CodeBuddies.Views
 
         public ICommand OpenWindowModalCommand => new RelayCommand<Buddy>(_ => OpenSessionModal());
 
-        internal ICommand PinBuddyCommand => new RelayCommand<Buddy>(_ => HandlePinBuddy());
+        public ICommand PinBuddyCommand => new RelayCommand<Buddy>(_ => HandlePinBuddy());
 
         private void OpenSessionModal()
         {

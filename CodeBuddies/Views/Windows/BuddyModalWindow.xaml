@@ -14,7 +14,7 @@
 
 
         <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
-            <Button Content="Pin/Unpin Buddy" Command="{Binding PinBuddyCommand}" Height="20"/>
+            <Button Content="Pin/Unpin Buddy" Command="{Binding DataContext.PinBuddyCommand}" Height="20"/>
             <Button Content="Invite to session" Margin="5" Width="100" Command="{Binding DataContext.OpenWindowModalCommand}"/>
             <Button Content="Close" Margin="5" Width="50" Command="{Binding CloseCommand}"/>
 

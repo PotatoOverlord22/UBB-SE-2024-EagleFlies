@@ -99,7 +99,7 @@ namespace CodeBuddies.ViewModels
 
         private void OpenModal()
         {
-            Console.WriteLine("test");
+            Console.WriteLine("test ", selectedBuddy.BuddyName);
             if (SelectedBuddy != null)
             {
 
@@ -124,8 +124,9 @@ namespace CodeBuddies.ViewModels
 
         internal void HandleBuddyPinned()
         {
-            buddies.Remove(selectedBuddy);
-            buddies.Insert(0, selectedBuddy);
+            Buddies.Remove(selectedBuddy);
+            Buddies.Insert(0, selectedBuddy);
+            OnPropertyChanged();
         }
 
         
