@@ -16,6 +16,15 @@ namespace CodeBuddies.Models.Entities
         {
             BuddyAddedToSession?.Invoke(buddyId, sessionId);
         }
+
+        internal delegate void BuddyPinnedHandler();
+
+        internal static event BuddyPinnedHandler BuddyPinned;
+
+        internal static void RaiseBuddyPinned()
+        {
+            BuddyPinned?.Invoke();
+        }
     }
 
 }
