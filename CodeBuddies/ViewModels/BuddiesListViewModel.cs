@@ -1,13 +1,19 @@
 ﻿using CodeBuddies.Models.Entities;
 using CodeBuddies.MVVM;
 using CodeBuddies.Repositories;
+using CodeBuddies.Views;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.IO;
+using System.Windows;
+using System.Windows.Input;
 
 namespace CodeBuddies.ViewModels
 {
     internal class BuddiesListViewModel : ViewModelBase
     {
+        private ObservableCollection<Buddy> buddies = new ObservableCollection<Buddy>();
+        public ICommand OpenPopupCommand { get; }
         private BuddyRepository repository;
 
         public BuddyRepository Repository
@@ -16,9 +22,8 @@ namespace CodeBuddies.ViewModels
             set { repository = value; }
         }
 
-
-        private ObservableCollection<Buddy> buddies;
-
+        public RelayCommand<Buddy> OpenModalCommand => new RelayCommand<Buddy>(_ => OpenModal());
+      
         public ObservableCollection<Buddy> Buddies
         {
             get { return buddies; }
@@ -41,7 +46,7 @@ namespace CodeBuddies.ViewModels
         public BuddiesListViewModel()
         {
             repository = new BuddyRepository();
-            Buddies = new ObservableCollection<Buddy>(repository.GetAllBuddies());
+            LoadBuddies();
         }
 
         private void FilterBuddies()
@@ -66,6 +71,36 @@ namespace CodeBuddies.ViewModels
                 }
                 Buddies = filteredBuddies;
             }
+            LoadBuddies();
+
         }
+       
+
+        private void LoadBuddies()
+        {
+            Buddies = new ObservableCollection<Buddy>(repository.GetAllBuddies());
+        }
+
+        private void OpenModal()
+        {
+            Console.WriteLine("test");
+            var modalWindow = new BuddyModalWindow();
+            modalWindow.Owner = Application.Current.MainWindow; // Ensure it's modal to the main window
+            
+            bool? dialogResult = modalWindow.ShowDialog();
+
+
+            if (dialogResult == true)
+            {
+                Debug.WriteLine("Action pressed! \n");
+            }
+            else
+            {
+                Debug.WriteLine("Close pressed!");
+                // Handle actions if Cancelled or closed
+            }
+        }
+
+
     }
 }

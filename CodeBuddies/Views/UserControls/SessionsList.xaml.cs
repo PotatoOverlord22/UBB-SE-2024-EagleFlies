@@ -10,7 +10,8 @@ namespace CodeBuddies.Views.UserControls
     {
         public SessionsList()
         {
-            InitializeComponent();    
+            InitializeComponent();
+            DataContext = new SessionsListViewModel();
         }
     }
 }
