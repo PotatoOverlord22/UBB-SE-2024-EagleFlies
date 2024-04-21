@@ -39,6 +39,7 @@ namespace CodeBuddies.ViewModels
             {
                 searchBySessionName = value;
                 FilterSessionsBySessionName();
+                OnPropertyChanged();
             }
         }
 

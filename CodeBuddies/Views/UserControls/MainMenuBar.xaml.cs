@@ -8,6 +8,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using CodeBuddies;
+using CodeBuddies.ViewModels;
 
 namespace CodeBuddies.Views.UserControls
 {
@@ -19,7 +20,9 @@ namespace CodeBuddies.Views.UserControls
         public MainMenuBar()
         {
             InitializeComponent();
+           
         }
+
 
         private void NewSessionButtonClicked(object sender, RoutedEventArgs e)
         {

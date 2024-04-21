@@ -11,7 +11,6 @@ namespace CodeBuddies.Views.UserControls
         public SessionsList()
         {
             InitializeComponent();
-            DataContext = new SessionsListViewModel();
         }
     }
 }
