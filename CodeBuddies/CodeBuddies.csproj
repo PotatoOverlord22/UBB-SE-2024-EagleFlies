@@ -9,19 +9,23 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Resources\Data\Constants\**" />
     <Compile Remove="Services\**" />
+    <EmbeddedResource Remove="Resources\Data\Constants\**" />
     <EmbeddedResource Remove="Services\**" />
+    <None Remove="Resources\Data\Constants\**" />
     <None Remove="Services\**" />
+    <Page Remove="Resources\Data\Constants\**" />
     <Page Remove="Services\**" />
   </ItemGroup>
 
   <ItemGroup>
     <None Remove="Resources\Pictures\exit-session.png" />
     <None Remove="Resources\Pictures\join-session.png" />
+    <None Remove="Resources\Pictures\mark-read.png" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Resources\Data\Constants\" />
     <Folder Include="ViewModels\" />
   </ItemGroup>
 
@@ -41,6 +45,7 @@
     </Resource>
     <Resource Include="Resources\Pictures\exit-session.png" />
     <Resource Include="Resources\Pictures\join-session.png" />
+    <Resource Include="Resources\Pictures\mark-read.png" />
     <Resource Include="Resources\Pictures\notifications_picture.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>

@@ -1,6 +1,7 @@
 ﻿using CodeBuddies.Models.Entities;
 using CodeBuddies.MVVM;
 using CodeBuddies.Repositories;
+using CodeBuddies.Resources.Data;
 using System.Collections.ObjectModel;
 
 
@@ -20,9 +21,10 @@ namespace CodeBuddies.ViewModels
 
         public SessionsListViewModel()
         {
+            GlobalEvents.BuddyAddedToSession += HandleBuddyAddedToSession;
             sessionRepository = new SessionRepository();
-            Sessions = new ObservableCollection<Session>(sessionRepository.GetAllSessions());
-  
+            Sessions = new ObservableCollection<Session>(sessionRepository.GetAllSessionsOfABuddy(Constants.CLIENT_BUDDY_ID));
+
         }
 
         private string searchBySessionName;
@@ -37,17 +39,17 @@ namespace CodeBuddies.ViewModels
             }
         }
 
-        void FilterSessionsBySessionName()
+        public void FilterSessionsBySessionName()
         {
             if (string.IsNullOrWhiteSpace(SearchBySessionName))
             {
                 Sessions.Clear();
-                Sessions = new ObservableCollection<Session>(sessionRepository.GetAllSessions());
+                Sessions = new ObservableCollection<Session>(sessionRepository.GetAllSessionsOfABuddy(Constants.CLIENT_BUDDY_ID));
             }
             else
             {
                 ObservableCollection<Session> filteredSessions = new ObservableCollection<Session>();
-                foreach (var session in sessionRepository.GetAllSessions())
+                foreach (var session in sessionRepository.GetAllSessionsOfABuddy(Constants.CLIENT_BUDDY_ID))
                 {
                     if (session.Name.ToLower().Contains(SearchBySessionName.ToLower()))
                     {
@@ -58,6 +60,9 @@ namespace CodeBuddies.ViewModels
             }
         }
 
-
+        public void HandleBuddyAddedToSession(long buddyId, long sessionId)
+        {
+            Sessions = new ObservableCollection<Session>(sessionRepository.GetAllSessionsOfABuddy(Constants.CLIENT_BUDDY_ID));
+        }
     }
 }

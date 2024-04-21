@@ -8,7 +8,7 @@ namespace CodeBuddies.Repositories
     {
 
         public BuddyRepository() : base() { }
-        
+
 
         public List<Buddy> GetAllBuddies()
         {
@@ -28,7 +28,7 @@ namespace CodeBuddies.Repositories
                 SqlDataAdapter notificationsDataAdapter = new SqlDataAdapter();
 
                 DataSet notificationDataSet = new DataSet();
-                string notificationQuery = "SELECT * FROM Notifications where buddy_id = @id";
+                string notificationQuery = "SELECT * FROM Notifications where receiver_id = @id";
                 SqlCommand selectAllNotificationsForSpecificBuddyCommand = new SqlCommand(notificationQuery, sqlConnection);
                 notificationsDataAdapter.SelectCommand = selectAllNotificationsForSpecificBuddyCommand;
                 selectAllNotificationsForSpecificBuddyCommand.Parameters.AddWithValue("@id", buddyRow["id"]);
@@ -44,19 +44,19 @@ namespace CodeBuddies.Repositories
 
                     if (notificationRow["notification_type"].ToString() == "invite")
                     {
-                        currentNotification = new InviteNotification((long)notificationRow["id"], (DateTime)notificationRow["notification_timestamp"], notificationRow["notification_type"].ToString(), notificationRow["notification_status"].ToString(), notificationRow["notification_description"].ToString(), false);
-                    }    
+                        currentNotification = new InviteNotification((long)notificationRow["id"], (DateTime)notificationRow["notification_timestamp"], notificationRow["notification_type"].ToString(), notificationRow["notification_status"].ToString(), notificationRow["notification_description"].ToString(), (long)notificationRow["sender_id"], (long)notificationRow["receiver_id"], (long)notificationRow["session_id"], false);
+                    }
                     else
                     {
-                        currentNotification = new InfoNotification((long)notificationRow["id"], (DateTime)notificationRow["notification_timestamp"], notificationRow["notification_type"].ToString(), notificationRow["notification_status"].ToString(), notificationRow["notification_description"].ToString());
+                        currentNotification = new InfoNotification((long)notificationRow["id"], (DateTime)notificationRow["notification_timestamp"], notificationRow["notification_type"].ToString(), notificationRow["notification_status"].ToString(), notificationRow["notification_description"].ToString(), (long)notificationRow["sender_id"], (long)notificationRow["receiver_id"], (long)notificationRow["session_id"]);
 
                     }
 
                     notifications.Add(currentNotification);
-             
+
                 }
 
-                Buddy currentBudy = new Buddy((long)buddyRow["id"], buddyRow["buddy_name"].ToString(), buddyRow["profile_photo_url"].ToString(), buddyRow["buddy_status"].ToString(), notifications );
+                Buddy currentBudy = new Buddy((long)buddyRow["id"], buddyRow["buddy_name"].ToString(), buddyRow["profile_photo_url"].ToString(), buddyRow["buddy_status"].ToString(), notifications);
                 buddies.Add(currentBudy);
             }
 
