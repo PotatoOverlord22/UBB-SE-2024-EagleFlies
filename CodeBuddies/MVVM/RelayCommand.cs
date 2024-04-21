@@ -3,7 +3,7 @@ using System.Windows.Input;
 
 namespace CodeBuddies.MVVM
 {
-    internal class RelayCommand<T> : ICommand
+    public class RelayCommand<T> : ICommand
     {
 
         private Action<T> execute;

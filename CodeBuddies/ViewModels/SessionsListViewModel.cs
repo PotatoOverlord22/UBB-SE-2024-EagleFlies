@@ -3,6 +3,7 @@ using CodeBuddies.MVVM;
 using CodeBuddies.Repositories;
 using CodeBuddies.Resources.Data;
 using System.Collections.ObjectModel;
+using System.Windows.Input;
 
 
 namespace CodeBuddies.ViewModels
@@ -63,6 +64,20 @@ namespace CodeBuddies.ViewModels
         public void HandleBuddyAddedToSession(long buddyId, long sessionId)
         {
             Sessions = new ObservableCollection<Session>(sessionRepository.GetAllSessionsOfABuddy(Constants.CLIENT_BUDDY_ID));
+        }
+
+        public void filterSessionOnlyOwner(long buddyId)
+        {
+            Sessions = new ObservableCollection<Session>(Sessions.Where(Session => Session.OwnerId == buddyId).ToList()); 
+        }
+
+
+        public ICommand SendInviteNotification => new RelayCommand<Buddy>(InviteBuddyToSession);
+
+        private void InviteBuddyToSession(Buddy buddy)
+        {
+
+
         }
     }
 }

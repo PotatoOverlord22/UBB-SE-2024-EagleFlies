@@ -2,19 +2,23 @@
 using CodeBuddies.MVVM;
 using CodeBuddies.Repositories;
 using CodeBuddies.Views;
+using CodeBuddies.Views.Windows;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
 using System.Windows;
 using System.Windows.Input;
+using SessionsModalWindow = CodeBuddies.Views.Windows.SessionsModalWindow;
 
 namespace CodeBuddies.ViewModels
 {
     internal class BuddiesListViewModel : ViewModelBase
     {
-        private ObservableCollection<Buddy> buddies = new ObservableCollection<Buddy>();
+        private ObservableCollection<Buddy> buddies;
         public ICommand OpenPopupCommand { get; }
         private BuddyRepository repository;
+
+
 
         public BuddyRepository Repository
         {
@@ -23,7 +27,7 @@ namespace CodeBuddies.ViewModels
         }
 
         public RelayCommand<Buddy> OpenModalCommand => new RelayCommand<Buddy>(_ => OpenModal());
-      
+
         public ObservableCollection<Buddy> Buddies
         {
             get { return buddies; }
@@ -46,6 +50,7 @@ namespace CodeBuddies.ViewModels
         public BuddiesListViewModel()
         {
             repository = new BuddyRepository();
+            GlobalEvents.BuddyPinned += HandleBuddyPinned;
             LoadBuddies();
         }
 
@@ -74,7 +79,7 @@ namespace CodeBuddies.ViewModels
             LoadBuddies();
 
         }
-       
+
 
         private void LoadBuddies()
         {
@@ -86,7 +91,7 @@ namespace CodeBuddies.ViewModels
             Console.WriteLine("test");
             var modalWindow = new BuddyModalWindow();
             modalWindow.Owner = Application.Current.MainWindow; // Ensure it's modal to the main window
-            
+
             bool? dialogResult = modalWindow.ShowDialog();
 
 
@@ -101,6 +106,12 @@ namespace CodeBuddies.ViewModels
             }
         }
 
+        internal void HandleBuddyPinned(Buddy buddy)
+        {
+            buddies.Remove(buddy);
+            buddies.Insert(0, buddy);
+        }
 
+        
     }
 }
