@@ -1,0 +1,41 @@
+﻿<UserControl x:Class="CodeBuddies.Views.UserControls.InactiveBuddies"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:CodeBuddies.Views.UserControls"
+             mc:Ignorable="d" 
+             d:DesignHeight="200" d:DesignWidth="300">
+    <Grid Margin="0,0,0,0">
+
+        <!-- ListView for Inactive Buddies -->
+        <ListView ItemsSource="{Binding Inactive}"  Template="{StaticResource CustomListViewTemplate}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Grid Height="80">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="80"/>
+                            <ColumnDefinition Width=".8*"/>
+                            <ColumnDefinition Width=".2*"/>
+                        </Grid.ColumnDefinitions>
+                        <!-- Border with ellipse for the profile photo -->
+                        <Border BorderBrush="Black" BorderThickness="2" CornerRadius="50" Margin="2">
+                            <Ellipse Margin="5">
+                                <Ellipse.Fill>
+                                    <ImageBrush ImageSource="{Binding ProfilePhotoUrl}" 
+                                                Viewport="0,0,1,1" 
+                                                ViewportUnits="RelativeToBoundingBox" 
+                                                Stretch="Uniform"/>
+                                </Ellipse.Fill>
+                            </Ellipse>
+                        </Border>
+                        <!-- Button for buddy name -->
+                        <Button Style="{StaticResource defaultButtonStyle}" Grid.Column="1" Content="{Binding BuddyName}" Margin="10"/>
+                        <!-- Circle indicator for inactive status (always red) -->
+                        <Ellipse Grid.Column="2" Width="20" Height="20" Margin="5" Fill="Red"/>
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </Grid>
+</UserControl>
