@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.SqlClient;
 using CodeBuddies.Resources.Data;
 using System;
+using CodeBuddies.Models.Exceptions;
 
 namespace CodeBuddies.Repositories
 {
@@ -154,14 +155,47 @@ namespace CodeBuddies.Repositories
         public void AddBuddyMemberToSession(long buddyId, long sessionId)
         {
             string insertQuery = "INSERT INTO BuddiesSessions (buddy_id, session_id) VALUES (@BuddyId, @SessionId)";
-
-            using (SqlCommand insertCommand = new SqlCommand(insertQuery, sqlConnection))
+            try
             {
-                insertCommand.Parameters.AddWithValue("@BuddyId", buddyId);
-                insertCommand.Parameters.AddWithValue("@SessionId", sessionId);
 
-                insertCommand.ExecuteNonQuery();
+                using (SqlCommand insertCommand = new SqlCommand(insertQuery, sqlConnection))
+                {
+                    insertCommand.Parameters.AddWithValue("@BuddyId", buddyId);
+                    insertCommand.Parameters.AddWithValue("@SessionId", sessionId);
+
+                    insertCommand.ExecuteNonQuery();
+                }
             }
+            catch (Exception ex) { throw new EntityAlreadyExists(ex.Message); }
+        }
+
+        public string GetSessionName(long sessionId)
+        {
+            string sessionName = null;
+
+            string selectSessionNameQuery = "SELECT session_name FROM Sessions WHERE id = @SessionId";
+
+            try
+            {
+                using (SqlCommand selectCommand = new SqlCommand(selectSessionNameQuery, sqlConnection))
+                {
+                    selectCommand.Parameters.AddWithValue("@SessionId", sessionId);
+
+                    object result = selectCommand.ExecuteScalar();
+
+                    // Check if the result is not null
+                    if (result != null)
+                    {
+                        sessionName = result.ToString();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new NullColumn(ex.Message);
+            }
+
+            return sessionName;
         }
 
     }

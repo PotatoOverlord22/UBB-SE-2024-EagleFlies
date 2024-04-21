@@ -1,8 +1,10 @@
 ﻿using CodeBuddies.Models.Entities;
+using CodeBuddies.Models.Exceptions;
 using CodeBuddies.MVVM;
 using CodeBuddies.Repositories;
 using CodeBuddies.Resources.Data;
 using System.Collections.ObjectModel;
+using System.Windows;
 
 namespace CodeBuddies.ViewModels
 {
@@ -37,24 +39,31 @@ namespace CodeBuddies.ViewModels
         {
             SendAcceptedInfoNotification(notification);
             // save the new member
-            sessionRepository.AddBuddyMemberToSession(notification.ReceiverId, notification.SessionId);
-            // remove the invite notification from the db
-            notificationRepository.RemoveById(notification.NotificationId);
-            notifications.Remove(notification);
+            try
+            {
+                sessionRepository.AddBuddyMemberToSession(notification.ReceiverId, notification.SessionId);
+                // Raise the event to notify the other components they need to update their sessions list
+                GlobalEvents.RaiseBuddyAddedToSessionEvent(notification.ReceiverId, notification.SessionId);
+            }
+            catch (EntityAlreadyExists error)
+            {
+                ShowErrorPopup("You are already a member of the session " + sessionRepository.GetSessionName(notification.SessionId));
+
+            }
+            finally
+            {
+                RemoveNotification(notification);
+            }
         }
         private void DeclineInvite(Notification notification)
         {
             // send an information notification informing the inviter that the user declined
             SendDeclinedInfoNotification(notification);
-            // remove the invite notification from the db
-            notificationRepository.RemoveById(notification.NotificationId);
-            notifications.Remove(notification);
+            RemoveNotification(notification);
         }
         private void MarkReadNotification(Notification notification)
         {
-            notifications.Remove(notification);
-            // also remove from db
-            notificationRepository.RemoveById(notification.NotificationId);
+            RemoveNotification(notification);
         }
 
         private void SendDeclinedInfoNotification(Notification notification)
@@ -69,6 +78,26 @@ namespace CodeBuddies.ViewModels
             // Reverse sender and receiver ids because this notification goes backwards
             Notification acceptedNotification = new InfoNotification(notificationRepository.GetFreeNotificationId(), DateTime.Now, "successInformation", "pending", Constants.CLIENT_NAME + " accepted your invitation!", notification.ReceiverId, notification.SenderId, notification.SessionId);
             notificationRepository.Save(acceptedNotification);
+        }
+        private void ShowErrorPopup(string errorMessage)
+        {
+
+            MessageBox.Show(errorMessage, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+        }
+
+        private void RemoveNotification(Notification notification)
+        {
+            // update optimistically
+            notifications.Remove(notification);
+            // remove from db
+            try
+            { 
+                notificationRepository.RemoveById(notification.NotificationId);
+            } catch(Exception ex)
+            {
+                // if failure, fetch again
+                Notifications = new ObservableCollection<Notification>(notificationRepository.GetAllByBuddyId(Constants.CLIENT_BUDDY_ID));
+            }
         }
     }
 }
