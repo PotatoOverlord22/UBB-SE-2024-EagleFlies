@@ -10,17 +10,20 @@ namespace CodeBuddies.Views
 {
     public partial class BuddyModalWindow : Window
     {
-        public BuddyModalWindow()
+        internal Buddy SelectedBuddy { get; set; }
+
+        internal BuddyModalWindow(Buddy selectedBuddy)
         {
             InitializeComponent();
             DataContext = this;
+            SelectedBuddy = selectedBuddy;
         }
 
         public ICommand CloseCommand => new RelayCommand<Buddy>(_ => Close());
 
         public ICommand OpenWindowModalCommand => new RelayCommand<Buddy>(_ => OpenSessionModal());
 
-        internal RelayCommand<Buddy> PinBuddyCommand => new RelayCommand<Buddy>(HandlePinBuddy);
+        internal ICommand PinBuddyCommand => new RelayCommand<Buddy>(_ => HandlePinBuddy());
 
         private void OpenSessionModal()
         {
@@ -42,9 +45,11 @@ namespace CodeBuddies.Views
             }
         }
 
-        internal void HandlePinBuddy(Buddy buddy)
+        internal void HandlePinBuddy()
         {
-            GlobalEvents.RaiseBuddyPinned(buddy);
+            GlobalEvents.RaiseBuddyPinned();
+            Close(); // Optionally close the window after pinning
+
         }
 
     }

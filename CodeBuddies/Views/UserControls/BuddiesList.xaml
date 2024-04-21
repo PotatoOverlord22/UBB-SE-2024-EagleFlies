@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:CodeBuddies.Views.UserControls"
              mc:Ignorable="d" 
              d:DesignHeight="200" d:DesignWidth="300">
-    <ListView ItemsSource="{Binding Buddies}"  Template="{StaticResource CustomListViewTemplate}">
+    <ListView ItemsSource="{Binding Buddies}" SelectedItem="{Binding SelectedBuddy}" Template="{StaticResource CustomListViewTemplate}">
         <ListView.ItemTemplate>
             <DataTemplate>
                 <Grid Height="80">

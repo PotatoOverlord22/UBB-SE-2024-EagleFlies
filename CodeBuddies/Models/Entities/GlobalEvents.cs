@@ -17,13 +17,13 @@ namespace CodeBuddies.Models.Entities
             BuddyAddedToSession?.Invoke(buddyId, sessionId);
         }
 
-        internal delegate void BuddyPinnedHandler(Buddy buddy);
+        internal delegate void BuddyPinnedHandler();
 
         internal static event BuddyPinnedHandler BuddyPinned;
 
-        internal static void RaiseBuddyPinned(Buddy buddy)
+        internal static void RaiseBuddyPinned()
         {
-            BuddyPinned?.Invoke(buddy);
+            BuddyPinned?.Invoke();
         }
     }
 

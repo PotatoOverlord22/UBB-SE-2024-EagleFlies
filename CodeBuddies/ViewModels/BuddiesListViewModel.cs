@@ -86,30 +86,46 @@ namespace CodeBuddies.ViewModels
             Buddies = new ObservableCollection<Buddy>(repository.GetAllBuddies());
         }
 
-        private void OpenModal()
+        private Buddy selectedBuddy;
+        public Buddy SelectedBuddy
         {
-            Console.WriteLine("test");
-            var modalWindow = new BuddyModalWindow();
-            modalWindow.Owner = Application.Current.MainWindow; // Ensure it's modal to the main window
-
-            bool? dialogResult = modalWindow.ShowDialog();
-
-
-            if (dialogResult == true)
+            get => selectedBuddy;
+            set
             {
-                Debug.WriteLine("Action pressed! \n");
-            }
-            else
-            {
-                Debug.WriteLine("Close pressed!");
-                // Handle actions if Cancelled or closed
+                selectedBuddy = value;
+                OnPropertyChanged();
             }
         }
 
-        internal void HandleBuddyPinned(Buddy buddy)
+        private void OpenModal()
         {
-            buddies.Remove(buddy);
-            buddies.Insert(0, buddy);
+            Console.WriteLine("test");
+            if (SelectedBuddy != null)
+            {
+
+                
+                var modalWindow = new BuddyModalWindow(SelectedBuddy);
+                modalWindow.Owner = Application.Current.MainWindow; // Ensure it's modal to the main window
+
+                bool? dialogResult = modalWindow.ShowDialog();
+
+
+                if (dialogResult == true)
+                {
+                    Debug.WriteLine("Action pressed! \n");
+                }
+                else
+                {
+                    Debug.WriteLine("Close pressed!");
+                    // Handle actions if Cancelled or closed
+                }
+            }
+        }
+
+        internal void HandleBuddyPinned()
+        {
+            buddies.Remove(selectedBuddy);
+            buddies.Insert(0, selectedBuddy);
         }
 
         

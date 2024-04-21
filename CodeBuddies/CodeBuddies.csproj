@@ -11,12 +11,16 @@
 	<ItemGroup>
 		<Compile Remove="Resources\Data\Constants\**" />
 		<Compile Remove="Services\**" />
+		<Compile Remove="Views\Converters\**" />
 		<EmbeddedResource Remove="Resources\Data\Constants\**" />
 		<EmbeddedResource Remove="Services\**" />
+		<EmbeddedResource Remove="Views\Converters\**" />
 		<None Remove="Resources\Data\Constants\**" />
 		<None Remove="Services\**" />
+		<None Remove="Views\Converters\**" />
 		<Page Remove="Resources\Data\Constants\**" />
 		<Page Remove="Services\**" />
+		<Page Remove="Views\Converters\**" />
 	</ItemGroup>
 
 	<ItemGroup>
