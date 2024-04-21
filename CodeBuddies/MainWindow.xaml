@@ -40,10 +40,7 @@
 
             <userControls:SessionsList Grid.Row="1"/>
 
-
-            <userControls:SessionsPanel />
         </Grid>
-
-
+        
     </Grid>
 </Window>

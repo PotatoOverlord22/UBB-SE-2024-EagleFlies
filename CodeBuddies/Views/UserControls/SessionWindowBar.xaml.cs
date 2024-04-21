@@ -26,6 +26,8 @@ namespace CodeBuddies.Views.UserControls
     public partial class SessionWindowBar : UserControl
     {
         private SessionRepository sessionRepository;
+
+        public event EventHandler DrawingBoardButtonClicked;
         public SessionWindowBar()
         {
             InitializeComponent();
@@ -53,6 +55,16 @@ namespace CodeBuddies.Views.UserControls
 
         private void OpenBoardButton_Clicked(object sender, RoutedEventArgs e)
         {
+            DrawingBoardButtonClicked?.Invoke(this, EventArgs.Empty);
+            
+            if (OpenBoardButton.Content.ToString() == "Open Board")
+            {
+                OpenBoardButton.Content = "Close Board";
+            }
+            else
+            {
+                OpenBoardButton.Content = "Open Board";
+            }
 
         }
 
@@ -69,6 +81,7 @@ namespace CodeBuddies.Views.UserControls
 
         private void SeeCodeReviewSectionButton_Clicked(object sender, RoutedEventArgs e)
         {
+
             // Check if sessionRepository is not null
             if (sessionRepository != null)
             {
