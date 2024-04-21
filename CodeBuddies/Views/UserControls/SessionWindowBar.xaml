@@ -107,6 +107,7 @@
             FontSize="15" 
             FontWeight="SemiBold" 
             Foreground="White"/>
+        <Grid x:Name="GridTextEditor" Background="#8F8B91" Margin="1,71,277,-710"/>
 
 
     </Grid>

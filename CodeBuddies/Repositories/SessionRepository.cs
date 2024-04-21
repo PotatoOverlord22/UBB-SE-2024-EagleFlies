@@ -5,6 +5,7 @@ using System.Data.SqlClient;
 using CodeBuddies.Resources.Data;
 using System;
 using CodeBuddies.Models.Exceptions;
+using static CodeBuddies.Resources.Data.Constants;
 
 namespace CodeBuddies.Repositories
 {
@@ -13,7 +14,7 @@ namespace CodeBuddies.Repositories
         public SessionRepository() : base() { }
 
 
-        private List<Message> GetMessagesForSpecificSession(long sessionId)
+        public List<Message> GetMessagesForSpecificSession(long sessionId)
         {
             List<Message> sessionMessages = new List<Message>();
 
@@ -35,7 +36,7 @@ namespace CodeBuddies.Repositories
             return sessionMessages;
         }
 
-        private List<CodeContribution> GetCodeContributionsForSpecificSession(long sessionId)
+        public List<CodeContribution> GetCodeContributionsForSpecificSession(long sessionId)
         {
             List<CodeContribution> codeContributions = new List<CodeContribution>();
 
@@ -56,7 +57,7 @@ namespace CodeBuddies.Repositories
             return codeContributions;
         }
 
-        private List<Message> GetMessagesForSpecificCodeReview(long codeReviewId)
+        public List<Message> GetMessagesForSpecificCodeReview(long codeReviewId)
         {
             List<Message> codeReviewMessages = new List<Message>();
 
@@ -79,7 +80,7 @@ namespace CodeBuddies.Repositories
 
 
 
-        private List<CodeReviewSection> GetCodeReviewSectionsForSpecificSession(long sessionId)
+        public List<CodeReviewSection> GetCodeReviewSectionsForSpecificSession(long sessionId)
         {
             List<CodeReviewSection> codeReviewSections = new List<CodeReviewSection>();
 
@@ -105,7 +106,7 @@ namespace CodeBuddies.Repositories
             return codeReviewSections;
         }
 
-        private List<long> GetBuddiesForSpecificSession(long sessionId)
+        public List<long> GetBuddiesForSpecificSession(long sessionId)
         {
             List<long> sessionBuddies = new List<long>();
 
@@ -196,6 +197,29 @@ namespace CodeBuddies.Repositories
             }
 
             return sessionName;
+        }
+
+        public void AddNewSession(long sessionId, string sessionName, string maxParticipants)
+        {
+            string insertQuery = "INSERT INTO Sessions (id, owner_id, session_name, creation_date, last_edit_date) VALUES (@SessionId, @OwnerId, @SessionName, @CreationDate, @LastEditDate)";
+
+            try
+            {
+                using (SqlCommand insertCommand = new SqlCommand(insertQuery, sqlConnection))
+                {
+                    insertCommand.Parameters.AddWithValue("@SessionId", sessionId);
+                    insertCommand.Parameters.AddWithValue("@SessionName", sessionName);
+                    insertCommand.Parameters.AddWithValue("@OwnerId", CLIENT_SESSION_ID);
+                    insertCommand.Parameters.AddWithValue("@CreationDate", DateTime.Now);
+                    insertCommand.Parameters.AddWithValue("@LastEditDate", DateTime.Now);
+
+                    insertCommand.ExecuteNonQuery();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new EntityAlreadyExists(ex.Message);
+            }
         }
 
     }

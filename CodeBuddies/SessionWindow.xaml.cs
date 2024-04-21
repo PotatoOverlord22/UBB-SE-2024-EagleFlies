@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CodeBuddies.Repositories;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +20,18 @@ namespace CodeBuddies
     /// </summary>
     public partial class SessionWindow : Window
     {
+
+        private SessionRepository sessionRepository;
+
         public SessionWindow()
         {
             InitializeComponent();
+            sessionRepository = new SessionRepository();
+        }
+
+        internal SessionRepository getSessionRepository()
+        {
+            return sessionRepository;
         }
     }
 }

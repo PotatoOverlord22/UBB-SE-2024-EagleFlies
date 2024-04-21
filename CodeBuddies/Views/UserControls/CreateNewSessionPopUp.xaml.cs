@@ -13,6 +13,9 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using CodeBuddies.Models.Entities;
+using CodeBuddies.Repositories;
+using static CodeBuddies.Resources.Data.Constants;
+using static CodeBuddies.ViewModels.ValidationForNewSession;
 
 namespace CodeBuddies.Views.UserControls
 {
@@ -83,17 +86,33 @@ namespace CodeBuddies.Views.UserControls
             //add the session to the list of sessions
             //close the popup
 
-            //Session newSession = new Session(sessionName, maxParticipants);
-            //SessionList.Add(newSession);
-
-            //SessionEndingCancelEventArgs args = new SessionEndingCancelEventArgs(false, SessionEndReasons.UserClosing);
-
             //generate a new session id randomly
             Random random = new Random();
             long sessionId = random.Next(1000, 9999);
+            SessionRepository sessionRepository = new SessionRepository();
 
-            SessionWindow sessionWindow = new SessionWindow();
-            sessionWindow.ShowDialog();
+            try
+            {
+                ValidateSessionName(sessionName);
+                ValidateMaxNoOfBuddies(maxParticipants);
+                ValidateBuddyId(CLIENT_SESSION_ID);
+                ValidateSessionId(sessionId);
+
+                sessionRepository.AddNewSession(sessionId, sessionName, maxParticipants);
+
+                if (sessionName != "" && maxParticipants != "")
+                {
+                    SessionWindow sessionWindow = new SessionWindow();
+                    sessionWindow.ShowDialog();
+                }
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+            //close the popup
+            this.Close();
         }
     }
 }
