@@ -18,7 +18,9 @@
             <DataGridTemplateColumn Header="Enter session" Width="*">
                 <DataGridTemplateColumn.CellTemplate>
                     <DataTemplate>
-                        <Button Style="{StaticResource JoinLeaveSessionButtonStyle}" Width="30" Height="30" Margin="8">
+                        <Button Style="{StaticResource JoinLeaveSessionButtonStyle}" Width="30" Height="30" Margin="8"
+                                 Command="{Binding DataContext.JoinSessionCommand, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"
+                                   CommandParameter="{Binding}">
                             <Image Source="pack://application:,,,/CodeBuddies;component/resources/pictures/join-session.png"/>
                         </Button>
                     </DataTemplate>
@@ -27,7 +29,9 @@
             <DataGridTemplateColumn Header="Leave session" Width="*">
                 <DataGridTemplateColumn.CellTemplate>
                     <DataTemplate>
-                        <Button Style="{StaticResource JoinLeaveSessionButtonStyle}" Width="30" Height="30" Margin="8">
+                        <Button Style="{StaticResource JoinLeaveSessionButtonStyle}" Width="30" Height="30" Margin="8" 
+                               Command="{Binding DataContext.LeaveSessionCommand, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"
+                                CommandParameter="{Binding}">
                             <Image Source="pack://application:,,,/CodeBuddies;component/resources/pictures/exit-session.png"/>
                         </Button>
                     </DataTemplate>
