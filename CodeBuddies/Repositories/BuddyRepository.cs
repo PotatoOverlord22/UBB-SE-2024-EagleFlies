@@ -114,5 +114,21 @@ namespace CodeBuddies.Repositories
             buddies.Add(new Buddy(2, "yo2", "pack://application:,,,/CodeBuddies;component/resources/pictures/dog_picture.png", "inactive", new List<Notification>()));
             buddies.Add(new Buddy(3, "yo3", "pack://application:,,,/CodeBuddies;component/resources/pictures/dog_picture.png", "inactive", new List<Notification>()));
         }
+
+        public List<Buddy> GetActiveBuddies()
+        {
+            return Buddies.Where(buddy => buddy.Status == "active").ToList();
+        }
+
+        public List<Buddy> GetInactiveBuddies()
+        {
+            return Buddies.Where(buddy => buddy.Status == "inactive").ToList();
+        }
+
+        public void UpdateBuddyStatus(Buddy buddy)
+        {
+            buddy.Status = buddy.Status == "active" ? "inactive" : "active";
+            SaveToFile();
+        }
     }
 }

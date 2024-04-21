@@ -22,7 +22,6 @@
 
   <ItemGroup>
     <Folder Include="Resources\Data\Constants\" />
-    <Folder Include="ViewModels\" />
   </ItemGroup>
 
   <ItemGroup>

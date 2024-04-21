@@ -30,7 +30,7 @@
         </Style>
     </UserControl.Resources>
 
-    <Grid Background="#AD23C5">
+    <Grid Background="#200B29">
         <Grid.RowDefinitions>
             <RowDefinition Height="70"/>
         </Grid.RowDefinitions>
@@ -91,6 +91,18 @@
             HorizontalAlignment="Left" VerticalAlignment="Center" 
             Style="{StaticResource RoundedButtonStyle}" 
             Background="#F43636" 
+            FontFamily="Segoe UI" 
+            FontSize="15" 
+            FontWeight="SemiBold" 
+            Foreground="White"/>
+
+        <Button Click="SeeCodeReviewSectionButton_Clicked"  
+            Margin="528,0,0,0" 
+            Content="CodeReviews" 
+            Width="105" Height="30" 
+            HorizontalAlignment="Left" VerticalAlignment="Center" 
+            Style="{StaticResource RoundedButtonStyle}" 
+            Background="#01B894" 
             FontFamily="Segoe UI" 
             FontSize="15" 
             FontWeight="SemiBold" 

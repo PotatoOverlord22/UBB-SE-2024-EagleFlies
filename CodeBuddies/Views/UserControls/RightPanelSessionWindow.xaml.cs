@@ -1,5 +1,4 @@
-﻿using CodeBuddies.ViewModels;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,14 +16,23 @@ using System.Windows.Shapes;
 namespace CodeBuddies.Views.UserControls
 {
     /// <summary>
-    /// Interaction logic for ActiveInactiveBuddies.xaml
+    /// Interaction logic for RightPanelSessionWindow.xaml
     /// </summary>
-    public partial class ActiveInactiveBuddies : UserControl
+    public partial class RightPanelSessionWindow : UserControl
     {
-        public ActiveInactiveBuddies()
+        public RightPanelSessionWindow()
         {
             InitializeComponent();
-            DataContext = new ActiveInactiveBuddiesListViewModel();
+        }
+
+        private void ReviewCodeButton_Clicked(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void ChatButton_Clicked(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

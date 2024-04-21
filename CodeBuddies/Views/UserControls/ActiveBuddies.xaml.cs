@@ -1,5 +1,4 @@
-﻿using CodeBuddies.ViewModels;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,15 +12,16 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using CodeBuddies.ViewModels;
 
 namespace CodeBuddies.Views.UserControls
 {
     /// <summary>
-    /// Interaction logic for ActiveInactiveBuddies.xaml
+    /// Interaction logic for ActiveBuddies.xaml
     /// </summary>
-    public partial class ActiveInactiveBuddies : UserControl
+    public partial class ActiveBuddies : UserControl
     {
-        public ActiveInactiveBuddies()
+        public ActiveBuddies()
         {
             InitializeComponent();
             DataContext = new ActiveInactiveBuddiesListViewModel();

@@ -51,5 +51,10 @@ namespace CodeBuddies.Views.UserControls
         {
 
         }
+
+        private void SeeCodeReviewSectionButton_Clicked(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
