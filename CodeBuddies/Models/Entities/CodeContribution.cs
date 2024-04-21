@@ -8,9 +8,9 @@ namespace CodeBuddies.Models.Entities
 {
     internal class CodeContribution
     {
-        private Buddy contributor;
+        private long contributor;
 
-        public Buddy Contributor
+        public long Contributor
         {
             get { return contributor; }
             set { contributor = value; }
@@ -32,7 +32,7 @@ namespace CodeBuddies.Models.Entities
             set { contributionValue = value; }
         }
 
-        public CodeContribution(Buddy contributor, DateTime date, int contributionValue)
+        public CodeContribution(long contributor, DateTime date, int contributionValue)
         {
             Contributor = contributor;
             ContributionDate = date;

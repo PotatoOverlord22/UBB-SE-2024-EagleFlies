@@ -29,15 +29,7 @@
         </Grid>
 
         <Grid Grid.Column="1">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="70"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
-
-            <userControls:MainMenuBar Grid.Row="0"/>
-
-            <userControls:SessionsList Grid.Row="1"/>
-
+            <userControls:SessionsPanel />
         </Grid>
 
 

@@ -46,15 +46,38 @@ namespace CodeBuddies.Models.Entities
             get { return description; }
             set { description = value; }
         }
+        protected long senderId;
+        public long SenderId
+        {
+            get { return senderId; }
+            set { senderId = value; }
+        }
+
+        protected long receiverId;
+        public long ReceiverId
+        {
+            get { return receiverId; }
+            set { receiverId = value; }
+        }
+
+        protected long sessionId;
+        public long SessionId
+        {
+            get { return sessionId; }
+            set { sessionId = value; }
+        }
 
 
-        public Notification(long notificationId, DateTime timeStamp, string type, string status, string description)
+        public Notification(long notificationId, DateTime timeStamp, string type, string status, string description, long senderId, long receiverId, long sessionId)
         {
             NotificationId = notificationId;
             TimeStamp = timeStamp;
             Type = type;
             Status = status;
             Description = description;
+            SenderId = senderId;
+            ReceiverId = receiverId;
+            SessionId = sessionId;
         }
 
         protected abstract void MarkNotification();
