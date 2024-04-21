@@ -124,34 +124,33 @@ namespace CodeBuddies.Repositories
             return sessionBuddies;
         }
 
-        public List<Session> GetAllSessions()
+        public List<Session> GetAllSessionsOfABuddy(long buddyId)
         {
             List<Session> sessions = new List<Session>();
 
             DataSet sessionDataSet = new DataSet();
-            string selectAllSessions = "SELECT * FROM Sessions";
+            string selectAllSessions = "SELECT * FROM Sessions s INNER JOIN BuddiesSessions bs ON s.id = bs.session_id WHERE bs.buddy_id=@user_id";
             SqlCommand selectAllSessionsCommand = new SqlCommand(selectAllSessions, sqlConnection);
+            selectAllSessionsCommand.Parameters.AddWithValue("@user_id", buddyId);
             dataAdapter.SelectCommand = selectAllSessionsCommand;
             dataAdapter.Fill(sessionDataSet, "Sessions");
 
-            foreach(DataRow sessionRow in sessionDataSet.Tables["Sessions"].Rows)
+            foreach (DataRow sessionRow in sessionDataSet.Tables["Sessions"].Rows)
             {
-                if ((long)sessionRow["owner_id"] == Constants.CLIENT_BUDDY_ID)
-                {
-                    List<Message> sessionMessages = GetMessagesForSpecificSession((long)sessionRow["id"]);
-                    List<long> sessionBuddies = GetBuddiesForSpecificSession((long)sessionRow["id"]);
-                    List<CodeContribution> sessionCodeContributions = GetCodeContributionsForSpecificSession((long)sessionRow["id"]);
-                    List<CodeReviewSection> sessionCodeReviewSections = GetCodeReviewSectionsForSpecificSession((long)sessionRow["id"]);
+                List<Message> sessionMessages = GetMessagesForSpecificSession((long)sessionRow["id"]);
+                List<long> sessionBuddies = GetBuddiesForSpecificSession((long)sessionRow["id"]);
+                List<CodeContribution> sessionCodeContributions = GetCodeContributionsForSpecificSession((long)sessionRow["id"]);
+                List<CodeReviewSection> sessionCodeReviewSections = GetCodeReviewSectionsForSpecificSession((long)sessionRow["id"]);
 
-                    
-                    Session session = new Session((long)sessionRow["id"], (long)sessionRow["owner_id"], sessionRow["session_name"].ToString(), Convert.ToDateTime(sessionRow["creation_date"]), Convert.ToDateTime(sessionRow["last_edit_date"]), sessionBuddies, sessionMessages, sessionCodeContributions, sessionCodeReviewSections, new List<string>(), new TextEditor("black", new List<string>()), new DrawingBoard(""));
-                    sessions.Add(session);
-                }
-            }        
+
+                Session session = new Session((long)sessionRow["id"], (long)sessionRow["owner_id"], sessionRow["session_name"].ToString(), Convert.ToDateTime(sessionRow["creation_date"]), Convert.ToDateTime(sessionRow["last_edit_date"]), sessionBuddies, sessionMessages, sessionCodeContributions, sessionCodeReviewSections, new List<string>(), new TextEditor("black", new List<string>()), new DrawingBoard(""));
+                sessions.Add(session);
+
+            }
 
             return sessions;
         }
-        
-   
+
+
     }
 }
