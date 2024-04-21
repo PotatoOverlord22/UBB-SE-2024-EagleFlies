@@ -36,30 +36,34 @@
         <userControls:ActiveBuddies Margin="0,0,0,500" />
 
         <!-- Inactive Buddies List -->
-        <userControls:InactiveBuddies Margin="0,300,0,299" />
+        <userControls:InactiveBuddies Margin="0,197,0,218" />
 
-        <Button Click="ReviewCodeButton_Clicked"  
-            Margin="150,630,0,0" 
-            Content="Review Code" 
-            Width="110" Height="30" 
-            HorizontalAlignment="Left" VerticalAlignment="Top" 
-            Style="{StaticResource RoundedButtonStyle}" 
-            Background="#01B894" 
-            FontFamily="Segoe UI" 
-            FontSize="15" 
-            FontWeight="SemiBold" 
-            Foreground="White"/>
+        <Grid x:Name="buttonGrid" Margin="0,587,0,0" VerticalAlignment="Top" Height="43">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
 
-        <Button Click="ChatButton_Clicked"  
-             Margin="10,630,0,0" 
-             Content="Messages" 
-             Width="110" Height="30" 
-             HorizontalAlignment="Left" VerticalAlignment="Top" 
-             Style="{StaticResource RoundedButtonStyle}" 
-             Background="#055AD3" 
-             FontFamily="Segoe UI" 
-             FontSize="15" 
-             FontWeight="SemiBold" 
-             Foreground="White"/>
+            <!-- Review Code Button -->
+            <Button x:Name="reviewCodeButton" Click="ReviewCodeButton_Clicked"
+                    Content="Review Code"
+                    Style="{StaticResource RoundedButtonStyle}"
+                    Background="#01B894"
+                    FontFamily="Segoe UI"
+                    FontSize="15"
+                    FontWeight="SemiBold"
+                    Foreground="White" Margin="135,0,10,0"/>
+
+            <!-- Chat Button -->
+            <Button x:Name="chatButton" Click="ChatButton_Clicked"
+                    Content="Messages"
+                    Style="{StaticResource RoundedButtonStyle}"
+                    Background="#055AD3"
+                    FontFamily="Segoe UI"
+                    FontSize="15"
+                    FontWeight="SemiBold"
+                    Foreground="White" Margin="19,0,0,0" HorizontalAlignment="Left" Width="103"/>
+        </Grid>
     </Grid>
 </UserControl>

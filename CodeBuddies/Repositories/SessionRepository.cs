@@ -5,6 +5,7 @@ using System.Data.SqlClient;
 using CodeBuddies.Resources.Data;
 using System;
 using CodeBuddies.Models.Exceptions;
+using static CodeBuddies.Resources.Data.Constants;
 
 namespace CodeBuddies.Repositories
 {
@@ -196,6 +197,29 @@ namespace CodeBuddies.Repositories
             }
 
             return sessionName;
+        }
+
+        public void AddNewSession(long sessionId, string sessionName, string maxParticipants)
+        {
+            string insertQuery = "INSERT INTO Sessions (id, owner_id, session_name, creation_date, last_edit_date) VALUES (@SessionId, @OwnerId, @SessionName, @CreationDate, @LastEditDate)";
+
+            try
+            {
+                using (SqlCommand insertCommand = new SqlCommand(insertQuery, sqlConnection))
+                {
+                    insertCommand.Parameters.AddWithValue("@SessionId", sessionId);
+                    insertCommand.Parameters.AddWithValue("@SessionName", sessionName);
+                    insertCommand.Parameters.AddWithValue("@OwnerId", CLIENT_SESSION_ID);
+                    insertCommand.Parameters.AddWithValue("@CreationDate", DateTime.Now);
+                    insertCommand.Parameters.AddWithValue("@LastEditDate", DateTime.Now);
+
+                    insertCommand.ExecuteNonQuery();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new EntityAlreadyExists(ex.Message);
+            }
         }
 
     }
