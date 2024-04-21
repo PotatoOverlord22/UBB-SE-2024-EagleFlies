@@ -16,18 +16,17 @@
         <Grid Grid.Column="0" Background="#A6A29F">
             <Grid.RowDefinitions>
                 <RowDefinition Height="70"/>
-                <RowDefinition Height="40"/>
                 <RowDefinition Height=".7*"/>
                 <RowDefinition Height=".3*"/>
             </Grid.RowDefinitions>
 
             <Label Grid.Row="0" Content="Code Buddies" Style="{StaticResource BrandLabelStyle}"></Label>
 
-            <TextBox Grid.Row="1" Style="{StaticResource SearchBar}" Tag="Search code buddies..." Padding="5 0 0 0" Margin="10 0 10 0"  Height="35" HorizontalAlignment="Stretch" VerticalAlignment="Center" HorizontalContentAlignment="Left"  VerticalContentAlignment="Center"></TextBox>
 
-            <userControls:BuddiesList Grid.Row="2" Loaded="BuddiesList_Loaded" />
 
-            <userControls:NotificationsPanel Grid.Row="3" Margin="0,68,0,-68" />
+
+            <userControls:BuddiesList Grid.Row="1" Loaded="BuddiesList_Loaded" />
+            <userControls:NotificationsPanel Grid.Row="2" />
 
         </Grid>
 
@@ -41,9 +40,8 @@
 
             <userControls:SessionsList Grid.Row="1"/>
 
-            
 
-
+            <userControls:SessionsPanel />
         </Grid>
 
 

@@ -14,10 +14,16 @@ namespace CodeBuddies.ViewModels
     internal class BuddiesListViewModel : ViewModelBase
     {
         private ObservableCollection<Buddy> buddies = new ObservableCollection<Buddy>();
-        private readonly ModalNavigationStore _modalNavigationStore;
         public ICommand OpenPopupCommand { get; }
+        private BuddyRepository repository;
 
-        public ICommand OpenModalCommand { get; }
+        public BuddyRepository Repository
+        {
+            get { return repository; }
+            set { repository = value; }
+        }
+
+        public RelayCommand<Buddy> OpenModalCommand => new RelayCommand<Buddy>(_ => OpenModal());
       
         public ObservableCollection<Buddy> Buddies
         {
@@ -25,16 +31,47 @@ namespace CodeBuddies.ViewModels
             set { buddies = value; OnPropertyChanged(); }
         }
 
+        private string searchText;
+
+        public string SearchText
+        {
+            get { return searchText; }
+            set
+            {
+                searchText = value;
+                FilterBuddies();
+                OnPropertyChanged();
+            }
+        }
 
         public BuddiesListViewModel()
         {
-            BuddyRepository repository = new BuddyRepository("../../../Resources/Data/buddies.xml");
-            foreach (Buddy buddy in repository.GetAll())
-            {
-                buddies.Add(buddy);
-            }
+            repository = new BuddyRepository();
+            LoadBuddies();
+        }
 
-            OpenModalCommand = new RelayCommand(_ => OpenModal());
+        private void FilterBuddies()
+        {
+            if (string.IsNullOrWhiteSpace(SearchText))
+            {
+                Buddies.Clear();
+                foreach (Buddy buddy in repository.GetAllBuddies())
+                {
+                    Buddies.Add(buddy);
+                }
+            }
+            else
+            {
+                ObservableCollection<Buddy> filteredBuddies = new ObservableCollection<Buddy>();
+                foreach (var buddy in repository.GetAllBuddies())
+                {
+                    if (buddy.BuddyName.ToLower().Contains(SearchText.ToLower()))
+                    {
+                        filteredBuddies.Add(buddy);
+                    }
+                }
+                Buddies = filteredBuddies;
+            }
             LoadBuddies();
 
         }
@@ -42,18 +79,17 @@ namespace CodeBuddies.ViewModels
 
         private void LoadBuddies()
         {
-            // Load buddies logic here
+            Buddies = new ObservableCollection<Buddy>(repository.GetAllBuddies());
         }
 
         private void OpenModal()
         {
+            Console.WriteLine("test");
             var modalWindow = new BuddyModalWindow();
             modalWindow.Owner = Application.Current.MainWindow; // Ensure it's modal to the main window
             
             bool? dialogResult = modalWindow.ShowDialog();
 
-
-            //aici nu stiu cum trebuie facut ca sa faca diferit intreaba pe gpt
 
             if (dialogResult == true)
             {

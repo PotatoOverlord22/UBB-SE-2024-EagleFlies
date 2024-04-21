@@ -27,8 +27,8 @@
                     </Border>
                     
                     <Button Name="BuddyCard" Style="{StaticResource defaultButtonStyle}" Grid.Column="1"
-        Content="{Binding BuddyName}" Command="{Binding DataContext.OpenModalCommand, RelativeSource={RelativeSource AncestorType={x:Type ListView}}}"
-        Margin="10"/>
+                    Content="{Binding BuddyName}" Command="{Binding DataContext.OpenModalCommand, RelativeSource={RelativeSource AncestorType={x:Type ListView}}}"
+                     Margin="10"/>
 
                     
                 </Grid>

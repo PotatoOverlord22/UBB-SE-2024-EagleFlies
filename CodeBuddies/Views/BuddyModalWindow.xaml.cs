@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Input;
+using CodeBuddies.Models.Entities;
 using CodeBuddies.MVVM;
 
 namespace CodeBuddies.Views
@@ -12,7 +13,7 @@ namespace CodeBuddies.Views
             DataContext = this;
         }
 
-        public ICommand CloseCommand => new RelayCommand(_ => Close());
+        public ICommand CloseCommand => new RelayCommand<Buddy>(_ => Close());
     }
 
 }

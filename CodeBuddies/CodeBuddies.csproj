@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType>WinExe</OutputType>
+    <OutputType>Exe</OutputType>
     <TargetFramework>net8.0-windows</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
@@ -9,24 +9,29 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Resources\Data\Constants\**" />
     <Compile Remove="Services\**" />
+    <EmbeddedResource Remove="Resources\Data\Constants\**" />
     <EmbeddedResource Remove="Services\**" />
+    <None Remove="Resources\Data\Constants\**" />
     <None Remove="Services\**" />
+    <Page Remove="Resources\Data\Constants\**" />
     <Page Remove="Services\**" />
   </ItemGroup>
 
   <ItemGroup>
     <None Remove="Resources\Pictures\exit-session.png" />
     <None Remove="Resources\Pictures\join-session.png" />
+    <None Remove="Resources\Pictures\mark-read.png" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Resources\Data\Constants\" />
     <Folder Include="ViewModels\" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="SimpleModal.WPF" Version="1.0.0" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.6" />
   </ItemGroup>
 
   <ItemGroup>
@@ -41,6 +46,7 @@
     </Resource>
     <Resource Include="Resources\Pictures\exit-session.png" />
     <Resource Include="Resources\Pictures\join-session.png" />
+    <Resource Include="Resources\Pictures\mark-read.png" />
     <Resource Include="Resources\Pictures\notifications_picture.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>

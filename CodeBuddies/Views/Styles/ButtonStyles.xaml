@@ -98,7 +98,7 @@
 
     <Style x:Key="JoinLeaveSessionButtonStyle" TargetType="Button">
         <Setter Property="FontSize" Value="10"/>
-        <Setter Property="Visibility" Value="Hidden"/>
+        <Setter Property="Visibility" Value="Visible"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
@@ -113,13 +113,56 @@
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>
-            </Setter>
+        </Setter>
+    </Style>
 
+    <Style x:Key="AcceptDeclineNotificationButton" TargetType="Button">
+        <Setter Property="FontSize" Value="10"/>
+        <Setter Property="Visibility" Value="Collapsed"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Grid>
+                        <Border CornerRadius="20"
+                        Width="{TemplateBinding Width}"
+                        Height="{TemplateBinding Height}"
+                        BorderThickness="0">
+                            <ContentPresenter HorizontalAlignment="Center"
+                                      VerticalAlignment="Center"/>
+                        </Border>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
         <Style.Triggers>
             <DataTrigger Binding="{Binding Type}" Value="invite">
                 <Setter Property="Visibility" Value="Visible"/>
             </DataTrigger>
+        </Style.Triggers>
+    </Style>
 
+    <Style x:Key="MarkReadButton" TargetType="Button">
+        <Setter Property="FontSize" Value="10"/>
+        <Setter Property="Visibility" Value="Visible"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Grid>
+                        <Border CornerRadius="20"
+                        Width="{TemplateBinding Width}"
+                        Height="{TemplateBinding Height}"
+                        BorderThickness="0">
+                            <ContentPresenter HorizontalAlignment="Center"
+                                      VerticalAlignment="Center"/>
+                        </Border>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding Type}" Value="invite">
+                <Setter Property="Visibility" Value="Collapsed"/>
+            </DataTrigger>
         </Style.Triggers>
     </Style>
 
