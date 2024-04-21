@@ -1,4 +1,5 @@
-﻿using System.Windows.Controls;
+﻿using System.Windows;
+using System.Windows.Controls;
 using CodeBuddies.ViewModels;
 namespace CodeBuddies.Views.UserControls
 {
@@ -10,6 +11,12 @@ namespace CodeBuddies.Views.UserControls
         public MainMenuBar()
         {
             InitializeComponent();
+        }
+
+        private void NewSessionButtonClicked(object sender, RoutedEventArgs e)
+        {
+            CreateNewSessionPopUp createNewSessionPopUp = new CreateNewSessionPopUp();
+            createNewSessionPopUp.ShowDialog();
         }
     }
 }

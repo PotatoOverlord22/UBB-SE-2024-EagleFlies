@@ -64,6 +64,19 @@ namespace CodeBuddies.Repositories
 
         }
 
+        public List<Buddy> GetActiveBuddies()
+        {
+            return GetAllBuddies().Where(buddy => buddy.Status == "active").ToList();
+        }
 
+        public List<Buddy> GetInactiveBuddies()
+        {
+            return GetAllBuddies().Where(buddy => buddy.Status == "inactive").ToList();
+        }
+
+        public void UpdateBuddyStatus(Buddy buddy)
+        {
+            buddy.Status = buddy.Status == "active" ? "inactive" : "active";
+        }
     }
 }
