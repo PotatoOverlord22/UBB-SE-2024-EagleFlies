@@ -12,6 +12,9 @@ namespace CodeBuddies.ViewModels
         private ObservableCollection<Session> sessions;
         private SessionRepository sessionRepository;
 
+        public RelayCommand<Session> LeaveSessionCommand => new RelayCommand<Session>(LeaveSession);
+        public RelayCommand<Session> JoinSessionCommand => new RelayCommand<Session>(JoinSession);
+
         public ObservableCollection<Session> Sessions
         {
             get { return sessions; }
@@ -64,5 +67,18 @@ namespace CodeBuddies.ViewModels
         {
             Sessions = new ObservableCollection<Session>(sessionRepository.GetAllSessionsOfABuddy(Constants.CLIENT_BUDDY_ID));
         }
+
+        public void LeaveSession(Session session)
+        {
+            Console.WriteLine("hi");
+        }
+
+        public void JoinSession(Session session)
+        {
+            Console.WriteLine("hi");
+            SessionWindow sessionWindow = new SessionWindow();
+            sessionWindow.ShowDialog();
+        }
+
     }
 }
