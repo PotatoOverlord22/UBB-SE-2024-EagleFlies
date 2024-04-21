@@ -12,7 +12,7 @@ namespace CodeBuddies.Views.UserControls
             InitializeComponent();
         }
 
-
+        /*
         private void DrawingBoardButton_Click(object sender, RoutedEventArgs e)
         {
             if (App.Current.MainWindow is MainWindow mainWindow)
@@ -20,6 +20,7 @@ namespace CodeBuddies.Views.UserControls
                 mainWindow.ToggleDrawingBoard();
             }
         }
+        */
         private void NewSessionButtonClicked(object sender, RoutedEventArgs e)
         {
             CreateNewSessionPopUp createNewSessionPopUp = new CreateNewSessionPopUp();

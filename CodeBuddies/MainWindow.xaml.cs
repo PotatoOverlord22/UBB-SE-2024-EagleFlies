@@ -15,9 +15,11 @@ namespace CodeBuddies
             InitializeComponent();
         }
 
+        /*
         public void ToggleDrawingBoard()
         {
             DrawingBoardControl.Visibility = DrawingBoardControl.Visibility == Visibility.Visible ? Visibility.Collapsed : Visibility.Visible;
         }
+        */
     }
 }

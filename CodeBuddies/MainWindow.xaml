@@ -37,7 +37,7 @@
             </Grid.RowDefinitions>
 
   
-            <userControls:DrawingBoard Grid.Row ="1" x:Name="DrawingBoardControl" Visibility="Collapsed"/>
+            
 
 
             <userControls:SessionsPanel />
