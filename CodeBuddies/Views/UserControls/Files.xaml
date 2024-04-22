@@ -14,7 +14,7 @@
         <ListBox x:Name="lstFiles" SelectionChanged="lstFiles_SelectionChanged">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <Button Content="{Binding Text}" Tag="{Binding Id}" Click="FileButton_Click"/>
+                    <Button Content="{Binding Text}" Tag="{Binding FileId}" Click="FileButton_Click"/>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>

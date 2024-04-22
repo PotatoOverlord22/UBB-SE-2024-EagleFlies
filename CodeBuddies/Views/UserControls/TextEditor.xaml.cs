@@ -12,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using CodeBuddies.Models.Entities;
 using CodeBuddies.Repositories;
 
 namespace CodeBuddies.Views.UserControls
@@ -29,11 +30,9 @@ namespace CodeBuddies.Views.UserControls
             this.id = 0;
         }
 
-        public TextEditor(int id)
+        public void SetTextEditor(int id)
         {
             this.id = id;
-            InitializeComponent();
-            projectRepository = new SessionProjectRepository();
             txtEditor.Text = projectRepository.GetTextFromId(id);
         }
 

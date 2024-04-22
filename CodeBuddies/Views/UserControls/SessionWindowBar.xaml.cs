@@ -113,5 +113,10 @@ namespace CodeBuddies.Views.UserControls
                 MessageBox.Show("Session repository is not available.");
             }
         }
+
+        public void OpenExistingTextEditor(int fileId)
+        {
+            TextEditorButtonClicked?.Invoke(this, EventArgs.Empty);
+        }
     }
 }

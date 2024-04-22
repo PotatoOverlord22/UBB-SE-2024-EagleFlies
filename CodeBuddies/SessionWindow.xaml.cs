@@ -1,4 +1,5 @@
 ﻿using CodeBuddies.Repositories;
+using CodeBuddies.Views.UserControls;
 using System.Windows;
 
 namespace CodeBuddies
@@ -22,14 +23,23 @@ namespace CodeBuddies
               
             };
 
+            FilesControl.TextEditorButtonClicked += (sender, e) =>
+            {
+                FilesControl.Visibility = Visibility.Hidden;
+                ToggleTextEditor();
+
+            };
+
             SessionWindowBarControl.TextEditorButtonClicked += (sender, e) =>
             {
+                FilesControl.Visibility = Visibility.Hidden;
                 ToggleTextEditor();
 
             };
 
             SessionWindowBarControl.FilesButtonClicked += (sender, e) =>
             {
+                TextEditorControl.Visibility = Visibility.Hidden;
                 ToggleFiles();
 
             };
